@@ -2,10 +2,10 @@ package dao.impl;
 
 import connection.DataSource;
 import dao.TransactionDao;
-import dao.impl.constants.TransactionMysqlQuery;
+
+import dao.constants.TransactionMysqlQuery;
 import exceptions.DAOException;
 import model.entity.Transaction;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
