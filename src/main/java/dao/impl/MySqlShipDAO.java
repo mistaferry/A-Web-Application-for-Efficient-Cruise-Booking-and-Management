@@ -2,7 +2,7 @@ package dao.impl;
 
 import connection.DataSource;
 import dao.ShipDao;
-import dao.impl.constants.ShipMysqlQuery;
+import dao.constants.*;
 import exceptions.DAOException;
 import model.entity.Ship;
 

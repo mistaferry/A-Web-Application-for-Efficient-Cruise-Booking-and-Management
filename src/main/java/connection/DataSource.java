@@ -15,8 +15,8 @@ public class DataSource {
     static {
         Properties properties = getProperties();
         config.setJdbcUrl(properties.getProperty("url"));
-        config.setUsername(properties.getProperty("user"));
-        config.setPassword(properties.getProperty("password"));
+        config.setUsername(properties.getProperty("user.name"));
+        config.setPassword(properties.getProperty("user.password"));
         config.setDriverClassName(properties.getProperty("driver"));
         config.addDataSourceProperty( "cachePrepStmts" , properties.getProperty("cachePrepStmts"));
         config.addDataSourceProperty( "prepStmtCacheSize" ,  properties.getProperty("prepStmtCacheSize"));

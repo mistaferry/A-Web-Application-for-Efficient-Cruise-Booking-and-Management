@@ -2,8 +2,7 @@ package dao.impl;
 
 import connection.DataSource;
 import dao.UserDao;
-import dao.impl.constants.ShipMysqlQuery;
-import dao.impl.constants.UserMysqlQuery;
+import dao.constants.*;
 import exceptions.DAOException;
 import model.entity.Role;
 import model.entity.User;

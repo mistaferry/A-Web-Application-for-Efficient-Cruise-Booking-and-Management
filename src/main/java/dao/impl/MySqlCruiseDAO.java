@@ -2,11 +2,10 @@ package dao.impl;
 
 import connection.DataSource;
 import dao.CruiseDao;
-import dao.impl.constants.CruiseMysqlQuery;
 import exceptions.DAOException;
 import model.entity.Cruise;
 import model.entity.Ship;
-
+import dao.constants.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
