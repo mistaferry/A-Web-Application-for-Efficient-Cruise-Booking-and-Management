@@ -40,7 +40,7 @@ public class MySqlTransactionDAO implements TransactionDao {
             transaction = new Transaction();
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
-                    transaction = getTransactionValues(resultSet);
+                    transaction = setTransactionValues(resultSet);
                 }
             }
         }
@@ -55,7 +55,7 @@ public class MySqlTransactionDAO implements TransactionDao {
             transactionList = new ArrayList<>();
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
-                    Transaction transaction = getTransactionValues(resultSet);
+                    Transaction transaction = setTransactionValues(resultSet);
                     transactionList.add(transaction);
                 }
             }
@@ -63,7 +63,7 @@ public class MySqlTransactionDAO implements TransactionDao {
         return transactionList;
     }
 
-    private Transaction getTransactionValues(ResultSet resultSet) throws SQLException {
+    private Transaction setTransactionValues(ResultSet resultSet) throws SQLException {
         Transaction transaction = new Transaction();
         transaction.setTimestamp(resultSet.getDate("timestamp"));
         transaction.setAmount(resultSet.getDouble("amount"));

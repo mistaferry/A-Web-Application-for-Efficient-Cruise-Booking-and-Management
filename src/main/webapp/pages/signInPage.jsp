@@ -1,15 +1,19 @@
 <%@ page pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <fmt:setLocale value="nl" />
 <fmt:setBundle basename="resources" />
 
 <div class="form">
-    <form method="post" id="form-enter">
+    <form method="post" id="form-enter" action="/Controller">
+        <input type="hidden" name="action" value="sign-in">
+
+
         <div>
             <label for="login"><fmt:message key="login.label.username" /></label><br>
             <input type="text" id="login" name="login"
-                   required pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}"><br><br>
+                   pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}"><br><br>
         </div>
         <div>
             <label for="password"><fmt:message key="login.label.password" /></label><br>

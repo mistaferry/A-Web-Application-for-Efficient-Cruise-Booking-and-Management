@@ -18,7 +18,21 @@ import java.util.Optional;
 public class MySqlUserDAO implements UserDao {
     @Override
     public Optional<User> getByEmail(String email) throws DAOException {
-        return Optional.empty();
+        User user = null;
+        try(Connection connection = DataSource.getConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(TransactionMysqlQuery.GET_BY_ID);
+            int index = 0;
+            preparedStatement.setString(++index, email);
+            user = new User();
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    user = setUserValues(resultSet);
+                }
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return Optional.ofNullable(user);
     }
 
     @Override
@@ -139,4 +153,5 @@ public class MySqlUserDAO implements UserDao {
             preparedStatement.execute();
         }
     }
+
 }
