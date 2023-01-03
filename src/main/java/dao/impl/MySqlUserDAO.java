@@ -20,7 +20,7 @@ public class MySqlUserDAO implements UserDao {
     public Optional<User> getByEmail(String email) throws DAOException {
         User user = null;
         try(Connection connection = DataSource.getConnection()) {
-            PreparedStatement preparedStatement = connection.prepareStatement(TransactionMysqlQuery.GET_BY_ID);
+            PreparedStatement preparedStatement = connection.prepareStatement(UserMysqlQuery.GET_BY_EMAIL);
             int index = 0;
             preparedStatement.setString(++index, email);
             user = new User();

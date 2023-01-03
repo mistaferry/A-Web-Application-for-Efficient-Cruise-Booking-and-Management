@@ -5,6 +5,8 @@ public class TransactionMysqlQuery {
 
     public static final String GET_BY_ID = "SELECT transaction WHERE id=?";
 
+    public static final String GET_BY_EMAIL = "SELECT transaction WHERE login=?";
+
     public static final String GET_ALL = "SELECT * FROM transaction";
 
     public static final String UPDATE = "UPDATE transaction WHERE id=?";

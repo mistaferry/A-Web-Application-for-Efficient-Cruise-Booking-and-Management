@@ -3,10 +3,8 @@ package actions.general;
 import actions.Action;
 import com.google.protobuf.ServiceException;
 import dto.UserDTO;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import services.GeneralService;
 import services.ServiceFactory;
 
@@ -29,9 +27,9 @@ public class SignInAction implements Action {
             request.getSession().setAttribute("user", user);
             request.getSession().setAttribute("role", user.getRoleId());
             switch (user.getRoleId()) {
-                case 1 -> path = "congrats.jsp";
-                case 2 -> path = "congrats.jsp";
-                case 3 -> path = "congrats.jsp";
+                case 1 -> path = "/pages/test.jsp";
+                case 2 -> path = "/pages/test.jsp";
+                case 3 -> path = "/pages/test.jsp";
             }
         } catch (ServiceException e) {
             e.printStackTrace();

@@ -3,7 +3,7 @@ package dao.constants;
 public class UserMysqlQuery {
     public static final String ADD_USER = "INSERT INTO user (login, password, first_name, surname, role_id, blocked) VALUES (?, ?, ?, ?, ?, ?)";
 
-    public static final String GET_BY_ID = "SELECT user WHERE id=?";
+    public static final String GET_BY_EMAIL = "SELECT * FROM user WHERE login=?";
 
     public static final String GET_ALL = "SELECT * FROM user";
 
@@ -13,8 +13,7 @@ public class UserMysqlQuery {
 
     public static final String DELETE = "DELETE user WHERE id=?";
 
-    public static final String GET_BY_EMAIL = "SELECT user WHERE email=?";
-
+    public static final String GET_BY_ID = "SELECT transaction WHERE id=?";
     public static final String GET_NUMBER_OF_RECORDS = "DELETE user WHERE id=?";
 
     public static final String SET_USER_ROLE = "";
