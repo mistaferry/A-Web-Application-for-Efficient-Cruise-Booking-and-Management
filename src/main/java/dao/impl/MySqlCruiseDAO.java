@@ -115,7 +115,7 @@ public class MySqlCruiseDAO implements CruiseDao {
             PreparedStatement preparedStatement = connection.prepareStatement(CruiseMysqlQuery.GET_ALL);
             cruiseList = new ArrayList<>();
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
+                while (resultSet.next()) {
                     Cruise cruise = setCruiseValues(resultSet);
                     cruiseList.add(cruise);
                 }

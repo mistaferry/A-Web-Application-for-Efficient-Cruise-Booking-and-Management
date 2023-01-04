@@ -2,6 +2,7 @@ package actions.general;
 
 import actions.Action;
 import com.google.protobuf.ServiceException;
+import dto.CruiseDTO;
 import dto.UserDTO;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -26,8 +27,12 @@ public class SignInAction implements Action {
             UserDTO user = generalService.signIn(login, password);
             request.setAttribute("user", user);
             request.setAttribute("role", user.getRoleId());
+/*
             List<UserDTO> cruiseDTOList = generalService.viewCatalog();
             request.getSession().setAttribute("cruises", cruiseDTOList);
+*/
+            List<CruiseDTO> cruiseDTOList = generalService.viewCruiseCatalog();
+            request.getSession().setAttribute("allCruises", cruiseDTOList);
             switch (user.getRoleId()) {
                 case 1 -> path = "/pages/test.jsp";
                 case 2 -> path = "/pages/test.jsp";

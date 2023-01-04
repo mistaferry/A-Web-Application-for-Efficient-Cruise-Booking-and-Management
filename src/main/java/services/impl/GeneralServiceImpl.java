@@ -1,20 +1,28 @@
 package services.impl;
 
 import com.google.protobuf.ServiceException;
+import dao.CruiseDao;
 import dao.UserDao;
+import dto.CruiseDTO;
 import dto.UserDTO;
 import exceptions.DAOException;
+import model.entity.Cruise;
 import model.entity.User;
 import services.GeneralService;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import static utils.Convertor.convertCruiseToDTO;
 import static utils.Convertor.convertUserToDTO;
 
 public class GeneralServiceImpl implements GeneralService {
     private final UserDao userDao;
-    public GeneralServiceImpl(UserDao userDao) {
+    private final CruiseDao cruiseDao;
+
+    public GeneralServiceImpl(UserDao userDao, CruiseDao cruiseDao) {
         this.userDao = userDao;
+        this.cruiseDao = cruiseDao;
     }
 
     @Override
@@ -34,11 +42,23 @@ public class GeneralServiceImpl implements GeneralService {
 
     @Override
     public List<UserDTO> viewCatalog() throws ServiceException {
-        List<UserDTO> DTOUserList = new ArrayList<>();
+        List<UserDTO> userDTOList = new ArrayList<>();
         try{
             List<User> userList = userDao.getAll();
-            userList.forEach(user -> DTOUserList.add(convertUserToDTO(user)));
-            return DTOUserList;
+            userList.forEach(user -> userDTOList.add(convertUserToDTO(user)));
+            return userDTOList;
+        } catch (DAOException | SQLException e) {
+            throw  new ServiceException(e);
+        }
+    }
+
+    @Override
+    public List<CruiseDTO> viewCruiseCatalog() throws ServiceException {
+        List<CruiseDTO> cruiseDTOList = new ArrayList<>();
+        try{
+            List<Cruise> cruiseList = cruiseDao.getAll();
+            cruiseList.forEach(cruise -> cruiseDTOList.add(convertCruiseToDTO(cruise)));
+            return cruiseDTOList;
         } catch (DAOException | SQLException e) {
             throw  new ServiceException(e);
         }

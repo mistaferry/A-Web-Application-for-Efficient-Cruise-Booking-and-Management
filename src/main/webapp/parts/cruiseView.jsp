@@ -1,18 +1,29 @@
-<div class="cruise_container">
-    <img src="src/main/webapp/images/cruise1.jpg"
-         class="cruise_image"/>
-    <div>
-        <p>${dish.name}</p>
-        <p class="dish_description">&ensp;kdjfbvsjnl</p>
-        <p class="dish_weight">Weight: </p>
-        <p class="dish_price">Price</p>
-        <%--        <button class="dish_addtocart btn btn-outline-primary">Add to cart</button>--%>
-<%--        <form action="${pageContext.request.contextPath}/cart" method="post">--%>
-<%--            <input name="id" style="display: none" value="${dish.id}">--%>
-<%--            <input value="1" name="count" style="display: none">--%>
-<%--            <input type="submit"--%>
-<%--                   value="Add to cart"--%>
-<%--                   class="dish_addtocart btn btn-outline-primary">--%>
-<%--        </form>--%>
-    </div>
-</div>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<fmt:setLocale value="${sessionScope.locale}" scope="session"/>
+
+<img src="src/main/webapp/images/cruise1.jpg"
+     class="cruise_image"/>
+
+<c:if test="${empty sessionScope.cruises}">
+    <p>LIST IS EMPTY</p>
+</c:if>
+<table>
+    <tr>
+        <%--        <th>Id</th>--%>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Role</th>
+        <th>Blocked</th>
+    </tr>
+    <c:forEach var = "cruise" items="${sessionScope.cruises}">
+        <tr>
+            <td><c:out value = "${cruise.firstName}"/></td>
+            <td><c:out value = "${cruise.surname}"/></td>
+            <td><c:out value = "${cruise.roleId}"/></td>
+            <td><c:out value = "${cruise.blocked}"/></td>
+        </tr>
+    </c:forEach>
+</table>
+
