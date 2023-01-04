@@ -1,16 +1,18 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Skinny
-  Date: 03.01.2023
-  Time: 15:20
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<fmt:setLocale value="${sessionScope.locale}" scope="session"/>
+
+<!DOCTYPE html>
+<html lang="${sessionScope.locale}">
 <head>
-    <title>Title</title>
+    <title>
+        Cruise Company
+    </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-  <h1>CATALOG PAGE</h1>
-</body>
+<jsp:include page="/parts/mainMenu.jsp"/>
+
+<jsp:include page="test.jsp"/>
+
+<jsp:include page="/parts/footer.jsp"/>
 </html>

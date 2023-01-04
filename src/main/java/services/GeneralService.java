@@ -11,5 +11,5 @@ public interface GeneralService {
 
     UserDTO signIn(String login, String password) throws ServiceException;
 
-    List<CruiseDTO> viewCatalog(String login, String password) throws ServiceException;
+    List<UserDTO> viewCatalog() throws ServiceException;
 }

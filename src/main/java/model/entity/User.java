@@ -2,15 +2,18 @@ package model.entity;
 
 import lombok.*;
 
-import java.util.HashSet;
-import java.util.Set;
-
 
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Builder
 public class User extends Entity{
     private static final long serialVersionUID = 1L;
+
+    public int getId() {
+        return id;
+    }
+
+    private int id;
     private String login;
     private String password;
     private String firstName;
@@ -23,7 +26,8 @@ public class User extends Entity{
 //        this.cruises = new HashSet<Cruise>();
     }
 
-    public User(String login, String password, String firstName, String surname, int roleId, boolean blocked) {
+    public User(int id, String login, String password, String firstName, String surname, int roleId, boolean blocked) {
+        this.id = id;
         this.login = login;
         this.password = password;
         this.firstName = firstName;

@@ -144,6 +144,7 @@ VALUES ('innakamar@gmail.com', 'innakamar', 'Inna', 'Kamarenko', 1, false),
        ('nazar29meln@gmail.com', 'melnych123', 'Nazar', 'Melnychenko', 1, false),
        ('victoradm1@gmail.com', 'sereda', 'Victor', 'Sereda', 2, false),
        ('dinakram23@gmail.com', 'innakamar', 'Diana', 'Kramarenko', 3, false);
+select * from user;
 
 INSERT INTO users_has_cruises(user_id, cruise_id)
 VALUES (1, 2),

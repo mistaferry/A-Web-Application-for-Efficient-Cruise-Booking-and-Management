@@ -1,7 +1,14 @@
 package model.entity;
 
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import java.sql.Date;
 
+@EqualsAndHashCode(callSuper = true)
+@Builder
+@Data
 public class Cruise extends Entity{
     private static final long serialVersionUID = 1L;
     private int shipId;
@@ -11,6 +18,16 @@ public class Cruise extends Entity{
     private String startPort;
     private String endPort;
     private boolean paid;
+
+    public Cruise(int shipId, int duration, Date startDate, int numberOfPorts, String startPort, String endPort, boolean paid) {
+        this.shipId = shipId;
+        this.duration = duration;
+        this.startDate = startDate;
+        this.numberOfPorts = numberOfPorts;
+        this.startPort = startPort;
+        this.endPort = endPort;
+        this.paid = paid;
+    }
 
     public int getNumberOfPorts() {
         return numberOfPorts;

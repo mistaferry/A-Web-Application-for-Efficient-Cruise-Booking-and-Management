@@ -1,17 +1,19 @@
 package services.impl;
 
 import com.google.protobuf.ServiceException;
+import dao.CruiseDao;
 import dao.UserDao;
+import dao.impl.MySqlUserDAO;
 import dto.CruiseDTO;
 import dto.UserDTO;
 import exceptions.DAOException;
+import model.entity.Cruise;
 import model.entity.User;
 import services.GeneralService;
-import utils.Convertor;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-
 import static utils.Convertor.convertUserToDTO;
 
 public class GeneralServiceImpl implements GeneralService {
@@ -36,7 +38,15 @@ public class GeneralServiceImpl implements GeneralService {
     }
 
     @Override
-    public List<CruiseDTO> viewCatalog(String login, String password) throws ServiceException {
-        return null;
+    public List<UserDTO> viewCatalog() throws ServiceException {
+        List<UserDTO> DTOUserList = new ArrayList<>();
+        try{
+            List<User> userList = userDao.getAll();
+//            System.out.println(userList.get(1));
+            userList.forEach(user -> DTOUserList.add(convertUserToDTO(user)));
+            return DTOUserList;
+        } catch (DAOException | SQLException e) {
+            throw  new ServiceException(e);
+        }
     }
 }

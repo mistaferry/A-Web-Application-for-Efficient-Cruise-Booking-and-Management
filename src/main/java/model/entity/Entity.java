@@ -4,21 +4,21 @@ import java.io.Serializable;
 
 public abstract class Entity implements Serializable {
     private static final long serialVersionUID = 1L;
-    private long id;
+    private int id;
 
     public Entity() {
 
     }
 
-    public Entity(long id) {
+    public Entity(int id) {
         this.id = id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 }

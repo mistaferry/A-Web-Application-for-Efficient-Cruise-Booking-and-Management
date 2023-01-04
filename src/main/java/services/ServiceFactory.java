@@ -8,7 +8,8 @@ public class ServiceFactory {
     private GeneralServiceImpl generalService;
 
     public ServiceFactory(){
-        this.generalService = new GeneralServiceImpl(DAOFactory.getInstance().getUserDao());
+        this.generalService = new GeneralServiceImpl(
+                DAOFactory.getInstance().getUserDao());
     }
 
     public static ServiceFactory getInstance(){
