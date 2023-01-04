@@ -109,7 +109,7 @@ public class MySqlUserDAO implements UserDao {
             PreparedStatement preparedStatement = connection.prepareStatement(UserMysqlQuery.GET_ALL);
             userList = new ArrayList<>();
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
+                while (resultSet.next()) {
                     User user = setUserValues(resultSet);
                     userList.add(user);
                 }

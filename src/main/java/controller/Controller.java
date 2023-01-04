@@ -17,11 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 
 
 import java.io.IOException;
-import java.util.List;
-import java.util.StringJoiner;
 
 @WebServlet("/controller")
-//@WebServlet("/hello")
 public class Controller extends HttpServlet {
     private static final Logger logger = LoggerFactory.getLogger(Controller.class);
     ActionFactory ACTION_FACTORY = ActionFactory.getActionFactory();
@@ -31,17 +28,6 @@ public class Controller extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.sendRedirect(process(req, resp));
     }
-
-    public static String getActionToRedirect(String action, String... parameters) {
-        String base = "controller" + "?" + "action" + "=" + action;
-        StringJoiner stringJoiner = new StringJoiner("&", "&", "");
-        for (int i = 0; i < parameters.length; i+=2) {
-            stringJoiner.add(parameters[i] + "=" + parameters[i + 1]);
-        }
-        return base + (parameters.length > 0 ? stringJoiner : "");
-    }
-
-
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
