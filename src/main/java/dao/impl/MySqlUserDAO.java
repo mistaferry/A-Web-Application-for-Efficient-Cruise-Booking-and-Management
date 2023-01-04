@@ -6,7 +6,6 @@ import dao.constants.*;
 import exceptions.DAOException;
 import model.entity.Role;
 import model.entity.User;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -120,6 +119,7 @@ public class MySqlUserDAO implements UserDao {
 
     private User setUserValues(ResultSet resultSet) throws SQLException {
         User user = new User();
+        user.setId(resultSet.getInt("id"));
         user.setLogin(resultSet.getString("login"));
         user.setPassword(resultSet.getString("password"));
         user.setFirstName(resultSet.getString("first_name"));

@@ -5,11 +5,8 @@ import com.google.protobuf.ServiceException;
 import dto.UserDTO;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import services.GeneralService;
 import services.ServiceFactory;
-
 import java.io.IOException;
 import java.util.List;
 

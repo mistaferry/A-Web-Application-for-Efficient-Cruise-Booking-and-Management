@@ -9,11 +9,6 @@ import lombok.*;
 public class User extends Entity{
     private static final long serialVersionUID = 1L;
 
-    public int getId() {
-        return id;
-    }
-
-    private int id;
     private String login;
     private String password;
     private String firstName;
@@ -26,14 +21,28 @@ public class User extends Entity{
 //        this.cruises = new HashSet<Cruise>();
     }
 
-    public User(int id, String login, String password, String firstName, String surname, int roleId, boolean blocked) {
-        this.id = id;
+    public User(String login, String password, String firstName, String surname, int roleId, boolean blocked) {
         this.login = login;
         this.password = password;
         this.firstName = firstName;
         this.surname = surname;
         this.roleId = roleId;
         this.blocked = blocked;
+    }
+
+    public User(long id, String login, String password, String firstName, String surname, int roleId, boolean blocked) {
+        super(id);
+        this.login = login;
+        this.password = password;
+        this.firstName = firstName;
+        this.surname = surname;
+        this.roleId = roleId;
+        this.blocked = blocked;
+    }
+
+    @Override
+    public void setId(long id) {
+        super.setId(id);
     }
 
     public String getLogin() {

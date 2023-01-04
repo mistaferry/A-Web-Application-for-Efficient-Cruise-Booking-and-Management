@@ -3,7 +3,6 @@ package controller;
 import actions.Action;
 import actions.ActionFactory;
 import com.google.protobuf.ServiceException;
-import dto.UserDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import services.GeneralService;
@@ -14,15 +13,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-
 import java.io.IOException;
 
 @WebServlet("/controller")
 public class Controller extends HttpServlet {
     private static final Logger logger = LoggerFactory.getLogger(Controller.class);
-    ActionFactory ACTION_FACTORY = ActionFactory.getActionFactory();
-    private final GeneralService generalService = ServiceFactory.getInstance().getGeneralService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -36,12 +31,11 @@ public class Controller extends HttpServlet {
 
     private String process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Action action = ActionFactory.getAction(req.getParameter("action"));
-        try{
+        try {
             return action.execute(req);
         } catch (ServiceException e) {
             logger.error(e.getMessage());
             return "errorPage.jsp";
         }
-
     }
 }

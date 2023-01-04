@@ -1,16 +1,11 @@
 package services.impl;
 
 import com.google.protobuf.ServiceException;
-import dao.CruiseDao;
 import dao.UserDao;
-import dao.impl.MySqlUserDAO;
-import dto.CruiseDTO;
 import dto.UserDTO;
 import exceptions.DAOException;
-import model.entity.Cruise;
 import model.entity.User;
 import services.GeneralService;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +37,6 @@ public class GeneralServiceImpl implements GeneralService {
         List<UserDTO> DTOUserList = new ArrayList<>();
         try{
             List<User> userList = userDao.getAll();
-//            System.out.println(userList.get(1));
             userList.forEach(user -> DTOUserList.add(convertUserToDTO(user)));
             return DTOUserList;
         } catch (DAOException | SQLException e) {
