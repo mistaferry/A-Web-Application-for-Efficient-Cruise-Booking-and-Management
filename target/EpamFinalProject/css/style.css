@@ -1,0 +1,44 @@
+.footer {
+    position:fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    alignment: center;
+}
+
+#footer-text{
+    color: darkgray;
+}
+
+.form{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#form-button{
+    text-align: center;
+    padding: 5px;
+    border-radius: 60px;
+    width: 170px;
+}
+
+.nav-enter{
+    display: flex;
+    justify-content: flex-start;
+    background-color: black;
+    padding: 2%;
+    position: relative;
+}
+
+.nav-enter a{
+    width: 15%;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+}
+
+#nav-company-name{
+    font-weight: bold;
+}
