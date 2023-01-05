@@ -6,7 +6,7 @@
 <fmt:setBundle basename="resources" />
 
 <div class="form">
-    <form method="post" id="form-enter" action="controller">
+    <form method="post" id="form-enter" action="controller?action=sign-in">
         <input type="hidden" name="action" value="sign-in">
 
 
