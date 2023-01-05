@@ -33,8 +33,10 @@ public final class Convertor {
 
     public static CruiseDTO convertCruiseToDTO(Cruise cruise) {
         return CruiseDTO.builder()
+                .id(cruise.getId())
                 .shipId(cruise.getShipId())
                 .duration(cruise.getDuration())
+                .price(cruise.getPrice())
                 .startDate(cruise.getStartDate())
                 .paid(cruise.isPaid())
                 .numberOfPorts(cruise.getNumberOfPorts())

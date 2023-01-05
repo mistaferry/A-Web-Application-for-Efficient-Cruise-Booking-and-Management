@@ -29,7 +29,7 @@ public class MySqlCityDAO implements CityDao {
 
     @Override
     public Optional<City> getById(long id) throws DAOException, SQLException {
-        City city;
+        City city = null;
         try(Connection connection = DataSource.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(CityMysqlQuery.GET_BY_ID);
             int index = 0;

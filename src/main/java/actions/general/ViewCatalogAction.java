@@ -35,9 +35,9 @@ public class ViewCatalogAction implements Action {
         HttpSession session = request.getSession();
         String path = null;
         try{
-            List<UserDTO> cruiseDTOList = generalService.viewCatalog();
+            List<CruiseDTO> cruiseDTOList = generalService.viewCruiseCatalog();
             session.setAttribute("allCruises", cruiseDTOList);
-            path = "/pages/test.jsp";
+            path = "/test1.jsp";
         } catch (ServiceException e) {
             e.printStackTrace();
             path = "/pages/errorPage.jsp";

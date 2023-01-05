@@ -13,20 +13,42 @@ public class Cruise extends Entity{
     private static final long serialVersionUID = 1L;
     private int shipId;
     private int duration;
+    private double price;
     private Date startDate;
     private int numberOfPorts;
-    private String startPort;
-    private String endPort;
+    private City startPort;
+    private City endPort;
     private boolean paid;
 
-    public Cruise(int shipId, int duration, Date startDate, int numberOfPorts, String startPort, String endPort, boolean paid) {
+    public Cruise(int shipId, int duration, double price, Date startDate, int numberOfPorts, City startPort, City endPort, boolean paid) {
         this.shipId = shipId;
         this.duration = duration;
+        this.price = price;
         this.startDate = startDate;
         this.numberOfPorts = numberOfPorts;
         this.startPort = startPort;
         this.endPort = endPort;
         this.paid = paid;
+    }
+
+    public Cruise(long id, int shipId, int duration, double price, Date startDate, int numberOfPorts, City startPort, City endPort, boolean paid) {
+        super(id);
+        this.shipId = shipId;
+        this.duration = duration;
+        this.price = price;
+        this.startDate = startDate;
+        this.numberOfPorts = numberOfPorts;
+        this.startPort = startPort;
+        this.endPort = endPort;
+        this.paid = paid;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public int getNumberOfPorts() {
@@ -37,19 +59,19 @@ public class Cruise extends Entity{
         this.numberOfPorts = numberOfPorts;
     }
 
-    public String getStartPort() {
+    public City getStartPort() {
         return startPort;
     }
 
-    public void setStartPort(String startPort) {
+    public void setStartPort(City startPort) {
         this.startPort = startPort;
     }
 
-    public String getEndPort() {
+    public City getEndPort() {
         return endPort;
     }
 
-    public void setEndPort(String endPort) {
+    public void setEndPort(City endPort) {
         this.endPort = endPort;
     }
 

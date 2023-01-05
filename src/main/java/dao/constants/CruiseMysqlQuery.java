@@ -5,7 +5,7 @@ public class CruiseMysqlQuery {
 
     public static final String GET_BY_ID = "SELECT cruise WHERE id=?";
 
-    public static final String GET_ALL = "SELECT ship_id, duration, start_day, paid, number_of_ports, start_port, end_port FROM cruise";
+    public static final String GET_ALL = "SELECT id, ship_id, duration, price, start_day, paid, number_of_ports, start_port, end_port FROM cruise";
 
     public static final String UPDATE = "UPDATE cruise WHERE id=?";
 

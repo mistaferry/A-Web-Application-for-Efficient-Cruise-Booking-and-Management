@@ -1,8 +1,10 @@
 package dao.impl;
 
 import connection.DataSource;
+import dao.CityDao;
 import dao.CruiseDao;
 import exceptions.DAOException;
+import model.entity.City;
 import model.entity.Cruise;
 import model.entity.Ship;
 import dao.constants.*;
@@ -80,15 +82,22 @@ public class MySqlCruiseDAO implements CruiseDao {
         try(Connection connection = DataSource.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(CruiseMysqlQuery.ADD_CRUISE);
             int index = 0;
-            preparedStatement.setInt(++index, cruise.getShipId());
-            preparedStatement.setInt(++index, cruise.getDuration());
-            preparedStatement.setDate(++index, Date.valueOf(cruise.getStartDate().toLocalDate()));
-            preparedStatement.setBoolean(++index, cruise.isPaid());
-            preparedStatement.setInt(++index, cruise.getNumberOfPorts());
-            preparedStatement.setString(++index, cruise.getStartPort());
-            preparedStatement.setString(++index, cruise.getEndPort());
+            setValuesToStatement(cruise, preparedStatement, index);
             preparedStatement.execute();
         }
+    }
+
+    private void setValuesToStatement(Cruise cruise, PreparedStatement preparedStatement, int index) throws SQLException {
+        preparedStatement.setInt(++index, cruise.getShipId());
+        preparedStatement.setInt(++index, cruise.getDuration());
+        preparedStatement.setDate(++index, Date.valueOf(cruise.getStartDate().toLocalDate()));
+        preparedStatement.setBoolean(++index, cruise.isPaid());
+        preparedStatement.setDouble(++index, cruise.getPrice());
+        preparedStatement.setInt(++index, cruise.getNumberOfPorts());
+        City startPort = cruise.getStartPort();
+        preparedStatement.setLong(++index, startPort.getId());
+        City endPort = cruise.getEndPort();
+        preparedStatement.setLong(++index, endPort.getId());
     }
 
     @Override
@@ -124,14 +133,21 @@ public class MySqlCruiseDAO implements CruiseDao {
         return cruiseList;
     }
 
-    private Cruise setCruiseValues(ResultSet resultSet) throws SQLException {
+    private Cruise setCruiseValues(ResultSet resultSet) throws SQLException, DAOException {
         Cruise cruise = new Cruise();
+        cruise.setId(resultSet.getInt("id"));
         cruise.setShipId(resultSet.getInt("ship_id"));
         cruise.setDuration(resultSet.getInt("duration"));
+        cruise.setPrice(resultSet.getDouble("price"));
         cruise.setStartDate(resultSet.getDate("start_day"));
         cruise.setPaid(resultSet.getBoolean("paid"));
-        cruise.setStartPort(resultSet.getString("start_port"));
-        cruise.setStartPort(resultSet.getString("end_port"));
+        int startPortId = resultSet.getInt("start_port");
+        CityDao cityDao = new MySqlCityDAO();
+        City startPort = (cityDao.getById(startPortId)).get();
+        cruise.setStartPort(startPort);
+        int endPortId = resultSet.getInt("end_port");
+        City endPort = (cityDao.getById(endPortId)).get();
+        cruise.setEndPort(endPort);
         return cruise;
     }
 
@@ -140,13 +156,7 @@ public class MySqlCruiseDAO implements CruiseDao {
         try(Connection connection = DataSource.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(CruiseMysqlQuery.UPDATE);
             int index = 0;
-            preparedStatement.setInt(++index, cruise.getShipId());
-            preparedStatement.setInt(++index, cruise.getDuration());
-            preparedStatement.setDate(++index, cruise.getStartDate());
-            preparedStatement.setBoolean(++index, cruise.isPaid());
-            preparedStatement.setInt(++index, cruise.getNumberOfPorts());
-            preparedStatement.setString(++index, cruise.getStartPort());
-            preparedStatement.setString(++index, cruise.getEndPort());
+            setValuesToStatement(cruise, preparedStatement, index);
             preparedStatement.execute();
         }
     }

@@ -12,17 +12,20 @@
 <section class="flex-container">
     <c:forEach var ="cruise" items="${sessionScope.allCruises}">
         <div class="item">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png" alt="1">
+            <img src="/parts/images/cruise${cruise.id}.jpg" alt="1">
                 <div class="text">
                     <div class="name">
-                        <p>${cruise.firstName}</p>
+                        <p>Id - ${cruise.id}</p>
                     </div>
                     <div class="name">
-                        <p>Старт ${}</p>
+                        <p>Cruise from ${cruise.startPort.name} to ${cruise.endPort.name}</p>
+                    </div>
+                    <div class="name">
+                        <p>Start ${cruise.startDate}</p>
                     </div>
                     <div class="price">
                         Price<br>
-                        ${cruise.surname}
+                        ${cruise.price}
                     </div>
                 </div>
             <div class="link"></div>

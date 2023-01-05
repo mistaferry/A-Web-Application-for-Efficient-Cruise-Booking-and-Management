@@ -57,12 +57,19 @@ CREATE TABLE cruise
     id        INT PRIMARY KEY AUTO_INCREMENT,
     ship_id   INT,
     duration  INT,
+    price       DOUBLE NOT NULL ,
     start_day datetime,
     paid      BOOLEAN,
     number_of_ports INT          NOT NULL,
-    start_port      VARCHAR(100) NOT NULL,
-    end_port        VARCHAR(100) NOT NULL,
+    start_port      INT NOT NULL,
+    end_port        INT NOT NULL,
     FOREIGN KEY (ship_id) REFERENCES ship (id)
+        on update cascade
+        on delete cascade,
+    FOREIGN KEY (start_port) REFERENCES city (id)
+        on update cascade
+        on delete cascade,
+    FOREIGN KEY (end_port) REFERENCES city (id)
         on update cascade
         on delete cascade
 );
@@ -122,10 +129,14 @@ VALUES ('Adam', 'Romanchenko', 1),
        ('Josyp', 'Brovarchuk', 1),
        ('Olga', 'Miroshnychenko', 2);
 
-INSERT INTO cruise(ship_id, duration, start_day, paid, number_of_ports, start_port, end_port)
-VALUES (1, 4, '2023-04-30', true, 5, 1, 1),
-       (2, 7, '2023-06-04', true, 8, 2, 6),
-       (3, 11, '2023-05-28', true, 12, 4, 11);
+INSERT INTO cruise(ship_id, duration, price, start_day, paid, number_of_ports, start_port, end_port)
+VALUES (1, 4, 6300, '2023-04-30', true, 5, 1, 1),
+       (2, 7, 12000, '2023-06-04', true, 8, 2, 6),
+       (3, 11, 22220, '2023-05-28', true, 12, 4, 11),
+       (1, 10, 11300, '2023-08-12', true, 12, 4, 11),
+       (2, 7, 9000, '2023-07-10', true, 9, 3, 8),
+       (3, 9, 19200, '2023-09-1', true, 5, 1, 3),
+       (1, 11, 31999, '2023-05-31', true, 10, 4, 10);
 
 INSERT INTO transaction(cruise_id, timestamp, amount, completed, description)
 VALUES (1, current_date, 11714, true, 'Succesfully paid'),
@@ -137,13 +148,13 @@ VALUES ('CLIENT'),
        ('ADMIN'),
        ('MANAGER');
 
-INSERT INTO user(login, password, first_name, surname, role_id, blocked)
-VALUES ('innakamar@gmail.com', 'innakamar', 'Inna', 'Kamarenko', 1, false),
-       ('lusenko@gmail.com', 'lusenko', 'Tamara', 'Lusenko', 1, false),
-       ('gullyle@gmail.com', 'gullyle', 'Halyna', 'Hnatyuk', 1, false),
-       ('nazar29meln@gmail.com', 'melnych123', 'Nazar', 'Melnychenko', 1, false),
-       ('victoradm1@gmail.com', 'sereda', 'Victor', 'Sereda', 2, false),
-       ('dinakram23@gmail.com', 'innakamar', 'Diana', 'Kramarenko', 3, false);
+INSERT INTO user(id, login, password, first_name, surname, role_id, blocked)
+VALUES (1, 'innakamar@gmail.com', 'innakamar', 'Inna', 'Kamarenko', 1, false),
+       (2, 'lusenko@gmail.com', 'lusenko', 'Tamara', 'Lusenko', 1, false),
+       (3, 'gullyle@gmail.com', 'gullyle', 'Halyna', 'Hnatyuk', 1, false),
+       (4, 'nazar29meln@gmail.com', 'melnych123', 'Nazar', 'Melnychenko', 1, false),
+       (5, 'victoradm1@gmail.com', 'sereda', 'Victor', 'Sereda', 2, false),
+       (6, 'dinakram23@gmail.com', 'innakamar', 'Diana', 'Kramarenko', 3, false);
 select * from user;
 
 INSERT INTO users_has_cruises(user_id, cruise_id)
