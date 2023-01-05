@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.sql.Date;
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Builder
@@ -43,6 +44,8 @@ public class Cruise extends Entity{
         this.paid = paid;
     }
 
+
+
     public double getPrice() {
         return price;
     }
@@ -52,7 +55,7 @@ public class Cruise extends Entity{
     }
 
     public int getNumberOfPorts() {
-        return numberOfPorts;
+        return this.numberOfPorts;
     }
 
     public void setNumberOfPorts(int numberOfPorts) {

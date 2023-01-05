@@ -18,4 +18,5 @@ public class CruiseMysqlQuery {
     public static final String SET_SHIP = "SELECT * FROM cruise SET ship_id=? WHERE id=?";
 
     public static final String GET_SORTED = "SELECT * FROM cruise ORDER BY ?";
+
 }

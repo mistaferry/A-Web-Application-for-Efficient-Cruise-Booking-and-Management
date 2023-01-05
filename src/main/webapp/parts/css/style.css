@@ -1,5 +1,6 @@
 .footer {
-    bottom: 0;
+    /*bottom: 0;*/
+    position: fixed;
     width: 100%;
     text-align: center;
     alignment: center;
@@ -42,52 +43,6 @@
     color: white;
 }
 
-.nav1{
-    display: flex;
-    justify-content: right;
-    border: solid;
-    align-items: center;
-    position: relative;
-}
-
-.nav1 a, .nav3 a{
-    padding: 1% 5%;
-    text-decoration: none;
-    color: inherit;
-}
-
-.nav2 a{
-    padding: 3%;
-    text-decoration: none;
-    color: white;
-}
-
-.nav1 button{
-    background-color: black;
-    color: white;
-    border: none;
-    padding: 10% 30px;
-}
-
-.nav2{
-    display: flex;
-
-    justify-content: flex-end;
-    background-color: black;
-    margin-top: 2%;
-    position: relative;
-}
-
-.nav2 a:hover{
-    background-color: black;
-}
-
-.nav3{
-    margin-top: 2%;
-    display: flex;
-    justify-content: center;
-}
-
 .flex-container{
     margin-top: 2%;
     display: flex;
@@ -101,13 +56,13 @@
     justify-content: space-between;
     max-width: 30%;
     text-align: center;
-    border: 2px solid;
+    /*border: 2px solid;*/
     /*margin-bottom: 4%;*/
     margin: 10px;
 }
 
 .flex-container .item img{
-    height: 600px;
+    height: 400px;
     width: auto;
 }
 
@@ -136,6 +91,14 @@
 
 .text .name p{
     text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.text .date p{
+    color: blue;
+    font-weight: bold;
+    text-align: center;
 }
 
 .text .size a{
@@ -144,11 +107,15 @@
 }
 
 .text .price{
-    padding: 1% 1em;
-    float: right;
+    padding: 4% 1em;
+    margin-left: 10px;
+    margin-right: 10px;
     font-size: 18px;
-    background-color: black;
+    /*background-color: black;*/
+    border: solid;
+    border-color: black;
     text-align: center;
-    color: white;
+    color: black;
     font-weight: bold;
 }
+

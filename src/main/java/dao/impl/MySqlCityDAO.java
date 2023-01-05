@@ -36,7 +36,8 @@ public class MySqlCityDAO implements CityDao {
             preparedStatement.setLong(++index, id);
             city = new City();
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
+                while (resultSet.next()) {
+                    city.setId(id);
                     city.setName(resultSet.getString("name"));
                     city.setCountry(resultSet.getString("country"));
                 }

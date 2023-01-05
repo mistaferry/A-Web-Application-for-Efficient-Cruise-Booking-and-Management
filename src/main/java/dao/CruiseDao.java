@@ -1,6 +1,7 @@
 package dao;
 
 import exceptions.DAOException;
+import model.entity.City;
 import model.entity.Cruise;
 import model.entity.Ship;
 
@@ -18,4 +19,5 @@ public interface CruiseDao extends EntityDao<Cruise> {
     Optional<Cruise> getByDuration(int duration) throws DAOException, SQLException;
 
     void setShip(int id, Ship ship) throws DAOException, SQLException;
+
 }

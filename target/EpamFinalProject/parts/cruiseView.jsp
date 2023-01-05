@@ -15,17 +15,13 @@
             <img src="/parts/images/cruise${cruise.id}.jpg" alt="1">
                 <div class="text">
                     <div class="name">
-                        <p>Id - ${cruise.id}</p>
-                    </div>
-                    <div class="name">
                         <p>Cruise from ${cruise.startPort.name} to ${cruise.endPort.name}</p>
                     </div>
-                    <div class="name">
-                        <p>Start ${cruise.startDate}</p>
+                    <div class="date">
+                        <p>${cruise.startDate}</p>
                     </div>
                     <div class="price">
-                        Price<br>
-                        ${cruise.price}
+                        Price ${cruise.price}
                     </div>
                 </div>
             <div class="link"></div>

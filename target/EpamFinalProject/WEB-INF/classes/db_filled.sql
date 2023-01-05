@@ -93,6 +93,9 @@ CREATE TABLE users_has_cruises
     cruise_id INT,
     FOREIGN KEY (cruise_id) REFERENCES cruise (id)
         on update cascade
+        on delete cascade,
+    FOREIGN KEY (user_id) REFERENCES user (id)
+        on update cascade
         on delete cascade
 );
 
@@ -130,13 +133,13 @@ VALUES ('Adam', 'Romanchenko', 1),
        ('Olga', 'Miroshnychenko', 2);
 
 INSERT INTO cruise(ship_id, duration, price, start_day, paid, number_of_ports, start_port, end_port)
-VALUES (1, 4, 6300, '2023-04-30', true, 5, 1, 1),
-       (2, 7, 12000, '2023-06-04', true, 8, 2, 6),
-       (3, 11, 22220, '2023-05-28', true, 12, 4, 11),
-       (1, 10, 11300, '2023-08-12', true, 12, 4, 11),
-       (2, 7, 9000, '2023-07-10', true, 9, 3, 8),
-       (3, 9, 19200, '2023-09-1', true, 5, 1, 3),
-       (1, 11, 31999, '2023-05-31', true, 10, 4, 10);
+VALUES (1, 4, 6300, '2023-04-30', true, 5, 7, 8),
+       (2, 7, 12000, '2023-06-04', true, 8, 1, 6),
+       (3, 11, 22220, '2023-05-28', true, 12, 13, 1),
+       (1, 10, 11300, '2023-08-12', true, 12, 12, 3),
+       (2, 7, 9000, '2023-07-10', true, 9, 3, 14),
+       (3, 9, 19200, '2023-09-1', true, 5, 4, 5),
+       (1, 11, 31999, '2023-05-31', true, 10, 6, 2);
 
 INSERT INTO transaction(cruise_id, timestamp, amount, completed, description)
 VALUES (1, current_date, 11714, true, 'Succesfully paid'),
@@ -162,3 +165,14 @@ VALUES (1, 2),
        (2, 1),
        (3, 2),
        (4, 2);
+
+
+
+
+
+
+
+
+
+
+
