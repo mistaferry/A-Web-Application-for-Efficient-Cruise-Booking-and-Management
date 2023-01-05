@@ -1,0 +1,152 @@
+.footer {
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    alignment: center;
+}
+
+#footer-text{
+    color: darkgray;
+}
+
+.flex-container{
+    margin-top: 2%;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+
+.logo{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    width: 14%;
+    background-color: black;
+    margin-left: 6%;
+    z-index: 1;
+}
+
+#logo{
+    text-align: center;
+    width: 80%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#text_logo{
+    position: absolute;
+    width: 10%;
+    margin-top: 0;
+    color: white;
+}
+
+.nav1{
+    display: flex;
+    justify-content: right;
+    border: solid;
+    align-items: center;
+    position: relative;
+}
+
+.nav1 a, .nav3 a{
+    padding: 1% 5%;
+    text-decoration: none;
+    color: inherit;
+}
+
+.nav2 a{
+    padding: 3%;
+    text-decoration: none;
+    color: white;
+}
+
+.nav1 button{
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 10% 30px;
+}
+
+.nav2{
+    display: flex;
+
+    justify-content: flex-end;
+    background-color: black;
+    margin-top: 2%;
+    position: relative;
+}
+
+.nav2 a:hover{
+    background-color: black;
+}
+
+.nav3{
+    margin-top: 2%;
+    display: flex;
+    justify-content: center;
+}
+
+.flex-container{
+    margin-top: 2%;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.flex-container .item{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-width: 30%;
+    text-align: center;
+    border: 2px solid;
+    margin-bottom: 4%;
+}
+
+.flex-container .item img{
+    width: 100%;
+}
+
+.flex-container .item .link{
+    margin-top: 2em;
+}
+
+.flex-container .item .link a{
+    text-decoration: none;
+    padding: 10px 50px;
+    max-width: 40%;
+    border: 2px solid black;
+    color: white;
+    background-color: black;
+}
+
+.flex-container .item .text{
+    text-align: left;
+}
+
+.text .size{
+    padding-left: 1em;
+    float: left;
+    padding-right: 4%;
+}
+
+.text .name p{
+    text-align: center;
+}
+
+.text .size a{
+    text-decoration: none;
+    color: black;
+}
+
+.text .price{
+    padding: 1% 1em;
+    float: right;
+    font-size: 18px;
+    background-color: black;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+}

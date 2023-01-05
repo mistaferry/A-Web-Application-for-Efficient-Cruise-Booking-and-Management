@@ -1,29 +1,37 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<fmt:setLocale value="en" />
+<fmt:setBundle basename="resources" />
 <fmt:setLocale value="${sessionScope.locale}" scope="session"/>
 
-<img src="src/main/webapp/images/cruise1.jpg"
-     class="cruise_image"/>
+<style>
+    <%@ include file="css/style.css"%>
+</style>
 
-<c:if test="${empty sessionScope.cruises}">
-    <p>LIST IS EMPTY</p>
-</c:if>
-<table>
-    <tr>
-        <%--        <th>Id</th>--%>
-        <th>Name</th>
-        <th>Surname</th>
-        <th>Role</th>
-        <th>Blocked</th>
-    </tr>
-    <c:forEach var = "cruise" items="${sessionScope.cruises}">
-        <tr>
-            <td><c:out value = "${cruise.firstName}"/></td>
-            <td><c:out value = "${cruise.surname}"/></td>
-            <td><c:out value = "${cruise.roleId}"/></td>
-            <td><c:out value = "${cruise.blocked}"/></td>
-        </tr>
+
+<section class="flex-container">
+    <c:forEach var ="cruise" items="${sessionScope.allCruises}">
+        <div class="item">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png" alt="1">
+                <div class="text">
+                    <div class="name">
+                        <p>${cruise.firstName}</p>
+                    </div>
+<%--                    <div class="size">--%>
+<%--                        Size<br>--%>
+<%--                        <a>XS</a>--%>
+<%--                        <a>S</a>--%>
+<%--                        <a>M</a>--%>
+<%--                        <a>L</a>--%>
+<%--                        <a>XL</a>--%>
+<%--                        <a>XXL</a>--%>
+<%--                    </div>--%>
+                    <div class="price">
+                        Price<br>
+                        ${cruise.surname}
+                    </div>
+                </div>
+            <div class="link"></div>
+        </div>
     </c:forEach>
-</table>
-
+</section>
