@@ -25,9 +25,9 @@ CREATE TABLE user
 
 CREATE TABLE ship
 (
-    id              INT PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(50) NOT NULL ,
-    capacity        INT          NOT NULL
+    id       INT PRIMARY KEY AUTO_INCREMENT,
+    name     VARCHAR(50) NOT NULL,
+    capacity INT         NOT NULL
 );
 
 CREATE TABLE staff
@@ -35,7 +35,7 @@ CREATE TABLE staff
     id         INT PRIMARY KEY AUTO_INCREMENT,
     first_name VARCHAR(50) NOT NULL,
     surname    VARCHAR(50) NOT NULL,
-    ship_id INT,
+    ship_id    INT,
     FOREIGN KEY (ship_id) REFERENCES ship (id)
         on update cascade
         on delete cascade
@@ -50,15 +50,15 @@ CREATE TABLE city
 
 CREATE TABLE cruise
 (
-    id        INT PRIMARY KEY AUTO_INCREMENT,
-    ship_id   INT,
-    duration  INT,
-    price       DOUBLE NOT NULL ,
-    start_day datetime,
-    paid      BOOLEAN,
-    number_of_ports INT          NOT NULL,
-    start_port      INT NOT NULL,
-    end_port        INT NOT NULL,
+    id              INT PRIMARY KEY AUTO_INCREMENT,
+    ship_id         INT,
+    duration        INT,
+    price           DOUBLE NOT NULL,
+    start_day       datetime,
+    paid            BOOLEAN,
+    number_of_ports INT    NOT NULL,
+    start_port      INT    NOT NULL,
+    end_port        INT    NOT NULL,
     FOREIGN KEY (ship_id) REFERENCES ship (id)
         on update cascade
         on delete cascade,
@@ -97,7 +97,7 @@ CREATE TABLE users_has_cruises
 
 CREATE TABLE ship_has_cities
 (
-    ship_id   INT,
+    ship_id INT,
     city_id INT,
     FOREIGN KEY (ship_id) REFERENCES ship (id)
         on update cascade
@@ -126,7 +126,9 @@ VALUES ('Kiel', 'Germany'),
 INSERT INTO ship(name, capacity)
 VALUES ('MSC Fantasia', 3959),
        ('MSC Magnifica', 3013),
-       ('MSC Preziosa', 4363);
+       ('MSC Preziosa', 4363),
+       ('MSC Passion', 5),
+       ('MSC Sentiaro', 2490);
 
 INSERT INTO staff(first_name, surname, ship_id)
 VALUES ('Adam', 'Romanchenko', 1),
@@ -144,8 +146,8 @@ INSERT INTO cruise(ship_id, duration, price, start_day, paid, number_of_ports, s
 VALUES (1, 4, 6300, '2023-04-30', true, 5, 7, 8),
        (2, 7, 12000, '2023-06-04', true, 8, 1, 6),
        (3, 11, 22220, '2023-05-28', true, 12, 13, 1),
-       (1, 10, 11300, '2023-08-12', true, 12, 12, 3),
-       (2, 7, 9000, '2023-07-10', true, 9, 3, 14),
+       (5, 10, 11300, '2023-08-12', true, 7, 4, 5),
+       (4, 7, 9000, '2023-07-10', true, 8, 11, 7),
        (3, 9, 19200, '2023-09-1', true, 5, 4, 5),
        (1, 11, 31999, '2023-05-31', true, 10, 6, 2);
 
@@ -166,7 +168,8 @@ VALUES (1, 'innakamar@gmail.com', 'innakamar', 'Inna', 'Kamarenko', 1, false),
        (4, 'nazar29meln@gmail.com', 'melnych123', 'Nazar', 'Melnychenko', 1, false),
        (5, 'victoradm1@gmail.com', 'sereda', 'Victor', 'Sereda', 2, false),
        (6, 'dinakram23@gmail.com', 'innakamar', 'Diana', 'Kramarenko', 3, false);
-select * from user;
+select *
+from user;
 
 INSERT INTO users_has_cruises(user_id, cruise_id)
 VALUES (1, 2),
@@ -175,13 +178,45 @@ VALUES (1, 2),
        (4, 2);
 
 INSERT INTO ship_has_cities(ship_id, city_id)
-VALUES  (1, 1),
-        (1, 2),
-        (1, 3),
-        (1, 4),
-        (1, 5),
-        (1, 6),
-        (1, 7);
+VALUES (1, 7),
+       (1, 3),
+       (1, 1),
+       (1, 5),
+       (1, 8),
+       (2, 1),
+       (2, 5),
+       (2, 3),
+       (2, 10),
+       (2, 9),
+       (2, 11),
+       (2, 7),
+       (2, 6),
+       (3, 13),
+       (3, 2),
+       (3, 4),
+       (3, 10),
+       (3, 14),
+       (3, 2),
+       (3, 8),
+       (3, 9),
+       (3, 12),
+       (3, 11),
+       (3, 5),
+       (3, 1),
+       (4, 11),
+       (4, 8),
+       (4, 12),
+       (4, 4),
+       (4, 1),
+       (4, 9),
+       (4, 2),
+       (4, 7),
+       (5, 4),
+       (5, 9),
+       (5, 10),
+       (5, 2),
+       (5, 6),
+       (5, 5);
 
 
 

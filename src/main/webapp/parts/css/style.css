@@ -95,6 +95,10 @@
     font-size: 20px;
 }
 
+.text .rote p{
+    text-align: center;
+}
+
 .text .date p{
     color: blue;
     font-weight: bold;
