@@ -7,7 +7,6 @@ import model.entity.Ship;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.List;
 
 @Builder
 @Data
@@ -18,8 +17,6 @@ public class CruiseDTO implements Serializable {
     private int duration;
     private double price;
     private Date startDate;
-    private City startPort;
-    private City endPort;
     private boolean paid;
 
 }

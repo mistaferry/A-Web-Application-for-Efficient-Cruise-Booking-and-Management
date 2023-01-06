@@ -115,11 +115,13 @@
     margin-left: 10px;
     margin-right: 10px;
     font-size: 18px;
-    /*background-color: black;*/
-    border: solid;
-    border-color: black;
     text-align: center;
-    color: black;
     font-weight: bold;
 }
 
+.button-order{
+    background-color: black;
+    border: solid;
+    border-color: black;
+    color: white;
+}

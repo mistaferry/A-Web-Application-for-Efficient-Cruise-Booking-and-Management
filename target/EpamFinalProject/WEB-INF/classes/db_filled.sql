@@ -57,15 +57,7 @@ CREATE TABLE cruise
     price           DOUBLE NOT NULL,
     start_day       datetime,
     paid            BOOLEAN,
-    start_port      INT    NOT NULL,
-    end_port        INT    NOT NULL,
     FOREIGN KEY (ship_id) REFERENCES ship (id)
-        on update cascade
-        on delete cascade,
-    FOREIGN KEY (start_port) REFERENCES city (id)
-        on update cascade
-        on delete cascade,
-    FOREIGN KEY (end_port) REFERENCES city (id)
         on update cascade
         on delete cascade
 );
@@ -142,14 +134,14 @@ VALUES ('Adam', 'Romanchenko', 1),
        ('Josyp', 'Brovarchuk', 1),
        ('Olga', 'Miroshnychenko', 2);
 
-INSERT INTO cruise(ship_id, duration, price, start_day, paid, start_port, end_port)
-VALUES (1, 4, 6300, '2023-04-30', true,  7, 8),
-       (2, 7, 12000, '2023-06-04', true, 1, 6),
-       (3, 11, 22220, '2023-05-28', true, 13, 1),
-       (5, 10, 11300, '2023-08-12', true, 4, 5),
-       (4, 7, 9000, '2023-07-10', true,  11, 7),
-       (3, 9, 19200, '2023-09-1', true,  4, 5),
-       (1, 11, 31999, '2023-05-31', true, 6, 2);
+INSERT INTO cruise(ship_id, duration, price, start_day, paid)
+VALUES (1, 4, 6300, '2023-04-30', true),
+       (2, 7, 12000, '2023-06-04', true),
+       (3, 11, 22220, '2023-05-28', true),
+       (5, 10, 11300, '2023-08-12', true),
+       (4, 7, 9000, '2023-07-10', true),
+       (3, 9, 19200, '2023-09-1', true),
+       (1, 11, 31999, '2023-05-31', true);
 
 INSERT INTO transaction(cruise_id, timestamp, amount, completed, description)
 VALUES (1, current_date, 11714, true, 'Succesfully paid'),

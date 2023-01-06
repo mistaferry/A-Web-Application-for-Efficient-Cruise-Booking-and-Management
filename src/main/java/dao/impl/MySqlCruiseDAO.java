@@ -95,10 +95,6 @@ public class MySqlCruiseDAO implements CruiseDao {
         preparedStatement.setBoolean(++index, cruise.isPaid());
         preparedStatement.setDouble(++index, cruise.getPrice());
 //        preparedStatement.setInt(++index, cruise.getNumberOfPorts());
-        City startPort = cruise.getStartPort();
-        preparedStatement.setLong(++index, startPort.getId());
-        City endPort = cruise.getEndPort();
-        preparedStatement.setLong(++index, endPort.getId());
     }
 
     @Override
@@ -147,16 +143,6 @@ public class MySqlCruiseDAO implements CruiseDao {
         cruise.setPrice(resultSet.getDouble("price"));
         cruise.setStartDate(resultSet.getDate("start_day"));
         cruise.setPaid(resultSet.getBoolean("paid"));
-
-        int startPortId = resultSet.getInt("start_port");
-        CityDao cityDao = new MySqlCityDAO();
-        City startPort = (cityDao.getById(startPortId)).get();
-        cruise.setStartPort(startPort);
-
-        int endPortId = resultSet.getInt("end_port");
-        City endPort = (cityDao.getById(endPortId)).get();
-        cruise.setEndPort(endPort);
-
         return cruise;
     }
 

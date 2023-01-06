@@ -39,8 +39,6 @@ public final class Convertor {
                 .price(cruise.getPrice())
                 .startDate(cruise.getStartDate())
                 .paid(cruise.isPaid())
-                .startPort(cruise.getStartPort())
-                .endPort(cruise.getEndPort())
                 .build();
     }
 }

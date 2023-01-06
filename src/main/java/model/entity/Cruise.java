@@ -15,8 +15,6 @@ public class Cruise extends Entity {
     private int duration;
     private double price;
     private Date startDate;
-    private City startPort;
-    private City endPort;
     private boolean paid;
 
     public Cruise() {
@@ -33,26 +31,20 @@ public class Cruise extends Entity {
         this.paid = paid;
     }
 
-    public Cruise(Ship ship, int duration, double price, Date startDate, City startPort, City endPort, boolean paid) {
+    public Cruise(Ship ship, int duration, double price, Date startDate, boolean paid) {
         this.ship = ship;
         this.duration = duration;
         this.price = price;
         this.startDate = startDate;
-        ;
-        this.startPort = startPort;
-        this.endPort = endPort;
         this.paid = paid;
     }
 
-    public Cruise(long id, Ship ship, int duration, double price, Date startDate, City startPort, City endPort, boolean paid) {
+    public Cruise(long id, Ship ship, int duration, double price, Date startDate, boolean paid) {
         super(id);
         this.ship = ship;
         this.duration = duration;
         this.price = price;
         this.startDate = startDate;
-        ;
-        this.startPort = startPort;
-        this.endPort = endPort;
         this.paid = paid;
     }
 
@@ -63,22 +55,6 @@ public class Cruise extends Entity {
 
     public void setPrice(double price) {
         this.price = price;
-    }
-
-    public City getStartPort() {
-        return startPort;
-    }
-
-    public void setStartPort(City startPort) {
-        this.startPort = startPort;
-    }
-
-    public City getEndPort() {
-        return endPort;
-    }
-
-    public void setEndPort(City endPort) {
-        this.endPort = endPort;
     }
 
     public Ship getShip() {

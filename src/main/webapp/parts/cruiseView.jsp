@@ -15,15 +15,11 @@
             <img src="/parts/images/cruise${cruise.id}.jpg" alt="1">
             <div class="text">
                 <div class="name">
-                    <p>Cruise from ${cruise.startPort.name} to ${cruise.endPort.name}</p>
+                    <p>Cruise by "${cruise.ship.name}"
+                        from ${cruise.ship.route.get(0).name} to ${cruise.ship.route.get(cruise.ship.route.size()-1).name}</p>
                 </div>
                 <div class="name">
                     <p>${cruise.startDate.toLocalDate().dayOfMonth} ${cruise.startDate.toLocalDate().month} ${cruise.startDate.toLocalDate().year}</p>
-                </div>
-                <div class="rote">
-                    <p>
-                        Number of ports visited - ${cruise.ship.numberOfPorts}
-                    </p>
                 </div>
                 <div class="rote">
                     <p>
