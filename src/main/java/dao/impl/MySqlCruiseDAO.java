@@ -133,12 +133,13 @@ public class MySqlCruiseDAO implements CruiseDao {
     private Cruise setCruiseValues(ResultSet resultSet) throws SQLException, DAOException {
         Cruise cruise = new Cruise();
         cruise.setId(resultSet.getInt("id"));
-
-        int shipId = resultSet.getInt("ship_id");
-        ShipDao shipDao = new MySqlShipDAO();
-        Ship ship = (shipDao.getById(shipId)).get();
+        Ship ship = new Ship();
+        ship.setId(resultSet.getInt("ship_id"));
+        ship.setName(resultSet.getString("ship_name"));
+        ship.setCapacity(resultSet.getInt("capacity"));
+        ship.setNumberOfPorts(resultSet.getInt("number_of_ports"));
+        ship.setRoute((new MySqlCityDAO()).getAllCitiesByShipId(ship.getId()));
         cruise.setShip(ship);
-
         cruise.setDuration(resultSet.getInt("duration"));
         cruise.setPrice(resultSet.getDouble("price"));
         cruise.setStartDate(resultSet.getDate("start_day"));

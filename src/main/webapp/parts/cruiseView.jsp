@@ -32,7 +32,14 @@
                     Price ${cruise.price}
                 </div>
             </div>
-            <div class="link"></div>
+            <form action="controller?action=create-order" method="post">
+                <input type="hidden" name="cruise_id" value="${cruise.id}">
+                <div class="button-order">
+                    <button type="submit" class="button-order">
+                        <label>Order now</label>
+                    </button>
+                </div>
+            </form>
         </div>
     </c:forEach>
 </section>
