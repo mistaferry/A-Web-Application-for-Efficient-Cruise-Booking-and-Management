@@ -42,6 +42,7 @@ public class MySqlShipDAO implements ShipDao {
                     ship.setId(resultSet.getLong("id"));
                     ship.setName(resultSet.getString("name"));
                     ship.setCapacity(resultSet.getInt("capacity"));
+                    ship.setNumberOfPorts(resultSet.getInt("number_of_ports"));
                     ship.setRoute(city);
                 }
             }
@@ -60,6 +61,7 @@ public class MySqlShipDAO implements ShipDao {
                     Ship ship = new Ship();
                     ship.setName(resultSet.getString("name"));
                     ship.setCapacity(resultSet.getInt("capacity"));
+                    ship.setNumberOfPorts(resultSet.getInt("number_of_ports"));
                     shipList.add(ship);
                 }
             }
@@ -74,6 +76,7 @@ public class MySqlShipDAO implements ShipDao {
             int index = 0;
             preparedStatement.setString(++index, ship.getName());
             preparedStatement.setInt(++index, ship.getCapacity());
+            preparedStatement.setInt(++index, ship.getNumberOfPorts());
             preparedStatement.execute();
         }
     }

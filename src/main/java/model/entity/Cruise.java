@@ -9,40 +9,52 @@ import java.sql.Date;
 @EqualsAndHashCode(callSuper = true)
 @Builder
 @Data
-public class Cruise extends Entity{
+public class Cruise extends Entity {
     private static final long serialVersionUID = 1L;
     private Ship ship;
     private int duration;
     private double price;
     private Date startDate;
-    private int numberOfPorts;
     private City startPort;
     private City endPort;
     private boolean paid;
 
-    public Cruise(Ship ship, int duration, double price, Date startDate, int numberOfPorts, City startPort, City endPort, boolean paid) {
+    public Cruise() {
+    }
+
+    public Cruise(Ship ship) {
+        this.ship = ship;
+    }
+
+    public Cruise(Ship ship, int duration, Date startDate, boolean paid) {
+        this.ship = ship;
+        this.duration = duration;
+        this.startDate = startDate;
+        this.paid = paid;
+    }
+
+    public Cruise(Ship ship, int duration, double price, Date startDate, City startPort, City endPort, boolean paid) {
         this.ship = ship;
         this.duration = duration;
         this.price = price;
         this.startDate = startDate;
-        this.numberOfPorts = numberOfPorts;
+        ;
         this.startPort = startPort;
         this.endPort = endPort;
         this.paid = paid;
     }
 
-    public Cruise(long id, Ship ship, int duration, double price, Date startDate, int numberOfPorts, City startPort, City endPort, boolean paid) {
+    public Cruise(long id, Ship ship, int duration, double price, Date startDate, City startPort, City endPort, boolean paid) {
         super(id);
         this.ship = ship;
         this.duration = duration;
         this.price = price;
         this.startDate = startDate;
-        this.numberOfPorts = numberOfPorts;
+        ;
         this.startPort = startPort;
         this.endPort = endPort;
         this.paid = paid;
     }
-
 
 
     public double getPrice() {
@@ -51,14 +63,6 @@ public class Cruise extends Entity{
 
     public void setPrice(double price) {
         this.price = price;
-    }
-
-    public int getNumberOfPorts() {
-        return this.numberOfPorts;
-    }
-
-    public void setNumberOfPorts(int numberOfPorts) {
-        this.numberOfPorts = numberOfPorts;
     }
 
     public City getStartPort() {
@@ -75,18 +79,6 @@ public class Cruise extends Entity{
 
     public void setEndPort(City endPort) {
         this.endPort = endPort;
-    }
-
-    public Cruise() { }
-    public Cruise(Ship ship) {
-        this.ship = ship;
-    }
-
-    public Cruise(Ship ship, int duration, Date startDate, boolean paid) {
-        this.ship = ship;
-        this.duration = duration;
-        this.startDate = startDate;
-        this.paid = paid;
     }
 
     public Ship getShip() {

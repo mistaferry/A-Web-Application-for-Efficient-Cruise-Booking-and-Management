@@ -27,7 +27,8 @@ CREATE TABLE ship
 (
     id       INT PRIMARY KEY AUTO_INCREMENT,
     name     VARCHAR(50) NOT NULL,
-    capacity INT         NOT NULL
+    capacity INT         NOT NULL,
+    number_of_ports INT    NOT NULL
 );
 
 CREATE TABLE staff
@@ -56,7 +57,6 @@ CREATE TABLE cruise
     price           DOUBLE NOT NULL,
     start_day       datetime,
     paid            BOOLEAN,
-    number_of_ports INT    NOT NULL,
     start_port      INT    NOT NULL,
     end_port        INT    NOT NULL,
     FOREIGN KEY (ship_id) REFERENCES ship (id)
@@ -123,12 +123,12 @@ VALUES ('Kiel', 'Germany'),
        ('Genoa', 'Italy'),
        ('Marseille', 'France');
 
-INSERT INTO ship(name, capacity)
-VALUES ('MSC Fantasia', 3959),
-       ('MSC Magnifica', 3013),
-       ('MSC Preziosa', 4363),
-       ('MSC Passion', 5),
-       ('MSC Sentiaro', 2490);
+INSERT INTO ship(name, capacity, number_of_ports)
+VALUES ('MSC Fantasia', 3959, 5),
+       ('MSC Magnifica', 3013, 8),
+       ('MSC Preziosa', 4363, 12),
+       ('MSC Passion', 5, 8),
+       ('MSC Sentiaro', 2490, 7);
 
 INSERT INTO staff(first_name, surname, ship_id)
 VALUES ('Adam', 'Romanchenko', 1),
@@ -142,14 +142,14 @@ VALUES ('Adam', 'Romanchenko', 1),
        ('Josyp', 'Brovarchuk', 1),
        ('Olga', 'Miroshnychenko', 2);
 
-INSERT INTO cruise(ship_id, duration, price, start_day, paid, number_of_ports, start_port, end_port)
-VALUES (1, 4, 6300, '2023-04-30', true, 5, 7, 8),
-       (2, 7, 12000, '2023-06-04', true, 8, 1, 6),
-       (3, 11, 22220, '2023-05-28', true, 12, 13, 1),
-       (5, 10, 11300, '2023-08-12', true, 7, 4, 5),
-       (4, 7, 9000, '2023-07-10', true, 8, 11, 7),
-       (3, 9, 19200, '2023-09-1', true, 5, 4, 5),
-       (1, 11, 31999, '2023-05-31', true, 10, 6, 2);
+INSERT INTO cruise(ship_id, duration, price, start_day, paid, start_port, end_port)
+VALUES (1, 4, 6300, '2023-04-30', true,  7, 8),
+       (2, 7, 12000, '2023-06-04', true, 1, 6),
+       (3, 11, 22220, '2023-05-28', true, 13, 1),
+       (5, 10, 11300, '2023-08-12', true, 4, 5),
+       (4, 7, 9000, '2023-07-10', true,  11, 7),
+       (3, 9, 19200, '2023-09-1', true,  4, 5),
+       (1, 11, 31999, '2023-05-31', true, 6, 2);
 
 INSERT INTO transaction(cruise_id, timestamp, amount, completed, description)
 VALUES (1, current_date, 11714, true, 'Succesfully paid'),
@@ -177,6 +177,7 @@ VALUES (1, 2),
        (3, 2),
        (4, 2);
 
+# route
 INSERT INTO ship_has_cities(ship_id, city_id)
 VALUES (1, 7),
        (1, 3),

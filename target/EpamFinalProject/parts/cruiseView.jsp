@@ -22,6 +22,11 @@
                 </div>
                 <div class="rote">
                     <p>
+                        Number of ports visited - ${cruise.ship.numberOfPorts}
+                    </p>
+                </div>
+                <div class="rote">
+                    <p>
                         <c:forEach var="city" items="${cruise.ship.route}" varStatus="loop">
                                 ${city.name} <c:if test="${!loop.last}"> - </c:if>
                         </c:forEach>
