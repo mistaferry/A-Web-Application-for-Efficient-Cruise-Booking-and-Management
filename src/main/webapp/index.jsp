@@ -13,6 +13,7 @@
     <jsp:include page="parts/mainMenu.jsp"/>
 
     <jsp:include page="signInPage.jsp"/>
+<%--    <jsp:include page="parts/cruiseView.jsp"/>--%>
 
     <jsp:include page="parts/footer.jsp"/>
 </html>

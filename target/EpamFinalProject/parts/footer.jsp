@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="css/style.css"/>
+
 <div class="container">
     <footer class="footer">
         <p>Published by IHuryn</p>
