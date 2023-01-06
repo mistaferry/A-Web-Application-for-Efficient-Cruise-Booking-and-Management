@@ -37,7 +37,7 @@ public class ViewCatalogAction implements Action {
         try{
             List<CruiseDTO> cruiseDTOList = generalService.viewCruiseCatalog();
             session.setAttribute("allCruises", cruiseDTOList);
-            path = "/test1.jsp";
+            path = "/catalog.jsp";
         } catch (ServiceException e) {
             e.printStackTrace();
             path = "/pages/errorPage.jsp";
