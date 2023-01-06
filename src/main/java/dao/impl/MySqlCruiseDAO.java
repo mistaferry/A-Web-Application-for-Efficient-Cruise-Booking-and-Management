@@ -3,6 +3,7 @@ package dao.impl;
 import connection.DataSource;
 import dao.CityDao;
 import dao.CruiseDao;
+import dao.ShipDao;
 import exceptions.DAOException;
 import model.entity.City;
 import model.entity.Cruise;
@@ -88,7 +89,7 @@ public class MySqlCruiseDAO implements CruiseDao {
     }
 
     private void setValuesToStatement(Cruise cruise, PreparedStatement preparedStatement, int index) throws SQLException {
-        preparedStatement.setInt(++index, cruise.getShipId());
+        preparedStatement.setLong(++index, cruise.getShip().getId());
         preparedStatement.setInt(++index, cruise.getDuration());
         preparedStatement.setDate(++index, Date.valueOf(cruise.getStartDate().toLocalDate()));
         preparedStatement.setBoolean(++index, cruise.isPaid());
@@ -136,18 +137,26 @@ public class MySqlCruiseDAO implements CruiseDao {
     private Cruise setCruiseValues(ResultSet resultSet) throws SQLException, DAOException {
         Cruise cruise = new Cruise();
         cruise.setId(resultSet.getInt("id"));
-        cruise.setShipId(resultSet.getInt("ship_id"));
+
+        int shipId = resultSet.getInt("ship_id");
+        ShipDao shipDao = new MySqlShipDAO();
+        Ship ship = (shipDao.getById(shipId)).get();
+        cruise.setShip(ship);
+
         cruise.setDuration(resultSet.getInt("duration"));
         cruise.setPrice(resultSet.getDouble("price"));
         cruise.setStartDate(resultSet.getDate("start_day"));
         cruise.setPaid(resultSet.getBoolean("paid"));
+
         int startPortId = resultSet.getInt("start_port");
         CityDao cityDao = new MySqlCityDAO();
         City startPort = (cityDao.getById(startPortId)).get();
         cruise.setStartPort(startPort);
+
         int endPortId = resultSet.getInt("end_port");
         City endPort = (cityDao.getById(endPortId)).get();
         cruise.setEndPort(endPort);
+
         return cruise;
     }
 

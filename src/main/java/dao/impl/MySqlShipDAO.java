@@ -1,9 +1,11 @@
 package dao.impl;
 
 import connection.DataSource;
+import dao.CityDao;
 import dao.ShipDao;
 import dao.constants.*;
 import exceptions.DAOException;
+import model.entity.City;
 import model.entity.Ship;
 
 import java.sql.Connection;
@@ -35,9 +37,12 @@ public class MySqlShipDAO implements ShipDao {
             preparedStatement.setLong(++index, id);
             ship = new Ship();
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
+                while (resultSet.next()) {
+                    List<City> city = (new MySqlCityDAO()).getAllCitiesByShipId(id);
+                    ship.setId(resultSet.getLong("id"));
                     ship.setName(resultSet.getString("name"));
                     ship.setCapacity(resultSet.getInt("capacity"));
+                    ship.setRoute(city);
                 }
             }
         }
@@ -51,7 +56,7 @@ public class MySqlShipDAO implements ShipDao {
             PreparedStatement preparedStatement = connection.prepareStatement(ShipMysqlQuery.GET_ALL);
             shipList = new ArrayList<>();
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
+                while (resultSet.next()) {
                     Ship ship = new Ship();
                     ship.setName(resultSet.getString("name"));
                     ship.setCapacity(resultSet.getInt("capacity"));

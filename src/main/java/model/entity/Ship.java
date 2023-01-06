@@ -1,10 +1,14 @@
 package model.entity;
 
+import java.util.List;
 import java.util.Set;
 
 public class Ship extends Entity{
     private static final long serialVersionUID = 1L;
     private String name;
+    private Set<Staff> staff;
+    private List<City> route;
+    private int capacity;
 
     public String getName() {
         return name;
@@ -14,10 +18,6 @@ public class Ship extends Entity{
         this.name = name;
     }
 
-    private Set<Staff> staff;
-    private Set<City> route;
-    private int capacity;
-
     public Set<Staff> getStaff() {
         return staff;
     }
@@ -26,11 +26,11 @@ public class Ship extends Entity{
         this.staff = staff;
     }
 
-    public Set<City> getRoute() {
+    public List<City> getRoute() {
         return route;
     }
 
-    public void setRoute(Set<City> route) {
+    public void setRoute(List<City> route) {
         this.route = route;
     }
 

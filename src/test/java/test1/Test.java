@@ -3,15 +3,12 @@ package test1;
 import com.google.protobuf.ServiceException;
 import dao.CruiseDao;
 import dao.UserDao;
-import dto.CruiseDTO;
 import dto.UserDTO;
 import exceptions.DAOException;
-import model.entity.Cruise;
 import model.entity.User;
 import services.GeneralService;
 import services.impl.GeneralServiceImpl;
 
-import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,8 +33,8 @@ public class Test {
         userDTOs.add(getTestUserDTO2());
         when(userDao.getAll()).thenReturn(users);
         System.out.println(userDao.getAll());
-        System.out.println(generalService.viewCatalog());
-        assertIterableEquals(userDTOs, generalService.viewCatalog());
+        System.out.println(generalService.viewAllUsers());
+        assertIterableEquals(userDTOs, generalService.viewAllUsers());
     }
 
     private UserDTO getTestUserDTO1() {

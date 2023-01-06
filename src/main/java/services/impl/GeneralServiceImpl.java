@@ -41,7 +41,7 @@ public class GeneralServiceImpl implements GeneralService {
     }
 
     @Override
-    public List<UserDTO> viewCatalog() throws ServiceException {
+    public List<UserDTO> viewAllUsers() throws ServiceException {
         List<UserDTO> userDTOList = new ArrayList<>();
         try{
             List<User> userList = userDao.getAll();

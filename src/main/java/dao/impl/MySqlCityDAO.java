@@ -53,15 +53,19 @@ public class MySqlCityDAO implements CityDao {
             PreparedStatement preparedStatement = connection.prepareStatement(CityMysqlQuery.GET_ALL);
             cityList = new ArrayList<>();
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
-                    City city = new City();
-                    city.setName(resultSet.getString("name"));
-                    city.setCountry(resultSet.getString("country"));
+                while (resultSet.next()) {
+                    City city = getCityFromDB(resultSet);
                     cityList.add(city);
                 }
             }
         }
         return cityList;
+    }
+
+    private City getCityFromDB(ResultSet resultSet) throws SQLException, DAOException {
+        long city_id = resultSet.getLong("city_id");
+        City city = (new MySqlCityDAO()).getById(city_id).get();
+        return city;
     }
 
     @Override
@@ -83,5 +87,23 @@ public class MySqlCityDAO implements CityDao {
             preparedStatement.setLong(++index, id);
             preparedStatement.execute();
         }
+    }
+
+    @Override
+    public List<City> getAllCitiesByShipId(long shipId) throws DAOException, SQLException {
+        List<City> cityList = null;
+        try(Connection connection = DataSource.getConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(CityMysqlQuery.GET_ALL_CITIES_BY_SHIP_ID);
+            int index = 0;
+            preparedStatement.setLong(++index, shipId);
+            cityList = new ArrayList<>();
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    City city = getCityFromDB(resultSet);
+                    cityList.add(city);
+                }
+            }
+        }
+        return cityList;
     }
 }

@@ -5,14 +5,13 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.sql.Date;
-import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Builder
 @Data
 public class Cruise extends Entity{
     private static final long serialVersionUID = 1L;
-    private int shipId;
+    private Ship ship;
     private int duration;
     private double price;
     private Date startDate;
@@ -21,8 +20,8 @@ public class Cruise extends Entity{
     private City endPort;
     private boolean paid;
 
-    public Cruise(int shipId, int duration, double price, Date startDate, int numberOfPorts, City startPort, City endPort, boolean paid) {
-        this.shipId = shipId;
+    public Cruise(Ship ship, int duration, double price, Date startDate, int numberOfPorts, City startPort, City endPort, boolean paid) {
+        this.ship = ship;
         this.duration = duration;
         this.price = price;
         this.startDate = startDate;
@@ -32,9 +31,9 @@ public class Cruise extends Entity{
         this.paid = paid;
     }
 
-    public Cruise(long id, int shipId, int duration, double price, Date startDate, int numberOfPorts, City startPort, City endPort, boolean paid) {
+    public Cruise(long id, Ship ship, int duration, double price, Date startDate, int numberOfPorts, City startPort, City endPort, boolean paid) {
         super(id);
-        this.shipId = shipId;
+        this.ship = ship;
         this.duration = duration;
         this.price = price;
         this.startDate = startDate;
@@ -79,23 +78,23 @@ public class Cruise extends Entity{
     }
 
     public Cruise() { }
-    public Cruise(int shipId) {
-        this.shipId = shipId;
+    public Cruise(Ship ship) {
+        this.ship = ship;
     }
 
-    public Cruise(int shipId, int duration, Date startDate, boolean paid) {
-        this.shipId = shipId;
+    public Cruise(Ship ship, int duration, Date startDate, boolean paid) {
+        this.ship = ship;
         this.duration = duration;
         this.startDate = startDate;
         this.paid = paid;
     }
 
-    public int getShipId() {
-        return shipId;
+    public Ship getShip() {
+        return ship;
     }
 
-    public void setShipId(int shipId) {
-        this.shipId = shipId;
+    public void setShip(Ship shipId) {
+        this.ship = shipId;
     }
 
     public int getDuration() {

@@ -45,11 +45,7 @@ CREATE TABLE city
 (
     id      INT PRIMARY KEY AUTO_INCREMENT,
     name    VARCHAR(100) NOT NULL,
-    country VARCHAR(50)  NOT NULL,
-    ship_id INT,
-    FOREIGN KEY (ship_id) REFERENCES ship (id)
-        on update cascade
-        on delete cascade
+    country VARCHAR(50)  NOT NULL
 );
 
 CREATE TABLE cruise
@@ -95,6 +91,18 @@ CREATE TABLE users_has_cruises
         on update cascade
         on delete cascade,
     FOREIGN KEY (user_id) REFERENCES user (id)
+        on update cascade
+        on delete cascade
+);
+
+CREATE TABLE ship_has_cities
+(
+    ship_id   INT,
+    city_id INT,
+    FOREIGN KEY (ship_id) REFERENCES ship (id)
+        on update cascade
+        on delete cascade,
+    FOREIGN KEY (city_id) REFERENCES city (id)
         on update cascade
         on delete cascade
 );
@@ -166,8 +174,14 @@ VALUES (1, 2),
        (3, 2),
        (4, 2);
 
-
-
+INSERT INTO ship_has_cities(ship_id, city_id)
+VALUES  (1, 1),
+        (1, 2),
+        (1, 3),
+        (1, 4),
+        (1, 5),
+        (1, 6),
+        (1, 7);
 
 
 
