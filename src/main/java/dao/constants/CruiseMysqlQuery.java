@@ -36,4 +36,6 @@ public class CruiseMysqlQuery {
 
     public static final String GET_SORTED = "SELECT * FROM cruise ORDER BY ?";
 
+
+
 }

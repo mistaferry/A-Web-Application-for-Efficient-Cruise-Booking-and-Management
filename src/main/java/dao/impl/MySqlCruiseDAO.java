@@ -44,10 +44,18 @@ public class MySqlCruiseDAO implements CruiseDao {
                     preparedStatement.setInt(++index, Integer.parseInt(filters.get(1)));
                     preparedStatement.setInt(++index, Integer.parseInt(filters.get(2)));
                 }
-            }else if(!filters.get(0).equals("") && filters.get(1).equals("All")){
-                preparedStatement = connection.prepareStatement(CruiseMysqlQuery.GET_BY_START_DAY_FILTER);
-                int index = 0;
-                preparedStatement.setString(++index, filters.get(0));
+            }else if(!filters.get(0).equals("") ){
+                if(filters.get(1).equals("All")) {
+                    preparedStatement = connection.prepareStatement(CruiseMysqlQuery.GET_BY_START_DAY_FILTER);
+                    int index = 0;
+                    preparedStatement.setString(++index, filters.get(0));
+                }else {
+                    preparedStatement = connection.prepareStatement(CruiseMysqlQuery.GET_BY_ALL_FILTERS);
+                    int index = 0;
+                    preparedStatement.setString(++index, filters.get(0));
+                    preparedStatement.setInt(++index, Integer.parseInt(filters.get(1)));
+                    preparedStatement.setInt(++index, Integer.parseInt(filters.get(2)));
+                }
             }
             cruiseList = new ArrayList<>();
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
