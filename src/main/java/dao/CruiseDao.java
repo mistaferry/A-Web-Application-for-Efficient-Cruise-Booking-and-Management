@@ -22,4 +22,5 @@ public interface CruiseDao extends EntityDao<Cruise> {
 
     void setShip(int id, Ship ship) throws DAOException, SQLException;
 
+    List<Cruise> getCruisePaginationWithFilters(List<String> filters, int dishPerPage, int pageNum) throws DAOException, SQLException;
 }

@@ -167,3 +167,8 @@
     margin-right: auto;
 }
 
+.c_pagination {
+    width: max-content;
+    margin: 10px auto 15px auto;
+}
+

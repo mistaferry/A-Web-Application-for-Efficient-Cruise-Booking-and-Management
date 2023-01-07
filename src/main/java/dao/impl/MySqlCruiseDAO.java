@@ -21,7 +21,7 @@ public class MySqlCruiseDAO implements CruiseDao {
             preparedStatement.setString(++index, query);
             cruiseList = new ArrayList<>();
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
+                while (resultSet.next()) {
                     Cruise cruise = setCruiseValues(resultSet);
                     cruiseList.add(cruise);
                 }
@@ -41,8 +41,7 @@ public class MySqlCruiseDAO implements CruiseDao {
                 }else if (!filters.get(1).equals("All")){
                     preparedStatement = connection.prepareStatement(CruiseMysqlQuery.GET_BY_DURATION_FILTER);
                     int index = 0;
-                    preparedStatement.setInt(++index, Integer.parseInt(filters.get(1)));
-                    preparedStatement.setInt(++index, Integer.parseInt(filters.get(2)));
+                    setPaginationValues(preparedStatement, Integer.parseInt(filters.get(2)), index, Integer.parseInt(filters.get(1)));
                 }
             }else if(!filters.get(0).equals("") ){
                 if(filters.get(1).equals("All")) {
@@ -53,8 +52,7 @@ public class MySqlCruiseDAO implements CruiseDao {
                     preparedStatement = connection.prepareStatement(CruiseMysqlQuery.GET_BY_ALL_FILTERS);
                     int index = 0;
                     preparedStatement.setString(++index, filters.get(0));
-                    preparedStatement.setInt(++index, Integer.parseInt(filters.get(1)));
-                    preparedStatement.setInt(++index, Integer.parseInt(filters.get(2)));
+                    setPaginationValues(preparedStatement, Integer.parseInt(filters.get(2)), index, Integer.parseInt(filters.get(1)));
                 }
             }
             cruiseList = new ArrayList<>();
@@ -200,5 +198,64 @@ public class MySqlCruiseDAO implements CruiseDao {
             preparedStatement.setLong(++index, id);
             preparedStatement.execute();
         }
+    }
+
+    @Override
+    public List<Cruise> getCruisePaginationWithFilters(List<String> filters, int dishPerPage, int pageNum) throws DAOException, SQLException {
+        List<Cruise> cruiseList;
+        try(Connection connection = DataSource.getConnection()) {
+            PreparedStatement preparedStatement = null;
+            String query = "";
+            if(!filters.get(0).isEmpty()){ /*дату встановлено*/
+                query += CruiseMysqlQuery.GET_ALL + CruiseMysqlQuery.GET_BY_START_DAY_FILTER;
+                preparedStatement = setDurationFilter(filters, connection, preparedStatement, query, dishPerPage, pageNum);
+            }else{ /*дату встановлено*/
+                query += CruiseMysqlQuery.GET_ALL;
+                preparedStatement = setDurationFilter(filters, connection, preparedStatement, query, dishPerPage, pageNum);
+            }
+            cruiseList = new ArrayList<>();
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    Cruise cruise = setCruiseValues(resultSet);
+                    cruiseList.add(cruise);
+                }
+            }
+        }
+        return cruiseList;
+    }
+
+    private PreparedStatement setDurationFilter(List<String> filters, Connection connection, PreparedStatement preparedStatement, String query, int dishPerPage, int pageNum) throws SQLException {
+        if(filters.get(1).equals("All")){ /*будь-яка тривалість*/
+            query += CruiseMysqlQuery.GET_PAGINATION;
+            preparedStatement = connection.prepareStatement(query);
+            int index = 0;
+            if(!filters.get(0).isEmpty()){
+                preparedStatement.setString(++index, filters.get(0));
+            }
+            setPaginationValues(preparedStatement, dishPerPage, index, pageNum * dishPerPage);
+
+        }else if (!filters.get(1).equals("All")){ /*задано тривалість*/
+            int index = 0;
+            if(!filters.get(0).isEmpty()){
+                preparedStatement.setString(++index, filters.get(0));
+                query += " AND (" + CruiseMysqlQuery.GET_BY_DURATION_FILTER + ") " ;
+                query += CruiseMysqlQuery.GET_PAGINATION;
+                preparedStatement = connection.prepareStatement(query);
+                preparedStatement.setString(++index, filters.get(0));
+            }else{
+                query += " WHERE " + CruiseMysqlQuery.GET_BY_DURATION_FILTER;
+                query += CruiseMysqlQuery.GET_PAGINATION;
+                preparedStatement = connection.prepareStatement(query);
+            }
+            preparedStatement.setInt(++index, Integer.parseInt(filters.get(1)));
+            preparedStatement.setInt(++index, Integer.parseInt(filters.get(2)));
+            setPaginationValues(preparedStatement, dishPerPage, index, pageNum * dishPerPage);
+        }
+        return preparedStatement;
+    }
+
+    private void setPaginationValues(PreparedStatement preparedStatement, int dishPerPage, int index, int i) throws SQLException {
+        preparedStatement.setInt(++index, i);
+        preparedStatement.setInt(++index, dishPerPage);
     }
 }

@@ -9,14 +9,13 @@ public class CruiseMysqlQuery {
             "s.name as ship_name, s.capacity as capacity, s.number_of_ports as number_of_ports FROM cruise " +
             "JOIN ship s on s.id = cruise.ship_id ";
 
-    public static final String GET_BY_ALL_FILTERS = GET_ALL +
-            "WHERE start_day=? AND (duration >= ? AND duration <= ?)";
+    public static final String GET_BY_ALL_FILTERS = "WHERE start_day=? AND (duration >= ? AND duration <= ?) ";
 
-    public static final String GET_BY_DURATION_FILTER = GET_ALL +
-            "WHERE duration >= ? AND duration <= ?";
+    public static final String GET_BY_DURATION_FILTER = "duration >= ? AND duration <= ? ";
 
-    public static final String GET_BY_START_DAY_FILTER = GET_ALL +
-            "WHERE start_day=?";
+    public static final String GET_BY_START_DAY_FILTER = "WHERE start_day=? ";
+
+    public static final String GET_PAGINATION = "LIMIT ?, ?";
 
     public static final String UPDATE = "UPDATE cruise WHERE id=?";
 
@@ -29,6 +28,8 @@ public class CruiseMysqlQuery {
     public static final String SET_SHIP = "SELECT * FROM cruise SET ship_id=? WHERE id=?";
 
     public static final String GET_SORTED = "SELECT * FROM cruise ORDER BY ?";
+
+    public static final String GET_CRUISE_COUNT = "SELECT COUNT(*) FROM cruise";
 
 
 

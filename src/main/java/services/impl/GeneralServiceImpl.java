@@ -75,4 +75,16 @@ public class GeneralServiceImpl implements GeneralService {
             throw  new ServiceException(e);
         }
     }
+
+    @Override
+    public List<CruiseDTO> viewCatalogWithPagination(List<String> filters, int cruisePerPage, int pageNum) throws ServiceException {
+        List<CruiseDTO> cruiseDTOList = new ArrayList<>();
+        try{
+            List<Cruise> cruiseList = cruiseDao.getCruisePaginationWithFilters(filters, cruisePerPage, pageNum);
+            cruiseList.forEach(cruise -> cruiseDTOList.add(convertCruiseToDTO(cruise)));
+            return cruiseDTOList;
+        } catch (DAOException | SQLException e) {
+            throw  new ServiceException(e);
+        }
+    }
 }
