@@ -30,8 +30,15 @@
                 </label>
             </a>
             <a>
+                <div class="select">
+                    <label>Records <input type="number" name="records" min="1" max="7"
+                               value="${not empty param.records ? param.records : "7"}"/>
+                    </label>
+                </div>
+            </a>
+            <a>
                 <div>
-                    <button id="save-button" type="submit">Show</button>
+                    <button class="save-button" type="submit">Show</button>
                 </div>
             </a>
         </nav>
