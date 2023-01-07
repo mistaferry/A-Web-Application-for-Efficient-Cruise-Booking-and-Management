@@ -63,4 +63,16 @@ public class GeneralServiceImpl implements GeneralService {
             throw  new ServiceException(e);
         }
     }
+
+    @Override
+    public List<CruiseDTO> viewCatalog(List<String> filters) throws ServiceException {
+        List<CruiseDTO> cruiseDTOList = new ArrayList<>();
+        try{
+            List<Cruise> cruiseList = cruiseDao.getByFilters(filters);
+            cruiseList.forEach(cruise -> cruiseDTOList.add(convertCruiseToDTO(cruise)));
+            return cruiseDTOList;
+        } catch (DAOException | SQLException e) {
+            throw  new ServiceException(e);
+        }
+    }
 }

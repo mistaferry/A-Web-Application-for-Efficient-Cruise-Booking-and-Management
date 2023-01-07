@@ -1,11 +1,8 @@
 package dao.impl;
 
 import connection.DataSource;
-import dao.CityDao;
 import dao.CruiseDao;
-import dao.ShipDao;
 import exceptions.DAOException;
-import model.entity.City;
 import model.entity.Cruise;
 import model.entity.Ship;
 import dao.constants.*;
@@ -25,6 +22,36 @@ public class MySqlCruiseDAO implements CruiseDao {
             cruiseList = new ArrayList<>();
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
+                    Cruise cruise = setCruiseValues(resultSet);
+                    cruiseList.add(cruise);
+                }
+            }
+        }
+        return cruiseList;
+    }
+
+    @Override
+    public List<Cruise> getByFilters(List<String> filters) throws DAOException, SQLException {
+        List<Cruise> cruiseList;
+        try(Connection connection = DataSource.getConnection()) {
+            PreparedStatement preparedStatement = null;
+            if(filters.get(0).equals("")){
+                if(filters.get(1).equals("All")){
+                    preparedStatement = connection.prepareStatement(CruiseMysqlQuery.GET_ALL);
+                }else if (!filters.get(1).equals("All")){
+                    preparedStatement = connection.prepareStatement(CruiseMysqlQuery.GET_BY_DURATION_FILTER);
+                    int index = 0;
+                    preparedStatement.setInt(++index, Integer.parseInt(filters.get(1)));
+                    preparedStatement.setInt(++index, Integer.parseInt(filters.get(2)));
+                }
+            }else if(!filters.get(0).equals("") && filters.get(1).equals("All")){
+                preparedStatement = connection.prepareStatement(CruiseMysqlQuery.GET_BY_START_DAY_FILTER);
+                int index = 0;
+                preparedStatement.setString(++index, filters.get(0));
+            }
+            cruiseList = new ArrayList<>();
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
                     Cruise cruise = setCruiseValues(resultSet);
                     cruiseList.add(cruise);
                 }

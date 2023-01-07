@@ -1,6 +1,7 @@
 package actions;
 import actions.general.SignInAction;
 import actions.general.ViewCatalogAction;
+import actions.general.ViewCruises;
 
 import java.util.*;
 
@@ -11,6 +12,7 @@ public final class ActionFactory {
     static {
         ACTION_MAP.put("sign-in", new SignInAction());
         ACTION_MAP.put("catalog", new ViewCatalogAction());
+        ACTION_MAP.put("view-cruises", new ViewCruises());
     }
 
     private ActionFactory(){ }

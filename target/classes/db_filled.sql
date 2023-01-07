@@ -140,7 +140,7 @@ VALUES (1, 4, 6300, '2023-04-30', true),
        (3, 11, 22220, '2023-05-28', true),
        (5, 10, 11300, '2023-08-12', true),
        (4, 7, 9000, '2023-07-10', true),
-       (3, 9, 19200, '2023-09-1', true),
+       (3, 9, 19200, '2023-09-01', true),
        (1, 11, 31999, '2023-05-31', true);
 
 INSERT INTO transaction(cruise_id, timestamp, amount, completed, description)

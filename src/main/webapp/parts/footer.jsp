@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="css/style.css"/>
+<link rel="stylesheet" href="parts/css/newStylr.css"/>
 
 <div class="container">
     <footer class="footer">

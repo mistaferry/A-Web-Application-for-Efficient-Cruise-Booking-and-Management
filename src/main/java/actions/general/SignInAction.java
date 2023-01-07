@@ -40,17 +40,8 @@ public class SignInAction implements Action {
                 request.setAttribute("error", errorMessage);
                 return path;
             }
-//            List<UserDTO> cruiseDTOList = generalService.viewCatalog();
-//            request.getSession().setAttribute("cruises", cruiseDTOList);
             request.setAttribute("user", user);
             request.setAttribute("role", user.getRoleId());
-//            List<CruiseDTO> cruiseDTOList = generalService.viewCruiseCatalog();
-//            request.getSession().setAttribute("allCruises", cruiseDTOList);
-//            switch (user.getRoleId()) {
-//                case 1 -> path = "/pages/test.jsp";
-//                case 2 -> path = "/pages/test.jsp";
-//                case 3 -> path = "/pages/test.jsp";
-//            }
             path = "controller?action=catalog";
         } catch (ServiceException e) {
             return "/pages/errorPage.jsp";

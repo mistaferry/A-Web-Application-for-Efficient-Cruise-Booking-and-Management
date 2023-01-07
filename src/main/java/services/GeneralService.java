@@ -16,5 +16,5 @@ public interface GeneralService {
 
     List<CruiseDTO> viewCruiseCatalog() throws ServiceException;
 
-
+    List<CruiseDTO> viewCatalog(List<String> filters) throws ServiceException;
 }

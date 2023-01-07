@@ -7,7 +7,22 @@ public class CruiseMysqlQuery {
 
     public static final String GET_ALL = "SELECT cruise.id, ship_id, duration, price, start_day, paid, " +
             "s.name as ship_name, s.capacity as capacity, s.number_of_ports as number_of_ports FROM cruise " +
-            "JOIN ship s on s.id = cruise.ship_id;";
+            "JOIN ship s on s.id = cruise.ship_id";
+
+    public static final String GET_BY_ALL_FILTERS = "SELECT cruise.id, ship_id, duration, price, start_day, paid, " +
+            "s.name as ship_name, s.capacity as capacity, s.number_of_ports as number_of_ports FROM cruise " +
+            "JOIN ship s on s.id = cruise.ship_id " +
+            "WHERE start_day=? AND (duration >= ? AND duration <= ?)";
+
+    public static final String GET_BY_DURATION_FILTER = "SELECT cruise.id, ship_id, duration, price, start_day, paid, " +
+            "s.name as ship_name, s.capacity as capacity, s.number_of_ports as number_of_ports FROM cruise " +
+            "JOIN ship s on s.id = cruise.ship_id " +
+            "WHERE duration >= ? AND duration <= ?";
+
+    public static final String GET_BY_START_DAY_FILTER = "SELECT cruise.id, ship_id, duration, price, start_day, paid, " +
+            "s.name as ship_name, s.capacity as capacity, s.number_of_ports as number_of_ports FROM cruise " +
+            "JOIN ship s on s.id = cruise.ship_id " +
+            "WHERE start_day=?";
 
     public static final String UPDATE = "UPDATE cruise WHERE id=?";
 

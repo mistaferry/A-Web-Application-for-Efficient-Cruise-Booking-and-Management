@@ -4,6 +4,7 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <fmt:setLocale value="nl" />
 <fmt:setBundle basename="resources" />
+<link rel="stylesheet" href="parts/css/newStylr.css"/>
 
 <div class="form">
     <form method="post" id="form-enter" action="controller?action=sign-in">

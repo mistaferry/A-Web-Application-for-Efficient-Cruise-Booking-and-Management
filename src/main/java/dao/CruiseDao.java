@@ -14,6 +14,8 @@ public interface CruiseDao extends EntityDao<Cruise> {
 
     List<Cruise> getSorted(String query) throws DAOException, SQLException;
 
+    List<Cruise> getByFilters(List<String> filters) throws DAOException, SQLException;
+
     Optional<Cruise> getByDate(Date date) throws DAOException, SQLException;
 
     Optional<Cruise> getByDuration(int duration) throws DAOException, SQLException;

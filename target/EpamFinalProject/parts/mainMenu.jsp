@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setLocale value="en" />
 <fmt:setBundle basename="resources" />
-<link rel="stylesheet" href="css/style.css"/>
+<link rel="stylesheet" href="parts/css/newStylr.css"/>
 
 <div class="menu-enter">
     <nav class="nav-enter">
