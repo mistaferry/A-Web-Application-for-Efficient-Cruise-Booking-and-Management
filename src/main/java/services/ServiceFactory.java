@@ -2,15 +2,19 @@ package services;
 
 import dao.DAOFactory;
 import services.impl.GeneralServiceImpl;
+import services.impl.UserServiceImpl;
 
 public class ServiceFactory {
     private static final ServiceFactory INSTANCE = new ServiceFactory();
     private GeneralServiceImpl generalService;
+    private UserServiceImpl userService;
 
     public ServiceFactory(){
         this.generalService = new GeneralServiceImpl(
                 DAOFactory.getInstance().getUserDao(),
                 DAOFactory.getInstance().getCruiseDao());
+        this.userService = new UserServiceImpl(
+                DAOFactory.getInstance().getUserDao());
     }
 
     public static ServiceFactory getInstance(){
@@ -19,5 +23,9 @@ public class ServiceFactory {
 
     public GeneralService getGeneralService(){
         return generalService;
+    }
+
+    public UserServiceImpl getUserService() {
+        return userService;
     }
 }

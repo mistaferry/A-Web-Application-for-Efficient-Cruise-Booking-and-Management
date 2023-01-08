@@ -10,13 +10,16 @@ public class UserMysqlQuery {
 
     public static final String GET_ALL = "SELECT * FROM user";
 
-    public static final String UPDATE = "UPDATE user WHERE id=?";
+    public static final String UPDATE = "UPDATE user SET login=?, password=?, first_name=?, surname=?, role_id=?, blocked=? WHERE id=?";
+
+    public static final String CHANGE_PASSWORD = "UPDATE user SET password=? WHERE id=?";
 
     public static final String UPDATE_PASSWORD = "UPDATE user SET password=? WHERE id=";
 
     public static final String DELETE = "DELETE user WHERE id=?";
 
-    public static final String GET_BY_ID = "SELECT transaction WHERE id=?";
+    public static final String GET_BY_ID = "SELECT * FROM user WHERE id=?";
+
     public static final String GET_NUMBER_OF_RECORDS = "DELETE user WHERE id=?";
 
     public static final String SET_USER_ROLE = "";

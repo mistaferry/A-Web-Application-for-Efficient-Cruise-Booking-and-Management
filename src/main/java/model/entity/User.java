@@ -8,7 +8,6 @@ import lombok.*;
 @Builder
 public class User extends Entity{
     private static final long serialVersionUID = 1L;
-
     private String login;
     private String password;
     private String firstName;

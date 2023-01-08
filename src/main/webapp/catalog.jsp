@@ -1,5 +1,8 @@
-<fmt:setLocale value="${sessionScope.locale}" scope="session"/>
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<fmt:setBundle basename="resources"/>
+<fmt:setLocale value="${sessionScope.locale}" scope="session"/>
 
 <!DOCTYPE html>
 <html lang="${sessionScope.locale}">

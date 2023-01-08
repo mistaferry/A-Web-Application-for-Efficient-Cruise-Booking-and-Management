@@ -21,21 +21,30 @@ public class Controller extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect(process(req, resp));
+        String path = process(req);
+        if(isAttributesPresent(req)){
+            req.getRequestDispatcher(path).forward(req, resp);
+        }else {
+            resp.sendRedirect(process(req));
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect(process(req, resp));
+        resp.sendRedirect(process(req));
     }
 
-    private String process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    private String process(HttpServletRequest req) throws ServletException, IOException {
         Action action = ActionFactory.getAction(req.getParameter("action"));
         try {
             return action.execute(req);
-        } catch (ServiceException e) {
+        } catch (Exception e) {
             logger.error(e.getMessage());
             return "errorPage.jsp";
         }
+    }
+
+    private boolean isAttributesPresent (HttpServletRequest request) {
+        return request.getAttributeNames().hasMoreElements();
     }
 }

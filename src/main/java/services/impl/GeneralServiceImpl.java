@@ -87,4 +87,15 @@ public class GeneralServiceImpl implements GeneralService {
             throw  new ServiceException(e);
         }
     }
+
+    @Override
+    public int getCruiseAmount(List<String> filters) throws ServiceException {
+        int amount;
+        try{
+            amount = cruiseDao.getAmountWithFilters(filters);
+            return amount;
+        } catch (DAOException | SQLException e) {
+            throw  new ServiceException(e);
+        }
+    }
 }

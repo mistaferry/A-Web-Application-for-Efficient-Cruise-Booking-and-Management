@@ -29,7 +29,7 @@ public class CruiseMysqlQuery {
 
     public static final String GET_SORTED = "SELECT * FROM cruise ORDER BY ?";
 
-    public static final String GET_CRUISE_COUNT = "SELECT COUNT(*) FROM cruise";
+    public static final String GET_CRUISE_COUNT = "SELECT COUNT(*) FROM cruise ";
 
 
 

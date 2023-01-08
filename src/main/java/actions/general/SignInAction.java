@@ -30,19 +30,20 @@ public class SignInAction implements Action {
         String password = request.getParameter("password");
         if (login == null || password == null || login.isEmpty() || password.isEmpty()){
             errorMessage = "Login or password can't be empty";
-            request.setAttribute("error", errorMessage);
+            session.setAttribute("error", errorMessage);
             return path;
         }
         try{
             UserDTO user = generalService.signIn(login, password);
             if (user == null){
                 errorMessage = "There is no such user";
-                request.setAttribute("error", errorMessage);
+                session.setAttribute("error", errorMessage);
                 return path;
             }
-            request.setAttribute("user", user);
-            request.setAttribute("role", user.getRoleId());
-            path = "controller?action=catalog";
+            session.setAttribute("user", user);
+            session.setAttribute("role", user.getRoleId());
+//            path = "controller?action=catalog";
+            path = "profile.jsp";
         } catch (ServiceException e) {
             return "/pages/errorPage.jsp";
         }

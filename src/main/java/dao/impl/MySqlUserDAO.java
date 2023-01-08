@@ -24,7 +24,7 @@ public class MySqlUserDAO implements UserDao {
             preparedStatement.setString(++index, email);
             user = new User();
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
+                while (resultSet.next()) {
                     user = setUserValues(resultSet);
                 }
             }
@@ -45,8 +45,14 @@ public class MySqlUserDAO implements UserDao {
     }
 
     @Override
-    public void updatePassword(User user) throws DAOException {
-
+    public void changePassword(long id, String newPassword) throws DAOException, SQLException {
+        try(Connection connection = DataSource.getConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(UserMysqlQuery.CHANGE_PASSWORD);
+            int index = 0;
+            preparedStatement.setString(++index, newPassword);
+            preparedStatement.setLong(++index, id);
+            preparedStatement.execute();
+        }
     }
 
     @Override
@@ -86,19 +92,21 @@ public class MySqlUserDAO implements UserDao {
 
     @Override
     public Optional<User> getById(long id) throws DAOException, SQLException {
-        User user;
+        User user = null;
         try(Connection connection = DataSource.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(UserMysqlQuery.GET_BY_ID);
             int index = 0;
             preparedStatement.setLong(++index, id);
             user = new User();
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
+                while (resultSet.next()) {
                     user = setUserValues(resultSet);
                 }
             }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
-        return Optional.of(user);
+        return Optional.ofNullable(user);
     }
 
     @Override
@@ -140,6 +148,7 @@ public class MySqlUserDAO implements UserDao {
             preparedStatement.setString(++index, user.getSurname());
             preparedStatement.setInt(++index, user.getRoleId());
             preparedStatement.setBoolean(++index, user.isBlocked());
+            preparedStatement.setLong(++index, user.getId());
             preparedStatement.execute();
         }
     }

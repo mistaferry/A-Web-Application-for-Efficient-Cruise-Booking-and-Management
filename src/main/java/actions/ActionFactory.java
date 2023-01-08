@@ -1,8 +1,5 @@
 package actions;
-import actions.general.SignInAction;
-import actions.general.ViewCatalogAction;
-import actions.general.ViewCruiseCatalogAction;
-import actions.general.ViewCruises;
+import actions.general.*;
 
 import java.util.*;
 
@@ -15,6 +12,8 @@ public final class ActionFactory {
         ACTION_MAP.put("catalog", new ViewCatalogAction());
 //        ACTION_MAP.put("view-cruises", new ViewCruises());
         ACTION_MAP.put("view-cruises", new ViewCruiseCatalogAction());
+        ACTION_MAP.put("edit-user-profile", new EditUserProfileAction());
+        ACTION_MAP.put("change-password", new ChangePassword());
     }
 
     private ActionFactory(){ }

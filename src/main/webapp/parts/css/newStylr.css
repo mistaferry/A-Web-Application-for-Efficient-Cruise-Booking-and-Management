@@ -167,8 +167,55 @@
     margin-right: auto;
 }
 
-.c_pagination {
-    width: max-content;
-    margin: 10px auto 15px auto;
+ul.pagination {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
 }
 
+ul.pagination li {display: inline;}
+
+ul.pagination li a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+ul.pagination a:hover{
+    background-color: lightgrey;
+}
+
+.info{
+    margin: 5% 10%;
+}
+
+.user-data{
+    color: gray;
+    font-style: italic;
+}
+
+.action-button{
+    text-align: center;
+    padding: 5px;
+    border-radius: 60px;
+    width: 170px;
+    background: gainsboro;
+    border-color: black;
+    border-style: solid;
+}
+
+.action-button a{
+    text-decoration: none;
+    color: black;
+}
+
+.label{
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.label span{
+    font-size: 16px;
+    font-style: normal;
+}

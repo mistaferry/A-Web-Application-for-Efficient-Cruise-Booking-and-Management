@@ -10,5 +10,5 @@ import java.io.IOException;
 
 
 public interface Action {
-    String execute(HttpServletRequest request) throws ServletException, IOException, ServiceException;
+    String execute(HttpServletRequest request) throws Exception;
 }
