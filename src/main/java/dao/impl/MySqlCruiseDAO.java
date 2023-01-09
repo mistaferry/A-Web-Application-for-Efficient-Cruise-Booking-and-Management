@@ -213,7 +213,7 @@ public class MySqlCruiseDAO implements CruiseDao {
         try(Connection connection = DataSource.getConnection()) {
             PreparedStatement preparedStatement = null;
             String query = "";
-            if(!filters.get(0).isEmpty()){ /*дату встановлено*/
+            if(!filters.get(0).isEmpty() && !filters.get(0).equals("All")){ /*дату встановлено*/
                 query += CruiseMysqlQuery.GET_ALL + CruiseMysqlQuery.GET_BY_START_DAY_FILTER;
                 preparedStatement = setDurationFilter(filters, connection, preparedStatement, query, dishPerPage, pageNum);
             }else{ /*дату встановлено*/
@@ -229,7 +229,7 @@ public class MySqlCruiseDAO implements CruiseDao {
                 }
                 resultSet = preparedStatement.executeQuery("SELECT  FOUND_ROWS()");
                 if(resultSet.next()){
-                    this.executedRows = resultSet.getInt(1);
+                    executedRows = resultSet.getInt(1);
                 }
             } catch (SQLException | DAOException throwables) {
                 throwables.printStackTrace();
@@ -241,29 +241,29 @@ public class MySqlCruiseDAO implements CruiseDao {
 
     private PreparedStatement setDurationFilter(List<String> filters, Connection connection, PreparedStatement preparedStatement, String query, int dishPerPage, int pageNum) throws SQLException {
         if(filters.get(1).equals("All")){ /*будь-яка тривалість*/
-            query += CruiseMysqlQuery.GET_PAGINATION;
+//            query += CruiseMysqlQuery.GET_PAGINATION;
             preparedStatement = connection.prepareStatement(query);
             int index = 0;
-            if(!filters.get(0).isEmpty()){
+            if(!filters.get(0).isEmpty() && !filters.get(0).equals("All")){
                 preparedStatement.setString(++index, filters.get(0));
             }
-            setPaginationValues(preparedStatement, dishPerPage, index, pageNum * dishPerPage);
+//            setPaginationValues(preparedStatement, dishPerPage, index, pageNum * dishPerPage);
 
         }else if (!filters.get(1).equals("All")){ /*задано тривалість*/
             int index = 0;
-            if(!filters.get(0).isEmpty()){
+            if(!filters.get(0).isEmpty() && !filters.get(0).equals("All")){
                 query += " AND (" + CruiseMysqlQuery.GET_BY_DURATION_FILTER + ") " ;
-                query += CruiseMysqlQuery.GET_PAGINATION;
+//                query += CruiseMysqlQuery.GET_PAGINATION;
                 preparedStatement = connection.prepareStatement(query);
                 preparedStatement.setString(++index, filters.get(0));
             }else{
                 query += " WHERE " + CruiseMysqlQuery.GET_BY_DURATION_FILTER;
-                query += CruiseMysqlQuery.GET_PAGINATION;
+//                query += CruiseMysqlQuery.GET_PAGINATION;
                 preparedStatement = connection.prepareStatement(query);
             }
             preparedStatement.setInt(++index, Integer.parseInt(filters.get(1)));
             preparedStatement.setInt(++index, Integer.parseInt(filters.get(2)));
-            setPaginationValues(preparedStatement, dishPerPage, index, pageNum * dishPerPage);
+//            setPaginationValues(preparedStatement, dishPerPage, index, pageNum * dishPerPage);
         }
         return preparedStatement;
     }

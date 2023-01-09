@@ -1,7 +1,5 @@
-
 .nav-enter{
     display: flex;
-    justify-content: flex-start;
     background-color: black;
     padding: 2%;
     margin-right: 2%;
@@ -9,15 +7,24 @@
     position: relative;
 }
 
-.nav-enter a {
-    width: 15%;
+.nav-enter a{
+    width: 10%;
     text-align: center;
     text-decoration: none;
     color: white;
+    font-weight: bold;
 }
 
-#nav-company-name {
-    font-weight: bold;
+.sign-nav{
+    justify-content: flex-start;
+}
+
+.customer-nav{
+    justify-content: flex-end;
+}
+
+#company-name{
+    padding-right: 45%;
 }
 
 .form{

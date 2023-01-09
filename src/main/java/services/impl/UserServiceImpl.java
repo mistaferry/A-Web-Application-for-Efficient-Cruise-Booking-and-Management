@@ -6,8 +6,6 @@ import exceptions.DAOException;
 import model.entity.User;
 import services.UserService;
 import utils.Convertor;
-
-import java.io.IOException;
 import java.sql.SQLException;
 
 public class UserServiceImpl implements UserService {

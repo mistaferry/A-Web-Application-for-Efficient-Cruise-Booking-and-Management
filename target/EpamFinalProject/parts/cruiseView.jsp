@@ -33,9 +33,7 @@
             <a>
                 <label>
                     <select name="cruisePerPage" class="select">
-                        <c:forTokens items="2,5,10,15" delims="," var="item">
-                            <option ${param.cruisePerPage == item ? "selected" : ""}>${item}</option>
-                        </c:forTokens>
+                        <option value="5" selected></option>
                     </select>
                 </label>
             </a>
@@ -56,7 +54,7 @@
 </form>
 
 <section class="flex-container">
-    <c:forEach var="cruise" items="${sessionScope.allCruises}">
+    <c:forEach var="cruise" items="${requestScope.allCruises}">
         <div class="item">
             <img src="/parts/images/cruise${cruise.id}.jpg" alt="1">
             <div class="text">
@@ -90,28 +88,28 @@
     </c:forEach>
 </section>
 
-<nav class="page-nav">
-    <ul class="pagination">
-        <li class="page-item ${param.page > 0 ? "" : "disabled"}">
-            <a class="page-link"
-               href="controller?action=view-cruises&startDay=${param.startDay}&duration=${param.duration}&page=${param.page-1}&cruisePerPage=${param.cruisePerPage}"
-               tabindex="-1">
-                Previous
-            </a>
-        </li>
-        <c:forEach var="num" begin="0" end="${sessionScope.pageAmount}">
-            <li class="page-item ${param.page == num ? "active" : ""}">
-                <a class="page-link"
-                   href="controller?action=view-cruises&startDay=${param.startDay}&duration=${param.duration}&page=${num}&cruisePerPage=${param.cruisePerPage}">
-                 ${num+1}
-                </a>
-            </li>
-        </c:forEach>
-        <li class="page-item ${param.page < sessionScope.pageAmount ? "" : "disabled"}">
-            <a class="page-link"
-               href="controller?action=view-cruises&startDay=${param.startDay}&duration=${param.duration}&page=${param.page+1}&cruisePerPage=${param.cruisePerPage}">
-                Next
-            </a>
-        </li>
-    </ul>
-</nav>
+<%--<nav class="page-nav">--%>
+<%--    <ul class="pagination">--%>
+<%--        <li class="page-item ${param.page > 0 ? "" : "disabled"}">--%>
+<%--            <a class="page-link"--%>
+<%--               href="controller?action=view-cruises&startDay=${param.startDay}&duration=${param.duration}&page=${param.page-1}&cruisePerPage=${param.cruisePerPage}"--%>
+<%--               tabindex="-1">--%>
+<%--                Previous--%>
+<%--            </a>--%>
+<%--        </li>--%>
+<%--        <c:forEach var="num" begin="0" end="${requestScope.pageAmount}">--%>
+<%--            <li class="page-item ${param.page == num ? "active" : ""}">--%>
+<%--                <a class="page-link"--%>
+<%--                   href="controller?action=view-cruises&startDay=${param.startDay}&duration=${param.duration}&page=${num}&cruisePerPage=${param.cruisePerPage}">--%>
+<%--                 ${num+1}--%>
+<%--                </a>--%>
+<%--            </li>--%>
+<%--        </c:forEach>--%>
+<%--        <li class="page-item ${param.page < requestScope.pageAmount ? "" : "disabled"}">--%>
+<%--            <a class="page-link"--%>
+<%--               href="controller?action=view-cruises&startDay=${param.startDay}&duration=${param.duration}&page=${param.page+1}&cruisePerPage=${param.cruisePerPage}">--%>
+<%--                Next--%>
+<%--            </a>--%>
+<%--        </li>--%>
+<%--    </ul>--%>
+<%--</nav>--%>
