@@ -136,12 +136,12 @@ VALUES ('Adam', 'Romanchenko', 1),
 
 INSERT INTO cruise(ship_id, duration, price, start_day, paid)
 VALUES (1, 4, 6300, '2023-04-30', true),
-       (2, 7, 12000, '2023-04-30', true),
-       (3, 11, 22220, '2023-04-30', true),
-       (5, 10, 11300, '2023-04-30', true),
-       (4, 7, 9000, '2023-04-30', true),
-       (3, 9, 19200, '2023-09-01', true),
-       (1, 11, 31999, '2023-05-31', true);
+       (2, 8, 12000, '2023-04-30', true),
+       (3, 12, 22220, '2023-04-30', true),
+       (5, 8, 11300, '2023-04-30', true),
+       (4, 8, 9000, '2023-04-30', true),
+       (3, 12, 19200, '2023-09-01', true),
+       (1, 12, 31999, '2023-05-31', true);
 
 INSERT INTO transaction(cruise_id, timestamp, amount, completed, description)
 VALUES (1, current_date, 11714, true, 'Succesfully paid'),

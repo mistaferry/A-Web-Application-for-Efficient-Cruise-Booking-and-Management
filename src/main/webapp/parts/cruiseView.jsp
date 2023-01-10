@@ -56,7 +56,8 @@
             <div class="text">
                 <div class="name">
                     <p>Cruise by "${cruise.ship.name}"
-                        from ${cruise.ship.route.get(0).name} to ${cruise.ship.route.get(cruise.ship.route.size()-1).name}</p>
+                        from ${cruise.ship.route.get(0).name}
+                        to ${cruise.ship.route.get(cruise.ship.route.size()-1).name}</p>
                 </div>
                 <div class="name">
                     <p>${cruise.startDate.toLocalDate().dayOfMonth} ${cruise.startDate.toLocalDate().month} ${cruise.startDate.toLocalDate().year}</p>
@@ -64,7 +65,7 @@
                 <div class="rote">
                     <p>
                         <c:forEach var="city" items="${cruise.ship.route}" varStatus="loop">
-                                ${city.name} <c:if test="${!loop.last}"> - </c:if>
+                            ${city.name} <c:if test="${!loop.last}"> - </c:if>
                         </c:forEach>
                     </p>
                 </div>
@@ -86,26 +87,27 @@
 
 <nav class="page-nav">
     <ul class="pagination">
-        <li class="page-item ${param.page == 0 ? "disabled" : ""}">
-            <a class="page-link"
-               href="controller?action=view-cruises&startDay=${param.startDay}&duration=${param.duration}&page=${param.page-1}&cruisePerPage=${param.cruisePerPage}"
-               tabindex="-1">
-                Previous
-            </a>
-        </li>
+        <c:if test="${param.page != 0}">
+            <li><a class="page-link"
+                   href="controller?action=view-cruises&startDay=${param.startDay}&duration=${param.duration}&page=${param.page-1}&cruisePerPage=${param.cruisePerPage}"
+                   tabindex="-1">Previous</a></li>
+        </c:if>
         <c:forEach var="num" begin="0" end="${requestScope.pageAmount}">
             <li class="page-item ${param.page == num ? "active" : ""}">
                 <a class="page-link"
                    href="controller?action=view-cruises&startDay=${param.startDay}&duration=${param.duration}&page=${num}&cruisePerPage=${param.cruisePerPage}">
-                 ${num+1}
+                        ${num+1}
                 </a>
             </li>
         </c:forEach>
-        <li class="page-item ${param.page == requestScope.pageAmount ? "disabled" : ""}">
-            <a class="page-link"
-               href="controller?action=view-cruises&startDay=${param.startDay}&duration=${param.duration}&page=${param.page+1}&cruisePerPage=${param.cruisePerPage}">
-                Next
-            </a>
-        </li>
+
+        <c:if test="${param.page lt requestScope.pageAmount}">
+            <li>
+                <a class="page-link"
+                   href="controller?action=view-cruises&startDay=${param.startDay}&duration=${param.duration}&page=${param.page+1}&cruisePerPage=${param.cruisePerPage}">
+                    Next
+                </a>
+            </li>
+        </c:if>
     </ul>
 </nav>

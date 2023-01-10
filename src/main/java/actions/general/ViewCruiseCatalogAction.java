@@ -2,8 +2,10 @@ package actions.general;
 
 import actions.Action;
 import com.google.protobuf.ServiceException;
+import dao.CruiseDao;
 import dao.impl.MySqlCruiseDAO;
 import dto.CruiseDTO;
+import exceptions.DAOException;
 import services.GeneralService;
 import services.ServiceFactory;
 
@@ -11,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -25,8 +28,8 @@ public class ViewCruiseCatalogAction implements Action {
     @Override
     public String execute(HttpServletRequest request) throws ServletException, IOException, ServiceException {
         List<String> filters = new ArrayList<>();
-//        int pageNum = Integer.parseInt(request.getParameter("page"));
-//        int cruisePerPage = Integer.parseInt(request.getParameter("cruisePerPage"));
+        int pageNum = Integer.parseInt(request.getParameter("page"));
+        int cruisePerPage = Integer.parseInt(request.getParameter("cruisePerPage"));
         getFiltersFromPage(request, filters);
         HttpSession session = request.getSession();
 
@@ -34,17 +37,20 @@ public class ViewCruiseCatalogAction implements Action {
         String path = null;
         try{
 
-            List<CruiseDTO> cruiseDTOList = generalService.viewCatalogWithPagination(filters, 0, 0);
-//            int pageAmount = MySqlCruiseDAO.getExecutedRows();
-//            pageAmount /= cruisePerPage;
-
-//            request.setAttribute("pageAmount", pageAmount);
+            List<CruiseDTO> cruiseDTOList = generalService.viewCatalogWithPagination(filters, cruisePerPage, pageNum);
+            int pageAmount = (new MySqlCruiseDAO()).getAmountWithFilters(filters);
+            System.out.println("executed rows - " + pageAmount);
+            pageAmount /= cruisePerPage;
+            System.out.println("pageAmount - " + pageAmount);
+            request.setAttribute("pageAmount", pageAmount);
             request.setAttribute("allCruises", cruiseDTOList);
 
             path = "/catalog.jsp";
         } catch (ServiceException e) {
             e.printStackTrace();
             path = "/errorPage.jsp";
+        } catch (DAOException | SQLException e) {
+            e.printStackTrace();
         }
         return path;
     }
