@@ -12,12 +12,11 @@
 <form method="get" action="controller" class="flex">
     <input type="hidden" name="action" value="view-cruises">
     <div>
-        <nav class="nav2">
+        <nav class="nav-filter">
             <a>
                 <label>
                     <select name="duration" class="select">
-                        <option value="All">Duration</option>
-                        <option value="All" ${param.duration == "All" ? "selected" : ""}>All</option>
+                        <option value="All" ${param.duration == "All" ? "selected" : ""}>Duration</option>
                         <option value="1-4" ${param.duration == "1-4" ? "selected" : ""}>1-4</option>
                         <option value="5-8" ${param.duration == "5-8" ? "selected" : ""}>5-8</option>
                         <option value="9-12" ${param.duration == "9-12" ? "selected" : ""}>9-12</option>
@@ -33,7 +32,10 @@
             <a>
                 <label>
                     <select name="cruisePerPage" class="select">
-                        <option value="5" selected></option>
+                        <option value="2" ${param.cruisePerPage == "2" ? "selected" : ""}>2</option>
+                        <option value="5" ${param.cruisePerPage == "5" ? "selected" : ""}>5</option>
+                        <option value="10" ${param.cruisePerPage == "10" ? "selected" : ""}>10</option>
+                        <option value="15" ${param.cruisePerPage == "15" ? "selected" : ""}>15</option>
                     </select>
                 </label>
             </a>
@@ -42,15 +44,9 @@
                     <option value="0" selected></option>
                 </select>
             </label>
-
+            <input class="save-button" type="submit" value="show"/>
         </nav>
     </div>
-    <input class="save-button" type="submit" value="show"/>
-<%--    <a>--%>
-<%--        <div>--%>
-<%--            --%>
-<%--        </div>--%>
-<%--    </a>--%>
 </form>
 
 <section class="flex-container">

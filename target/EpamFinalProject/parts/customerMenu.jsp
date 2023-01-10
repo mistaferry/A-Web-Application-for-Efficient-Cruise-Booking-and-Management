@@ -24,7 +24,7 @@
                 </label>
             </form>
         </a>
-        <a href="controller?action=view-cruises&startDay=All&duration=All"><fmt:message key="nav.catalog"/></a>
+        <a href="controller?action=view-cruises&startDay=All&duration=All&page=0&cruisePerPage=5"><fmt:message key="nav.catalog"/></a>
         <a><fmt:message key="nav.my.orders"/></a>
         <a href="profile.jsp"><fmt:message key="nav.account"/></a>
         <a><fmt:message key="sign.out"/></a>
