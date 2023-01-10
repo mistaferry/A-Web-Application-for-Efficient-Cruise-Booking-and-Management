@@ -212,14 +212,48 @@ public class MySqlCruiseDAO implements CruiseDao {
         List<Cruise> cruiseList;
         try(Connection connection = DataSource.getConnection()) {
             PreparedStatement preparedStatement = null;
-            String query = "";
-            if(!filters.get(0).isEmpty() && !filters.get(0).equals("All")){ /*дату встановлено*/
-                query += CruiseMysqlQuery.GET_ALL + CruiseMysqlQuery.GET_BY_START_DAY_FILTER;
-                preparedStatement = setDurationFilter(filters, connection, preparedStatement, query, dishPerPage, pageNum);
-            }else{ /*дату встановлено*/
-                query += CruiseMysqlQuery.GET_ALL;
-                preparedStatement = setDurationFilter(filters, connection, preparedStatement, query, dishPerPage, pageNum);
+            String query = CruiseMysqlQuery.GET_ALL;
+            if((filters.get(0).isEmpty() || filters.get(0).equals("0"))
+                    && !filters.get(1).equals("0")){
+                query += CruiseMysqlQuery.GET_BY_DURATION_FILTER;
+                preparedStatement = connection.prepareStatement(query);
+                int durationStart = 1;
+                int durationEnd = Integer.parseInt(filters.get(1));
+                int index = 0;
+                preparedStatement.setInt(++index, durationStart);
+                preparedStatement.setInt(++index, durationEnd);
+            }else{
+                if(!filters.get(0).equals("0") && !filters.get(0).isEmpty()) {
+                    if (filters.get(1).equals("0")) {
+                        query += CruiseMysqlQuery.GET_BY_START_DAY_FILTER;
+                        preparedStatement = connection.prepareStatement(query);
+                        String startDay = filters.get(0);
+                        int index = 0;
+                        preparedStatement.setString(++index, startDay);
+                    } else {
+                        query += CruiseMysqlQuery.GET_BY_START_DAY_FILTER +
+                                " AND (" + CruiseMysqlQuery.GET_BY_DURATION_FILTER + ")";
+                        preparedStatement = connection.prepareStatement(query);
+                        String startDay = filters.get(0);
+                        int durationStart = 1;
+                        int durationEnd = Integer.parseInt(filters.get(1));
+                        int index = 0;
+                        preparedStatement.setString(++index, startDay);
+                        preparedStatement.setInt(++index, durationStart);
+                        preparedStatement.setInt(++index, durationEnd);
+                    }
+                }else{
+                    preparedStatement = connection.prepareStatement(query);
+                }
             }
+//            if (filters.)
+//            if(!filters.get(0).isEmpty() && !filters.get(0).equals("All")){ /*дату встановлено*/
+//                query += CruiseMysqlQuery.GET_ALL + CruiseMysqlQuery.GET_BY_START_DAY_FILTER;
+//                preparedStatement = setDurationFilter(filters, connection, preparedStatement, query, dishPerPage, pageNum);
+//            }else{ /*дату встановлено*/
+//                query += CruiseMysqlQuery.GET_ALL;
+//                preparedStatement = setDurationFilter(filters, connection, preparedStatement, query, dishPerPage, pageNum);
+//            }
             cruiseList = new ArrayList<>();
             ResultSet resultSet = preparedStatement.executeQuery();
             try {

@@ -16,10 +16,10 @@
             <a>
                 <label>
                     <select name="duration" class="select">
-                        <option value="All" ${param.duration == "All" ? "selected" : ""}>Duration</option>
-                        <option value="1-4" ${param.duration == "1-4" ? "selected" : ""}>1-4</option>
-                        <option value="5-8" ${param.duration == "5-8" ? "selected" : ""}>5-8</option>
-                        <option value="9-12" ${param.duration == "9-12" ? "selected" : ""}>9-12</option>
+                        <option value="0" ${param.duration == "0" ? "selected" : ""}>Duration</option>
+                        <option value="4" ${param.duration == "4" ? "selected" : ""}>4</option>
+                        <option value="8" ${param.duration == "8" ? "selected" : ""}>8</option>
+                        <option value="12" ${param.duration == "12" ? "selected" : ""}>12</option>
                     </select>
                 </label>
             </a>
