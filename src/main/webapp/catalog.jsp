@@ -18,6 +18,6 @@
 
 <jsp:include page="/parts/cruiseView.jsp"/>
 
-<jsp:include page="/parts/footer.jsp"/>
+<jsp:include page="/parts/footer.jspf"/>
 
 </html>

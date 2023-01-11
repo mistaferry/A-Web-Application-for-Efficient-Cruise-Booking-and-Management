@@ -16,9 +16,9 @@
             <form method="POST" class="d-flex" >
                 <label>
                     <select name="language" onchange='submit()'>
-                        <option value="en" ${sessionScope.language eq 'en' ? 'selected' : ''}>en
+                        <option value="en" ${sessionScope.language eq "en" ? "selected" : ""}>en
                         </option>
-                        <option value="nl" ${sessionScope.language eq 'nl' ? 'selected' : ''}>nl
+                        <option value="nl" ${sessionScope.language eq "nl" ? "selected" : ""}>nl
                         </option>
                     </select>
                 </label>

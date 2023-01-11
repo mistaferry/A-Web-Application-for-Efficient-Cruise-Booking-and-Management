@@ -49,6 +49,8 @@
     </div>
 </form>
 
+<%@ include file="paginationNav.jspf" %>
+
 <section class="flex-container">
     <c:forEach var="cruise" items="${requestScope.allCruises}">
         <div class="item">
@@ -84,30 +86,3 @@
         </div>
     </c:forEach>
 </section>
-
-<nav class="page-nav">
-    <ul class="pagination">
-        <c:if test="${param.page != 0}">
-            <li><a class="page-link"
-                   href="controller?action=view-cruises&startDay=${param.startDay}&duration=${param.duration}&page=${param.page-1}&cruisePerPage=${param.cruisePerPage}"
-                   tabindex="-1">Previous</a></li>
-        </c:if>
-        <c:forEach var="num" begin="0" end="${requestScope.pageAmount}">
-            <li class="page-item ${param.page == num ? "active" : ""}">
-                <a class="page-link"
-                   href="controller?action=view-cruises&startDay=${param.startDay}&duration=${param.duration}&page=${num}&cruisePerPage=${param.cruisePerPage}">
-                        ${num+1}
-                </a>
-            </li>
-        </c:forEach>
-
-        <c:if test="${param.page lt requestScope.pageAmount}">
-            <li>
-                <a class="page-link"
-                   href="controller?action=view-cruises&startDay=${param.startDay}&duration=${param.duration}&page=${param.page+1}&cruisePerPage=${param.cruisePerPage}">
-                    Next
-                </a>
-            </li>
-        </c:if>
-    </ul>
-</nav>

@@ -9,36 +9,21 @@
 
 <!DOCTYPE html>
 <html lang="${param.lang}">
-<head>
-    <title>
-        <fmt:message key="company.name"/>
-    </title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
+    <head>
+        <title>
+            <fmt:message key="company.name"/>
+        </title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            <%@ include file="parts/css/newStylr.css"%>
+        </style>
+    </head>
+    <body>
+        <%@ include file="parts/languagePage.jspf" %>
 
-<div>
-    <nav class="nav-enter sign-nav">
-        <a id="company-name">Cruise Company</a>
-        <a>
-            <ul>
-                <li><a href="?sessionLocale=en"><fmt:message key="label.lang.en"/></a></li>
-                <li><a href="?sessionLocale=nl"><fmt:message key="label.lang.nl"/></a></li>
-            </ul>
+        <%@ include file="parts/singInPage.jspf" %>
 
-            <c:if test="${not empty param.sessionLocale}">
-                <fmt:message key="language.changed"/>
-                <button><a href="profile.jsp"><fmt:message key="button.save.changes"/></a></button>
-            </c:if>
-        </a>
-    </nav>
-</div>
-
-
-<%--    <jsp:include page="parts/signInMenu.jsp"/>--%>
-
-<jsp:include page="parts/signInPage.jsp"/>
-<%--    <jsp:include page="parts/cruiseView.jsp"/>--%>
-
-<jsp:include page="parts/footer.jsp"/>
+        <%@ include file="parts/singInPage.jspf" %>
+    </body>
 </html>

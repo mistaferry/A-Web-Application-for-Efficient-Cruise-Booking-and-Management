@@ -43,6 +43,6 @@
     </div>
 </div>
 
-<jsp:include page="/parts/footer.jsp"/>
+<jsp:include page="/parts/footer.jspf"/>
 
 </html>

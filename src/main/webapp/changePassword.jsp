@@ -47,6 +47,6 @@
     </div>
 </form>
 
-<jsp:include page="/parts/footer.jsp"/>
+<jsp:include page="/parts/footer.jspf"/>
 
 </html>

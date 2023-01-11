@@ -229,3 +229,9 @@ ul.pagination a:hover{
     font-size: 16px;
     font-style: normal;
 }
+
+.page-nav{
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
