@@ -27,11 +27,11 @@ public class ViewCruiseCatalogAction implements Action {
 
     @Override
     public String execute(HttpServletRequest request) throws ServletException, IOException, ServiceException {
+        HttpSession session = request.getSession();
         List<String> filters = new ArrayList<>();
         int pageNum = Integer.parseInt(request.getParameter("page"));
         int cruisePerPage = Integer.parseInt(request.getParameter("cruisePerPage"));
         getFiltersFromPage(request, filters);
-        HttpSession session = request.getSession();
 
         System.out.println(request.getQueryString());
         String path = null;
@@ -43,7 +43,7 @@ public class ViewCruiseCatalogAction implements Action {
             pageAmount /= cruisePerPage;
             System.out.println("pageAmount - " + pageAmount);
             request.setAttribute("pageAmount", pageAmount);
-            request.setAttribute("allCruises", cruiseDTOList);
+            session.setAttribute("allCruises", cruiseDTOList);
 
             path = "/catalog.jsp";
         } catch (ServiceException e) {

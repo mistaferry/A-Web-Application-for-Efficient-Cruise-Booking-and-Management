@@ -1,17 +1,15 @@
 <%@ page pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<fmt:setLocale value="en" />
-<fmt:setBundle basename="resources" />
-<fmt:setLocale value="${sessionScope.locale}" scope="session"/>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : 'en'}" scope="session" />
+<fmt:setLocale value="${language}"/>
+<fmt:setBundle basename="resources"/>
 <style>
     <%@ include file="/parts/css/newStylr.css"%>
 </style>
 
 <!DOCTYPE html>
-<html lang="${sessionScope.locale}">
+<html lang="${language}">
 <head>
     <title>
         <fmt:message key="company.name"/>
@@ -20,7 +18,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
-<jsp:include page="/parts/customerMenu.jsp"/>
+<jsp:include page="/parts/customerMenu.jspf"/>
 
 <form method="post" action="controller">
     <input type="hidden" name="action" value="change-password">

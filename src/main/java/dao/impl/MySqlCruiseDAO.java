@@ -215,6 +215,7 @@ public class MySqlCruiseDAO implements CruiseDao {
             String query = CruiseMysqlQuery.GET_ALL;
             if((filters.get(0).isEmpty() || filters.get(0).equals("0"))
                     && !filters.get(1).equals("0")){
+                query += "WHERE ";
                 query += CruiseMysqlQuery.GET_BY_DURATION_FILTER;
                 query += CruiseMysqlQuery.GET_PAGINATION;
                 preparedStatement = connection.prepareStatement(query);
@@ -223,6 +224,7 @@ public class MySqlCruiseDAO implements CruiseDao {
                 int index = 0;
                 preparedStatement.setInt(++index, durationStart);
                 preparedStatement.setInt(++index, durationEnd);
+                setPaginationValues(preparedStatement, dishPerPage, index, pageNum * dishPerPage);
             }else{
                 if(!filters.get(0).equals("0") && !filters.get(0).isEmpty()) {
                     if (filters.get(1).equals("0")) {
@@ -282,8 +284,14 @@ public class MySqlCruiseDAO implements CruiseDao {
             String query = CruiseMysqlQuery.GET_CRUISE_COUNT;
             if((filters.get(0).isEmpty() || filters.get(0).equals("0"))
                     && !filters.get(1).equals("0")){
+                query += "WHERE ";
                 query += CruiseMysqlQuery.GET_BY_DURATION_FILTER;
                 preparedStatement = connection.prepareStatement(query);
+                int durationStart = 1;
+                int durationEnd = Integer.parseInt(filters.get(1));
+                int index = 0;
+                preparedStatement.setInt(++index, durationStart);
+                preparedStatement.setInt(++index, durationEnd);
             }else{
                 if(!filters.get(0).equals("0") && !filters.get(0).isEmpty()) {
                     if (filters.get(1).equals("0")) {

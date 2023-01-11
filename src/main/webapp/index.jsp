@@ -1,14 +1,12 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page pageEncoding="UTF-8" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%--<fmt:setLocale value="en" />--%>
-<%--<%@ page isELIgnored="false" %>--%>
-<fmt:setLocale value="${param.lang}"/>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : 'en'}" scope="session" />
+<fmt:setLocale value="${language}"/>
 <fmt:setBundle basename="resources"/>
 
-
 <!DOCTYPE html>
-<html lang="${param.lang}">
+<html lang="${language}">
     <head>
         <title>
             <fmt:message key="company.name"/>
@@ -20,10 +18,11 @@
         </style>
     </head>
     <body>
-        <%@ include file="parts/languagePage.jspf" %>
 
-        <%@ include file="parts/singInPage.jspf" %>
+    <%@ include file="parts/customerMenu.jspf" %>
 
-        <%@ include file="parts/singInPage.jspf" %>
+    <%@ include file="parts/singInPage.jspf" %>
+
+        <%@ include file="parts/footer.jspf" %>
     </body>
 </html>

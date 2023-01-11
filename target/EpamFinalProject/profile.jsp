@@ -1,26 +1,24 @@
 <%@ page pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<fmt:setLocale value="en" />
-<fmt:setBundle basename="resources" />
-<fmt:setLocale value="${sessionScope.locale}" scope="session"/>
-
-<style>
-    <%@ include file="/parts/css/newStylr.css"%>
-</style>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : 'en'}" scope="session" />
+<fmt:setLocale value="${language}"/>
+<fmt:setBundle basename="resources"/>
 
 <!DOCTYPE html>
-<html lang="${sessionScope.locale}">
+<html lang="${language}">
 <head>
     <title>
         <fmt:message key="company.name"/>
     </title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        <%@ include file="parts/css/newStylr.css"%>
+    </style>
 </head>
 
-<jsp:include page="/parts/customerMenu.jsp"/>
+<%@ include file="parts/customerMenu.jspf" %>
 
 <div class="info">
     <div>
@@ -43,6 +41,6 @@
     </div>
 </div>
 
-<jsp:include page="/parts/footer.jsp"/>
+<jsp:include page="/parts/footer.jspf"/>
 
 </html>

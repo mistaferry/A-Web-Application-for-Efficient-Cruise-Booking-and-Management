@@ -1,0 +1,8 @@
+<div>
+    <form method="post">
+        <select name="language" onchange="submit()">
+            <option value="en" ${language == 'en' ? 'selected' : ''}>EN</option>
+            <option value="nl" ${language == 'nl' ? 'selected' : ''}>NL</option>
+        </select>
+    </form>
+</div>

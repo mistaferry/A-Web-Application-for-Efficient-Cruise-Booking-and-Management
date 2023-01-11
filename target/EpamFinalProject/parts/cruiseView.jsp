@@ -1,16 +1,17 @@
-<%@ page contentType="text/html; charset=UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%--<%@ page pageEncoding="UTF-8" %>--%>
+<%--<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>--%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<fmt:setLocale value="en"/>
-<fmt:setBundle basename="resources"/>
-<fmt:setLocale value="${sessionScope.locale}" scope="session"/>
+<%--<c:set var="language" value="${not empty param.language ? param.language : not empty param.language ? param.language : 'en'}" scope="session" />--%>
+<%--<fmt:setLocale value="${language}"/>--%>
+<%--<fmt:setBundle basename="resources"/>--%>
 
-<style>
-    <%@ include file="css/newStylr.css"%>
-</style>
+<%--<style>--%>
+<%--    <%@ include file="css/newStylr.css"%>--%>
+<%--</style>--%>
 
 <form method="get" action="controller" class="flex">
-    <input type="hidden" name="action" value="view-cruises">
+    <% System.out.println(); %>
+    <input type="hidden" name="action" value="view-cruises&startDay=${param.startDay}&duration=${param.duration}&page=${param.page}&cruisePerPage=${param.cruisePerPage}">
     <div>
         <nav class="nav-filter">
             <a>
@@ -52,7 +53,7 @@
 <%@ include file="paginationNav.jspf" %>
 
 <section class="flex-container">
-    <c:forEach var="cruise" items="${requestScope.allCruises}">
+    <c:forEach var="cruise" items="${sessionScope.allCruises}">
         <div class="item">
             <img src="/parts/images/cruise${cruise.id}.jpg" alt="1">
             <div class="text">
@@ -75,14 +76,6 @@
                     Price ${cruise.price}
                 </div>
             </div>
-            <form action="controller?action=create-order" method="post">
-                <input type="hidden" name="cruise_id" value="${cruise.id}">
-                <div class="button-order">
-                    <button type="submit" class="button-order">
-                        <label>Order now</label>
-                    </button>
-                </div>
-            </form>
         </div>
     </c:forEach>
 </section>
