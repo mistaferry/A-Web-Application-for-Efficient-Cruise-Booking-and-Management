@@ -7,7 +7,7 @@
 
 <html>
 <head>
-    <title>Title</title>
+    <title><fmt:message key="company.name"/></title>
 </head>
 <body>
 <h1>ERROR!!!!!!!!</h1>

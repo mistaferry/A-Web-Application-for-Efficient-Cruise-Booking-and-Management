@@ -16,7 +16,7 @@ import java.util.Optional;
 
 public class MySqlUserDAO implements UserDao {
     @Override
-    public Optional<User> getByEmail(String email) throws DAOException {
+    public Optional<User> getByEmail(String email, String password) throws DAOException {
         User user = null;
         try(Connection connection = DataSource.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(UserMysqlQuery.GET_BY_EMAIL);
@@ -28,10 +28,13 @@ public class MySqlUserDAO implements UserDao {
                     user = setUserValues(resultSet);
                 }
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            if(user.getPassword() == null || !user.getPassword().equals(password)){
+                throw new SQLException();
+            }
+        } catch (SQLException e) {
+            throw new DAOException(e);
         }
-        return Optional.ofNullable(user);
+        return Optional.of(user);
     }
 
     @Override
@@ -76,7 +79,7 @@ public class MySqlUserDAO implements UserDao {
     }
 
     @Override
-    public void add(User user) throws DAOException, SQLException {
+    public void add(User user) throws DAOException{
         try(Connection connection = DataSource.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(ShipMysqlQuery.ADD_SHIP);
             int index = 0;
@@ -87,6 +90,8 @@ public class MySqlUserDAO implements UserDao {
             preparedStatement.setInt(++index, user.getRoleId());
             preparedStatement.setBoolean(++index, user.isBlocked());
             preparedStatement.execute();
+        } catch (SQLException e) {
+            throw new DAOException(e);
         }
     }
 
@@ -138,7 +143,7 @@ public class MySqlUserDAO implements UserDao {
     }
 
     @Override
-    public void update(User user) throws DAOException, SQLException {
+    public void update(User user) throws DAOException {
         try(Connection connection = DataSource.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(UserMysqlQuery.UPDATE);
             int index = 0;
@@ -150,6 +155,8 @@ public class MySqlUserDAO implements UserDao {
             preparedStatement.setBoolean(++index, user.isBlocked());
             preparedStatement.setLong(++index, user.getId());
             preparedStatement.execute();
+        } catch (SQLException e) {
+            throw new DAOException(e);
         }
     }
 

@@ -4,8 +4,6 @@ import actions.Action;
 import com.google.protobuf.ServiceException;
 import dao.UserDao;
 import dto.CruiseDTO;
-import dto.UserDTO;
-import model.entity.User;
 import services.GeneralService;
 import services.ServiceFactory;
 

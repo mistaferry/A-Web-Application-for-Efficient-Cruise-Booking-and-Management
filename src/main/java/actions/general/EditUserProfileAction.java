@@ -21,22 +21,21 @@ public class EditUserProfileAction implements Action {
     }
 
     @Override
-    public String execute(HttpServletRequest request) throws ServletException, IOException, ServiceException {
+    public String execute(HttpServletRequest request) throws ServiceException {
         HttpSession session = request.getSession();
+        //старі дані користувавча
         UserDTO getUserFromSession = (UserDTO) session.getAttribute("user");
+        //нові дані, введені
         UserDTO user = getUserDTOValues(request, getUserFromSession);
-
         try {
             userService.updateUser(user);
             getUserFromSession.setFirstName(user.getFirstName());
             getUserFromSession.setSurname(user.getSurname());
             getUserFromSession.setLogin(user.getLogin());
-//        } catch (IncorrectFormatException | DuplicateEmailException e) {
-//            request.getSession().setAttribute(USER, user);
-//            request.getSession().setAttribute(ERROR, e.getMessage());
         } catch (DAOException | SQLException e) {
-            request.getSession().setAttribute("prevUser", user);
-            e.printStackTrace();
+            session.setAttribute("prevUser", getUserFromSession);
+            session.setAttribute("error", "login.uniqueness");
+            return "editProfile.jsp";
         }
         return "profile.jsp";
     }

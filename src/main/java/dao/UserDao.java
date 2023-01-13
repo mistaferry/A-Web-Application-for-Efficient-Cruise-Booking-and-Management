@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserDao extends EntityDao<User>{
-    Optional<User> getByEmail(String email) throws DAOException;
+    Optional<User> getByEmail(String email, String password) throws DAOException;
 
     List<User> getSorted(String query) throws DAOException;
 

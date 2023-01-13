@@ -3,11 +3,11 @@ package dao.constants;
 public class CruiseMysqlQuery {
     public static final String ADD_CRUISE = "INSERT INTO cruise (ship_id, duration, start_day, paid) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-    public static final String GET_BY_ID = "SELECT cruise WHERE id=?";
-
     public static final String GET_ALL = "SELECT cruise.id, ship_id, duration, price, start_day, paid, " +
             "s.name as ship_name, s.capacity as capacity, s.number_of_ports as number_of_ports FROM cruise " +
             "JOIN ship s on s.id = cruise.ship_id ";
+
+    public static final String GET_BY_ID = GET_ALL + " WHERE cruise.id=?";
 
     public static final String GET_BY_ALL_FILTERS = "WHERE start_day=? AND (duration >= ? AND duration <= ?) ";
 

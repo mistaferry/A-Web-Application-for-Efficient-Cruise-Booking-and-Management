@@ -1,0 +1,10 @@
+<div>
+    <form method="post">
+        <label>
+            <select name="language" onchange="submit()" class="language-choice">
+                <option value="en" ${language == 'en' ? 'selected' : ''}><fmt:message key="label.lang.en"/></option>
+                <option value="uk_UA" ${language == 'uk_UA' ? 'selected' : ''}><fmt:message key="label.lang.uk_UA"/></option>
+            </select>
+        </label>
+    </form>
+</div>

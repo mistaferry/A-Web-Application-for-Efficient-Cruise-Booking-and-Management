@@ -2,7 +2,6 @@ package actions.general;
 
 import actions.Action;
 import com.google.protobuf.ServiceException;
-import dao.CruiseDao;
 import dao.impl.MySqlCruiseDAO;
 import dto.CruiseDTO;
 import exceptions.DAOException;
@@ -15,7 +14,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ViewCruiseCatalogAction implements Action {
@@ -35,7 +33,7 @@ public class ViewCruiseCatalogAction implements Action {
 
         System.out.println(request.getQueryString());
         String path = null;
-        try{
+        try {
 
             List<CruiseDTO> cruiseDTOList = generalService.viewCatalogWithPagination(filters, cruisePerPage, pageNum);
             int pageAmount = (new MySqlCruiseDAO()).getAmountWithFilters(filters);

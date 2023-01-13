@@ -1,0 +1,45 @@
+<%@ page pageEncoding="UTF-8" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : 'en'}" scope="session" />
+<fmt:setLocale value="${language}"/>
+<fmt:setBundle basename="resources"/>
+
+<div class="form">
+    <form method="post" id="form-enter" action="controller">
+        <input type="hidden" name="action" value="register">
+        <div>
+            <label for="login"><fmt:message key="login.label.username"/></label><br>
+            <input type="text" id="login" name="login"
+                   pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}"><br><br>
+        </div>
+        <div>
+            <label for="password"><fmt:message key="login.label.password"/></label><br>
+            <input type="password" id="password" name="password"
+                   required minlength="2" maxlength="10"><br><br>
+        </div>
+        <div>
+            <label for="firstName"><fmt:message key="person.name"/></label><br>
+            <input type="password" id="firstName" name="firstName"
+                   required minlength="2" maxlength="15"><br><br>
+        </div>
+        <div>
+            <label for="surname"><fmt:message key="person.surname"/></label><br>
+            <input type="password" id="surname" name="password"
+                   required minlength="2" maxlength="15"><br>
+        </div>
+        <c:if test="${sessionScope.error ne null}">
+            <span class="error-text"><fmt:message key="login.uniqueness"/></span>
+            <%session.removeAttribute("error"); %>
+        </c:if>
+        <div>
+            <br>
+            <button id="form-button" type="submit"><fmt:message key="button.submit"/></button>
+        </div>
+        <br>
+        <a href="index.jsp" class="login-option">
+            <span>I have an account</span>
+        </a>
+    </form>
+</div>

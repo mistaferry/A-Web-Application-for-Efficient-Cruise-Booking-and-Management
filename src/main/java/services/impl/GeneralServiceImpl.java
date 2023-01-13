@@ -26,17 +26,24 @@ public class GeneralServiceImpl implements GeneralService {
     }
 
     @Override
-    public UserDTO signIn(String login, String password) throws ServiceException {
+    public UserDTO signIn(String login, String password) throws DAOException {
         UserDTO userDTO;
-        try{
-            User user = (userDao.getByEmail(login)).get();
-            if(user == null){
-                throw new Exception("Login not exist");
-            }
-            userDTO = convertUserToDTO(user);
-            return userDTO;
-        } catch (Exception e) {
-            throw  new ServiceException(e);
+        User user = (userDao.getByEmail(login, password)).get();
+        userDTO = convertUserToDTO(user);
+        return userDTO;
+    }
+
+    @Override
+    public void register(String login, String password, String firstName, String surname) throws DAOException {
+        User user = new User();
+        user.setLogin(login);
+        user.setPassword(password);
+        user.setFirstName(firstName);
+        user.setSurname(surname);
+        try {
+            userDao.add(user);
+        } catch (SQLException e) {
+            throw new DAOException(e);
         }
     }
 

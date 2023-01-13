@@ -13,11 +13,6 @@ import java.util.Optional;
 
 public class MySqlCruiseDAO implements CruiseDao {
 
-    private static int executedRows = 0;
-
-    public static int getExecutedRows() {
-        return executedRows;
-    }
 
     @Override
     public List<Cruise> getSorted(String query) throws DAOException, SQLException {
@@ -99,7 +94,7 @@ public class MySqlCruiseDAO implements CruiseDao {
             preparedStatement.setLong(++index, duration);
             cruise = new Cruise();
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
+                while (resultSet.next()) {
                     cruise = setCruiseValues(resultSet);
                 }
             }
@@ -146,7 +141,7 @@ public class MySqlCruiseDAO implements CruiseDao {
             preparedStatement.setLong(++index, id);
             cruise = new Cruise();
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
+                while (resultSet.next()) {
                     cruise = setCruiseValues(resultSet);
                 }
             }
@@ -328,27 +323,4 @@ public class MySqlCruiseDAO implements CruiseDao {
         return amount;
     }
 
-    PreparedStatement setDurationFilterWithoutPagination(List<String> filters, Connection connection, PreparedStatement preparedStatement, String query) throws SQLException {
-        if(filters.get(1).equals("All")){ /*будь-яка тривалість*/
-            preparedStatement = connection.prepareStatement(query);
-            int index = 0;
-            if(!filters.get(0).isEmpty()){
-                preparedStatement.setString(++index, filters.get(0));
-            }
-
-        }else if (!filters.get(1).equals("All")){ /*задано тривалість*/
-            int index = 0;
-            if(!filters.get(0).isEmpty()){
-                query += " AND (" + CruiseMysqlQuery.GET_BY_DURATION_FILTER + ") " ;
-                preparedStatement = connection.prepareStatement(query);
-                preparedStatement.setString(++index, filters.get(0));
-            }else{
-                query += " WHERE " + CruiseMysqlQuery.GET_BY_DURATION_FILTER;
-                preparedStatement = connection.prepareStatement(query);
-            }
-            preparedStatement.setInt(++index, Integer.parseInt(filters.get(1)));
-            preparedStatement.setInt(++index, Integer.parseInt(filters.get(2)));
-        }
-        return preparedStatement;
-    }
 }

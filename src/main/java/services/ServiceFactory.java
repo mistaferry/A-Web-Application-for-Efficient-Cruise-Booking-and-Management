@@ -14,7 +14,8 @@ public class ServiceFactory {
                 DAOFactory.getInstance().getUserDao(),
                 DAOFactory.getInstance().getCruiseDao());
         this.userService = new UserServiceImpl(
-                DAOFactory.getInstance().getUserDao());
+                DAOFactory.getInstance().getUserDao(),
+                DAOFactory.getInstance().getCruiseDao());
     }
 
     public static ServiceFactory getInstance(){

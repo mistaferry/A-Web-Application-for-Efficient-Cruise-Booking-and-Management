@@ -41,6 +41,6 @@
     </div>
 </div>
 
-<jsp:include page="/parts/footer.jspf"/>
+<%@ include file="/parts/footer.jspf" %>
 
 </html>

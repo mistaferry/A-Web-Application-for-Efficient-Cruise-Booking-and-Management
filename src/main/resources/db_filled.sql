@@ -12,12 +12,12 @@ CREATE TABLE role
 CREATE TABLE user
 (
     id         INT PRIMARY KEY AUTO_INCREMENT,
-    login      VARCHAR(50) NOT NULL,
+    login      VARCHAR(50) NOT NULL UNIQUE ,
     password   VARCHAR(50) NOT NULL,
     first_name VARCHAR(50) NOT NULL,
     surname    VARCHAR(50) NOT NULL,
-    role_id    INT,
-    blocked    BOOLEAN,
+    role_id    INT DEFAULT 1,
+    blocked    BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (role_id) REFERENCES role (id)
         on update cascade
         on delete cascade
@@ -154,7 +154,7 @@ VALUES ('CLIENT'),
        ('MANAGER');
 
 INSERT INTO user(id, login, password, first_name, surname, role_id, blocked)
-VALUES (1, 'innakamar@gmail.com', 'innakamar', 'Inna', 'Kamarenko', 1, false),
+VALUES (1, 'huryn@gmail.com', 'huryn', 'Inna', 'Kamarenko', 1, false),
        (2, 'lusenko@gmail.com', 'lusenko', 'Tamara', 'Lusenko', 1, false),
        (3, 'gullyle@gmail.com', 'gullyle', 'Halyna', 'Hnatyuk', 1, false),
        (4, 'nazar29meln@gmail.com', 'melnych123', 'Nazar', 'Melnychenko', 1, false),
