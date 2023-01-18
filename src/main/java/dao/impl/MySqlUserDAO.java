@@ -81,14 +81,12 @@ public class MySqlUserDAO implements UserDao {
     @Override
     public void add(User user) throws DAOException{
         try(Connection connection = DataSource.getConnection()) {
-            PreparedStatement preparedStatement = connection.prepareStatement(ShipMysqlQuery.ADD_SHIP);
+            PreparedStatement preparedStatement = connection.prepareStatement(UserMysqlQuery.ADD_USER);
             int index = 0;
             preparedStatement.setString(++index, user.getLogin());
             preparedStatement.setString(++index, user.getPassword());
             preparedStatement.setString(++index, user.getFirstName());
             preparedStatement.setString(++index, user.getSurname());
-            preparedStatement.setInt(++index, user.getRoleId());
-            preparedStatement.setBoolean(++index, user.isBlocked());
             preparedStatement.execute();
         } catch (SQLException e) {
             throw new DAOException(e);

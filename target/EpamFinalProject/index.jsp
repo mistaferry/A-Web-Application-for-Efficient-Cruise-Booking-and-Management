@@ -22,7 +22,7 @@
 
 <%@ include file="parts/signInMenu.jspf" %>
 
-<%@ include file="parts/singInPage.jspf" %>x
+<%@ include file="parts/singInPage.jspf" %>
 
 <%@ include file="parts/footer.jspf" %>
 

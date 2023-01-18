@@ -7,7 +7,7 @@
 <fmt:setBundle basename="resources"/>
 
 <div class="form">
-    <form method="post" id="form-enter" action="controller">
+    <form method="post" action="controller">
         <input type="hidden" name="action" value="sign-in">
         <div>
             <label for="login"><fmt:message key="login.label.username"/></label><br>
@@ -28,12 +28,10 @@
             <button id="form-button" type="submit"><fmt:message key="button.submit"/></button>
         </div>
         <br>
-        <a href="register.jsp" class="login-option">
-            <span>I don't have an account</span>
-        </a>
-        <br>
-        <a href="changePassword.jsp" class="login-option">
-            <span>I forgot my password</span>
-        </a>
+        <div class="login-option">
+            <p>Don't have an account? <a href="register.jsp">Register here</a></p>
+            <br><br>
+            <a href="changePassword.jsp" class="login-option">I forgot my password</a>
+        </div>
     </form>
 </div>

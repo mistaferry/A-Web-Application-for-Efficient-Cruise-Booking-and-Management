@@ -2,7 +2,6 @@ package actions.general;
 
 import actions.Action;
 import com.google.protobuf.ServiceException;
-import dao.UserDao;
 import dao.impl.MySqlUserDAO;
 import dto.UserDTO;
 import exceptions.DAOException;

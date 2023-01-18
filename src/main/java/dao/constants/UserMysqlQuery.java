@@ -1,7 +1,7 @@
 package dao.constants;
 
 public class UserMysqlQuery {
-    public static final String ADD_USER = "INSERT INTO user (login, password, first_name, surname, role_id, blocked) VALUES (?, ?, ?, ?, ?, ?)";
+    public static final String ADD_USER = "INSERT INTO user (login, password, first_name, surname) VALUES (?, ?, ?, ?)";
 
     public static final String GET_BY_EMAIL = "SELECT * FROM user WHERE login=?";
 
