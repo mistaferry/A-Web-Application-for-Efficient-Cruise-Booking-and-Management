@@ -30,8 +30,8 @@
         <br>
         <div class="login-option">
             <p>Don't have an account? <a href="register.jsp">Register here</a></p>
-            <br><br>
             <a href="changePassword.jsp" class="login-option">I forgot my password</a>
         </div>
+        <br><br><br>
     </form>
 </div>

@@ -79,6 +79,7 @@ CREATE TABLE users_has_cruises
 (
     user_id   INT,
     cruise_id INT,
+    date_of_registration DATETIME DEFAULT (current_date),
     FOREIGN KEY (cruise_id) REFERENCES cruise (id)
         on update cascade
         on delete cascade,
@@ -163,11 +164,21 @@ VALUES (1, 'huryn@gmail.com', 'huryn', 'Inna', 'Kamarenko', 1, false),
 select *
 from user;
 
-INSERT INTO users_has_cruises(user_id, cruise_id)
-VALUES (1, 2),
-       (2, 1),
-       (3, 2),
-       (4, 2);
+INSERT INTO users_has_cruises(user_id, cruise_id, date_of_registration)
+VALUES (1, 2, '2023-03-12'),
+       (2, 1, '2023-04-12'),
+       (3, 2, '2023-01-03'),
+       (4, 2, '2023-02-28'),
+       (5, 4, '2023-03-11'),
+       (6, 1, '2023-04-01'),
+       (3, 4, '2023-02-10'),
+       (2, 3, '2023-01-04'),
+       (1, 5, '2023-02-19'),
+       (1, 7, '2023-04-29'),
+       (1, 1, '2023-01-28'),
+       (1, 2, '2023-01-05'),
+       (1, 3, '2022-12-30'),
+       (1, 6, '2022-03-05');
 
 # route
 INSERT INTO ship_has_cities(ship_id, city_id)
@@ -211,7 +222,7 @@ VALUES (1, 7),
        (5, 6),
        (5, 5);
 
-
+select * from users_has_cruises
 
 
 

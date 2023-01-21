@@ -60,22 +60,10 @@ public class GeneralServiceImpl implements GeneralService {
     }
 
     @Override
-    public List<CruiseDTO> viewCruiseCatalog() throws ServiceException {
+    public List<CruiseDTO> viewUserCruisesWithPagination(long userId, int cruisePerPage, int pageNum) throws ServiceException {
         List<CruiseDTO> cruiseDTOList = new ArrayList<>();
         try{
-            List<Cruise> cruiseList = cruiseDao.getAll();
-            cruiseList.forEach(cruise -> cruiseDTOList.add(convertCruiseToDTO(cruise)));
-            return cruiseDTOList;
-        } catch (DAOException | SQLException e) {
-            throw  new ServiceException(e);
-        }
-    }
-
-    @Override
-    public List<CruiseDTO> viewCatalog(List<String> filters) throws ServiceException {
-        List<CruiseDTO> cruiseDTOList = new ArrayList<>();
-        try{
-            List<Cruise> cruiseList = cruiseDao.getByFilters(filters);
+            List<Cruise> cruiseList = cruiseDao.getCruisesByUser(userId, cruisePerPage, pageNum);
             cruiseList.forEach(cruise -> cruiseDTOList.add(convertCruiseToDTO(cruise)));
             return cruiseDTOList;
         } catch (DAOException | SQLException e) {

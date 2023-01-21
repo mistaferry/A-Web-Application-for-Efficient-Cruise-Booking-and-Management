@@ -1,0 +1,10 @@
+<div>
+    <nav class="nav-enter sign-nav">
+        <a id="company-name"><fmt:message key="company.name"/></a>
+        <a></a>
+        <a></a>
+        <a></a>
+        <a></a>
+        <%@ include file="languageChoice.jspf" %>
+    </nav>
+</div>

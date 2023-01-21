@@ -20,7 +20,7 @@
 </head>
 <body>
 
-<%@ include file="parts/signInMenu.jspf" %>
+<%@ include file="parts/startMenu.jspf" %>
 
 <%@ include file="parts/singInPage.jspf" %>
 

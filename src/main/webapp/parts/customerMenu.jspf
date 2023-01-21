@@ -2,9 +2,9 @@
     <nav class="nav-enter customer-nav">
         <a id="company-name"><fmt:message key="company.name"/></a>
         <a href="controller?action=view-cruises&startDay=0&duration=0&page=0&cruisePerPage=5"><fmt:message key="nav.catalog"/></a>
-        <a><fmt:message key="nav.my.orders"/></a>
+        <a href="controller?action=view-user-cruises&page=0&cruisePerPage=5"><fmt:message key="nav.my.orders"/></a>
         <a href="profile.jsp"><fmt:message key="nav.account"/></a>
-        <a><fmt:message key="sign.out"/></a>
+        <a href="index.jsp"><fmt:message key="nav.sign.out"/></a>
         <%@ include file="languageChoice.jspf" %>
     </nav>
 </div>

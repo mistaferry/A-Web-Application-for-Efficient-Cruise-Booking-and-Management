@@ -167,9 +167,9 @@ public class MySqlCruiseDAO implements CruiseDao {
 
     private Cruise setCruiseValues(ResultSet resultSet) throws SQLException, DAOException {
         Cruise cruise = new Cruise();
-        cruise.setId(resultSet.getInt("id"));
+        cruise.setId(resultSet.getInt("cruise"));
         Ship ship = new Ship();
-        ship.setId(resultSet.getInt("ship_id"));
+        ship.setId(resultSet.getInt("ship"));
         ship.setName(resultSet.getString("ship_name"));
         ship.setCapacity(resultSet.getInt("capacity"));
         ship.setNumberOfPorts(resultSet.getInt("number_of_ports"));
@@ -323,4 +323,44 @@ public class MySqlCruiseDAO implements CruiseDao {
         return amount;
     }
 
+    @Override
+    public List<Cruise> getCruisesByUser(long userId, int dishPerPage, int pageNum) throws DAOException, SQLException {
+        List<Cruise> cruiseList;
+        try(Connection connection = DataSource.getConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(CruiseMysqlQuery.GET_USER_CRUISES +
+                    CruiseMysqlQuery.GET_PAGINATION);
+            cruiseList = new ArrayList<>();
+            int index = 0;
+            preparedStatement.setLong(++index, userId);
+            setPaginationValues(preparedStatement, dishPerPage, index, pageNum * dishPerPage);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    Cruise cruise = setCruiseValues(resultSet);
+                    cruiseList.add(cruise);
+                }
+            }
+        }
+        return cruiseList;
+    }
+
+    @Override
+    public int getAmountByUser(long userId) throws DAOException, SQLException {
+        int amount = 0;
+        try(Connection connection = DataSource.getConnection()) {
+            PreparedStatement preparedStatement = null;
+            String query = CruiseMysqlQuery.GET_USER_CRUISE_COUNT;
+            preparedStatement = connection.prepareStatement(query);
+            int index = 0;
+            preparedStatement.setLong(++index, userId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            try {
+                if(resultSet.next()){
+                    amount = resultSet.getInt(1);
+                }
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+        return amount;
+    }
 }

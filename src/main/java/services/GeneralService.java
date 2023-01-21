@@ -15,9 +15,7 @@ public interface GeneralService {
 
     List<UserDTO> viewAllUsers() throws ServiceException;
 
-    List<CruiseDTO> viewCruiseCatalog() throws ServiceException;
-
-    List<CruiseDTO> viewCatalog(List<String> filters) throws ServiceException;
+    List<CruiseDTO> viewUserCruisesWithPagination(long userId, int cruisePerPage, int pageNum) throws ServiceException;
 
     List<CruiseDTO> viewCatalogWithPagination(List<String> filters, int cruisePerPage, int pageNum) throws ServiceException;
 

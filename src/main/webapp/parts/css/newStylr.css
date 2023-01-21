@@ -1,4 +1,4 @@
-.nav-enter{
+.nav-enter {
     display: flex;
     background-color: black;
     padding: 2%;
@@ -7,7 +7,7 @@
     position: relative;
 }
 
-.nav-enter a{
+.nav-enter a {
     width: 20%;
     text-align: center;
     text-decoration: none;
@@ -16,24 +16,24 @@
     margin: auto;
 }
 
-.sign-nav{
+.sign-nav {
     justify-content: flex-start;
 }
 
-.customer-nav{
+.customer-nav {
     justify-content: flex-end;
 }
 
-#company-name{
+#company-name {
     padding-right: 45%;
 }
 
-.form{
+.form {
     margin-top: 140px;
     margin-left: 625px;
 }
 
-.container{
+.container {
     bottom: 0;
 }
 
@@ -43,7 +43,7 @@
     alignment: center;
 }
 
-#footer-text{
+#footer-text {
     color: darkgray;
 }
 
@@ -54,7 +54,7 @@
     width: 170px;
 }
 
-.select{
+.select {
     background-color: lightgrey;
     padding: 10px 30px;
     color: black;
@@ -63,7 +63,7 @@
     border-radius: 5px;
 }
 
-.select input{
+.select input {
     text-align: center;
     background-color: lightgrey;
     color: black;
@@ -71,7 +71,7 @@
     outline: none;
 }
 
-.nav-filter{
+.nav-filter {
     display: flex;
     justify-content: flex-end;
     position: relative;
@@ -79,14 +79,14 @@
     margin-left: 2%;
 }
 
-.nav2, .nav-filter a{
+.nav2, .nav-filter a {
     margin-bottom: 15px;
     margin-top: 15px;
     padding: 10px;
     text-decoration: none;
 }
 
-.save-button{
+.save-button {
     text-align: center;
     border-radius: 60px;
     margin-top: auto;
@@ -95,13 +95,13 @@
     height: 50px;
 }
 
-.flex-container{
+.flex-container {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
 }
 
-.flex-container .item{
+.flex-container .item {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -110,16 +110,16 @@
     margin: 10px;
 }
 
-.flex-container .item img{
+.flex-container .item img {
     height: 352px;
     width: 282px;
 }
 
-.flex-container .item .link{
+.flex-container .item .link {
     margin-top: 2em;
 }
 
-.flex-container .item .link a{
+.flex-container .item .link a {
     text-decoration: none;
     padding: 10px 50px;
     max-width: 40%;
@@ -128,38 +128,38 @@
     background-color: black;
 }
 
-.flex-container .item .text{
+.flex-container .item .text {
     text-align: left;
 }
 
-.text .size{
+.text .size {
     padding-left: 1em;
     float: left;
     padding-right: 4%;
 }
 
-.text .name p{
+.text .name p {
     text-align: center;
     font-weight: bold;
     font-size: 20px;
 }
 
-.text .rote p{
+.text .rote p {
     text-align: center;
 }
 
-.text .date p{
+.text .date p {
     color: blue;
     font-weight: bold;
     text-align: center;
 }
 
-.text .size a{
+.text .size a {
     text-decoration: none;
     color: black;
 }
 
-.text .price{
+.text .price {
     padding: 4% 1em;
     margin-left: 10px;
     margin-right: 10px;
@@ -168,7 +168,7 @@
     font-weight: bold;
 }
 
-.button-order{
+.button-order {
     background-color: black;
     border: solid black;
     color: white;
@@ -178,7 +178,7 @@
     margin-right: auto;
 }
 
-.button-order:hover{
+.button-order:hover {
     cursor: pointer;
 }
 
@@ -188,7 +188,9 @@ ul.pagination {
     margin: 0;
 }
 
-ul.pagination li {display: inline;}
+ul.pagination li {
+    display: inline;
+}
 
 ul.pagination li a {
     color: black;
@@ -197,20 +199,20 @@ ul.pagination li a {
     text-decoration: none;
 }
 
-ul.pagination a:hover{
+ul.pagination a:hover {
     background-color: lightgrey;
 }
 
-.info{
+.info {
     margin: 5% 10%;
 }
 
-.user-data{
+.user-data {
     color: gray;
     font-style: italic;
 }
 
-.action-button{
+.action-button {
     text-align: center;
     padding: 5px;
     border-radius: 60px;
@@ -220,33 +222,33 @@ ul.pagination a:hover{
     border-style: solid;
 }
 
-.action-button a{
+.action-button a {
     text-decoration: none;
     color: black;
 }
 
-.label{
+.label {
     font-weight: bold;
     font-size: 18px;
 }
 
-.label span{
+.label span {
     font-size: 16px;
     font-style: normal;
 }
 
-.page-nav{
+.page-nav {
     display: flex;
     justify-content: center;
     position: relative;
 }
 
-.flex{
+.flex {
     display: flex;
     justify-content: center;
 }
 
-.form-reg{
+.form-reg {
     margin-top: 30px;
     width: 70%;
     height: auto;
@@ -261,35 +263,35 @@ ul.pagination a:hover{
     text-align: center;
 }
 
-.gender-chose{
+.gender-chose {
     display: flex;
     justify-content: center;
     text-align: center;
 }
 
-.gender-chose input{
+.gender-chose input {
     text-align: center;
     border: none;
 }
 
-.button{
+.button {
     alignment: center;
 }
 
-.input1{
-    padding:5px;
-    border-radius:10px;
+.input1 {
+    padding: 5px;
+    border-radius: 10px;
     width: 180px;
 }
 
-button{
+button {
     text-align: center;
     padding: 5px;
-    border-radius:60px;
+    border-radius: 60px;
     width: 180px;
 }
 
-.language-choice{
+.language-choice {
     background-color: black;
     padding: 10px 30px;
     color: white;
@@ -297,22 +299,39 @@ button{
     outline: none;
 }
 
-.error-text{
+.error-text {
     color: red;
     display: inline;
 }
 
-.login-option{
+.login-option {
     padding-bottom: 0;
     line-height: 1.5em;
     font-size: 13px;
 }
 
-.login-option p{
+.login-option p {
     margin: 0;
 }
 
-.login-option a{
+.login-option a {
     color: red;
     text-decoration: none;
+}
+
+.my-cruise-table {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+table td {
+    padding: 15px;
+}
+
+table thead td {
+    background-color: #54585d;
+    color: #ffffff;
+    font-weight: bold;
 }
