@@ -1,7 +1,7 @@
 package model.entity;
 
 public enum Role{
-    CLIENT, ADMIN, MANAGER;
+    CUSTOMER, ADMIN, MANAGER;
 
     public static Role getRoleByUser(User user){
         int roleId = user.getRoleId();

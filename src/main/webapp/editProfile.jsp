@@ -19,7 +19,7 @@
     </style>
 </head>
 
-<%@ include file="/parts/customerMenu.jspf" %>
+<%@ include file="parts/userMenuChoose.jspf" %>
 
 <form method="post" action="controller">
     <input type="hidden" name="action" value="edit-user-profile">

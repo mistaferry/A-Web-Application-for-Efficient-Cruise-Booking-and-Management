@@ -34,6 +34,7 @@ public class SignInAction implements Action {
             session.setAttribute("user", user);
             Role loggedUserRole = Role.getRoleByRoleId(user.getRoleId());
             session.setAttribute("role", loggedUserRole);
+            System.out.println("Role - " + loggedUserRole.name());
             path = "profile.jsp";
         } catch (Exception e) {
             errorMessage = "There is no such user";

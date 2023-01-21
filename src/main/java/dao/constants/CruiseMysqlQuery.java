@@ -39,6 +39,4 @@ public class CruiseMysqlQuery {
             "            ORDER BY uhc.date_of_registration\n";
 
     public static final String GET_USER_CRUISE_COUNT = "SELECT COUNT(*) FROM users_has_cruises WHERE user_id=?";
-
-
 }

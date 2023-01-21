@@ -19,7 +19,7 @@
     </style>
 </head>
 
-<%@ include file="/parts/customerMenu.jspf" %>
+<%@ include file="parts/userMenuChoose.jspf" %>
 
 <%@ include file="/parts/customerCruises.jspf" %>
 

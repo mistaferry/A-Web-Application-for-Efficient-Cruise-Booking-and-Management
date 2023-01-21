@@ -4,7 +4,7 @@
         <a></a>
         <a><fmt:message key="nav.main"/></a>
         <a href="profile.jsp"><fmt:message key="nav.account"/></a>
-        <a href="index.jsp"><fmt:message key="sign.out"/></a>
+        <a href="index.jsp"><fmt:message key="nav.sign.out"/></a>
         <%@ include file="languageChoice.jspf" %>
     </nav>
 </div>
