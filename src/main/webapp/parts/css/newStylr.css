@@ -319,7 +319,7 @@ button {
     text-decoration: none;
 }
 
-.my-cruise-table {
+.table {
     margin-top: 40px;
     display: flex;
     flex-direction: column;

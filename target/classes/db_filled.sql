@@ -154,13 +154,15 @@ VALUES ('CLIENT'),
        ('ADMIN'),
        ('MANAGER');
 
-INSERT INTO user(id, login, password, first_name, surname, role_id, blocked)
-VALUES (1, 'huryn@gmail.com', 'huryn', 'Inna', 'Kamarenko', 1, false),
-       (2, 'lusenko@gmail.com', 'lusenko', 'Tamara', 'Lusenko', 1, false),
-       (3, 'gullyle@gmail.com', 'gullyle', 'Halyna', 'Hnatyuk', 1, false),
-       (4, 'nazar29meln@gmail.com', 'melnych123', 'Nazar', 'Melnychenko', 1, false),
-       (5, 'victoradm1@gmail.com', 'sereda', 'Victor', 'Sereda', 2, false),
-       (6, 'dinakram23@gmail.com', 'innakamar', 'Diana', 'Kramarenko', 3, false);
+INSERT INTO user(login, password, first_name, surname, role_id, blocked)
+VALUES ('huryn@gmail.com', 'huryn', 'Inna', 'Kamarenko', 1, false),
+       ('lusenko@gmail.com', 'lusenko', 'Tamara', 'Lusenko', 1, false),
+       ('gullyle@gmail.com', 'gullyle', 'Halyna', 'Hnatyuk', 1, false),
+       ('nazar29meln@gmail.com', 'melnych123', 'Nazar', 'Melnychenko', 1, false),
+       ('victoradm1@gmail.com', 'sereda', 'Victor', 'Sereda', 2, false),
+       ('dinakram23@gmail.com', 'innakamar', 'Diana', 'Kramarenko', 2, false),
+       ('user@gmail.com', 'user', 'User', 'User', 1, false),
+       ('admin@gmail.com', 'admin', 'Admin', 'Admin', 2, false);
 select *
 from user;
 

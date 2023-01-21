@@ -266,7 +266,7 @@ public class MySqlCruiseDAO implements CruiseDao {
         return cruiseList;
     }
 
-    private void setPaginationValues(PreparedStatement preparedStatement, int dishPerPage, int index, int i) throws SQLException {
+    public static void setPaginationValues(PreparedStatement preparedStatement, int dishPerPage, int index, int i) throws SQLException {
         preparedStatement.setInt(++index, i);
         preparedStatement.setInt(++index, dishPerPage);
     }

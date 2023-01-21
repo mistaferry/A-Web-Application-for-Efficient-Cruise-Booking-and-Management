@@ -11,13 +11,13 @@
         </label>
         <label>
             <select name="cruisePerPage" style="display: none">
-                <option value="5" selected></option>
+                <option value="7" selected></option>
             </select>
         </label>
     </div>
 </form>
 
-<section class="my-cruise-table">
+<section class="table">
     <div>
         <h2>My cruises</h2><br>
     </div>
@@ -34,25 +34,25 @@
                 </tr>
             </thead>
             <tbody>
-                <c:forEach var="cruise" items="${sessionScope.myCruises}">
+                <c:forEach var="user" items="${sessionScope.myCruises}">
                     <tr>
                         <td>
-                            ${cruise.id}
+                            ${user.id}
                         </td>
                         <td>
-                            ${cruise.ship.name}
+                            ${user.ship.name}
                         </td>
                         <td>
-                                ${cruise.startDate.toLocalDate().dayOfMonth} ${cruise.startDate.toLocalDate().month} ${cruise.startDate.toLocalDate().year}
+                                ${user.startDate.toLocalDate().dayOfMonth} ${user.startDate.toLocalDate().month} ${user.startDate.toLocalDate().year}
                         </td>
                         <td>
-                            ${cruise.duration} days
+                            ${user.duration} days
                         </td>
                         <td>
-                            ${cruise.price} UAH
+                            ${user.price} UAH
                         </td>
                         <td>
-                            ${cruise.paid}
+                            ${user.paid}
                         </td>
                     </tr>
                 </c:forEach>

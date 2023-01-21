@@ -9,6 +9,7 @@ import exceptions.DAOException;
 import model.entity.Cruise;
 import model.entity.User;
 import services.GeneralService;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,47 +51,59 @@ public class GeneralServiceImpl implements GeneralService {
     @Override
     public List<UserDTO> viewAllUsers() throws ServiceException {
         List<UserDTO> userDTOList = new ArrayList<>();
-        try{
+        try {
             List<User> userList = userDao.getAll();
             userList.forEach(user -> userDTOList.add(convertUserToDTO(user)));
             return userDTOList;
         } catch (DAOException | SQLException e) {
-            throw  new ServiceException(e);
+            throw new ServiceException(e);
         }
     }
 
     @Override
     public List<CruiseDTO> viewUserCruisesWithPagination(long userId, int cruisePerPage, int pageNum) throws ServiceException {
         List<CruiseDTO> cruiseDTOList = new ArrayList<>();
-        try{
+        try {
             List<Cruise> cruiseList = cruiseDao.getCruisesByUser(userId, cruisePerPage, pageNum);
             cruiseList.forEach(cruise -> cruiseDTOList.add(convertCruiseToDTO(cruise)));
             return cruiseDTOList;
         } catch (DAOException | SQLException e) {
-            throw  new ServiceException(e);
+            throw new ServiceException(e);
         }
     }
 
     @Override
     public List<CruiseDTO> viewCatalogWithPagination(List<String> filters, int cruisePerPage, int pageNum) throws ServiceException {
         List<CruiseDTO> cruiseDTOList = new ArrayList<>();
-        try{
+        try {
             List<Cruise> cruiseList = cruiseDao.getCruisePaginationWithFilters(filters, cruisePerPage, pageNum);
             cruiseList.forEach(cruise -> cruiseDTOList.add(convertCruiseToDTO(cruise)));
             return cruiseDTOList;
         } catch (DAOException | SQLException e) {
-            throw  new ServiceException(e);
+            throw new ServiceException(e);
         }
     }
 
     @Override
     public int getCruiseAmount(List<String> filters) throws ServiceException {
         int amount;
-        try{
+        try {
             amount = cruiseDao.getAmountWithFilters(filters);
             return amount;
         } catch (DAOException | SQLException e) {
-            throw  new ServiceException(e);
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public List<UserDTO> viewAllUsersWithPagination(int cruisePerPage, int pageNum) throws ServiceException {
+        List<UserDTO> userDTOList = new ArrayList<>();
+        try {
+            List<User> userList = userDao.getUserPagination(cruisePerPage, pageNum);
+            userList.forEach(user -> userDTOList.add(convertUserToDTO(user)));
+            return userDTOList;
+        } catch (DAOException | SQLException e) {
+            throw new ServiceException(e);
         }
     }
 }

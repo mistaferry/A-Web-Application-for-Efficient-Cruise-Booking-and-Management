@@ -4,6 +4,7 @@ import connection.DataSource;
 import dao.UserDao;
 import dao.constants.*;
 import exceptions.DAOException;
+import model.entity.Cruise;
 import model.entity.Role;
 import model.entity.User;
 import java.sql.Connection;
@@ -13,6 +14,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import static dao.impl.MySqlCruiseDAO.setPaginationValues;
 
 public class MySqlUserDAO implements UserDao {
     @Override
@@ -168,4 +171,46 @@ public class MySqlUserDAO implements UserDao {
         }
     }
 
+    @Override
+    public List<User> getUserPagination(int dishPerPage, int pageNum) throws DAOException, SQLException {
+        List<User> userList;
+        try(Connection connection = DataSource.getConnection()) {
+            PreparedStatement preparedStatement;
+            String query = UserMysqlQuery.GET_ALL;
+            query += UserMysqlQuery.GET_PAGINATION;
+            preparedStatement = connection.prepareStatement(query);
+            int index = 0;
+            setPaginationValues(preparedStatement, dishPerPage, index, pageNum * dishPerPage);
+            userList = new ArrayList<>();
+            ResultSet resultSet = preparedStatement.executeQuery();
+            try {
+                while (resultSet.next()) {
+                    User user = setUserValues(resultSet);
+                    userList.add(user);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return userList;
+    }
+
+    @Override
+    public int getAmount() throws DAOException, SQLException {
+        int amount = 0;
+        try(Connection connection = DataSource.getConnection()) {
+            PreparedStatement preparedStatement = null;
+            String query = UserMysqlQuery.GET_COUNT;
+            preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            try {
+                if(resultSet.next()){
+                    amount = resultSet.getInt(1);
+                }
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+        return amount;
+    }
 }

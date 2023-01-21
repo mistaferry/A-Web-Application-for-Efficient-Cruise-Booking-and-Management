@@ -2,7 +2,7 @@
     <nav class="nav-enter sign-nav">
         <a id="company-name"><fmt:message key="company.name"/></a>
         <a></a>
-        <a><fmt:message key="nav.main"/></a>
+        <a href="controller?action=view-all-users&page=0&cruisePerPage=7"><fmt:message key="nav.main"/></a>
         <a href="profile.jsp"><fmt:message key="nav.account"/></a>
         <a href="index.jsp"><fmt:message key="nav.sign.out"/></a>
         <%@ include file="languageChoice.jspf" %>

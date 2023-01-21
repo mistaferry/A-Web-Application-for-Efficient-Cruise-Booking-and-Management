@@ -20,4 +20,6 @@ public interface GeneralService {
     List<CruiseDTO> viewCatalogWithPagination(List<String> filters, int cruisePerPage, int pageNum) throws ServiceException;
 
     int getCruiseAmount(List<String> filters) throws ServiceException;
+
+    List<UserDTO> viewAllUsersWithPagination(int cruisePerPage, int pageNum)  throws ServiceException;
 }

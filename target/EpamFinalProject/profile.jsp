@@ -18,7 +18,7 @@
     </style>
 </head>
 
-<%@ include file="parts/customerMenu.jspf" %>
+<%@ include file="parts/userMenuChoose.jspf" %>
 
 <div class="info">
     <div>

@@ -5,10 +5,9 @@ public class UserMysqlQuery {
 
     public static final String GET_BY_EMAIL = "SELECT * FROM user WHERE login=?";
 
-//    public static final String GET_ALL = "SELECT id, login, password, first_name, surname, blocked, r.id as role_id FROM user\n" +
-//            "JOIN role r ON r.id = user.role_id";
+    public static final String GET_ALL = "SELECT * FROM user ";
 
-    public static final String GET_ALL = "SELECT * FROM user";
+    public static final String GET_PAGINATION = "LIMIT ?,?";
 
     public static final String UPDATE = "UPDATE user SET login=?, password=?, first_name=?, surname=?, role_id=?, blocked=? WHERE id=?";
 
@@ -29,4 +28,6 @@ public class UserMysqlQuery {
     public static final String CANCEL_REGISTRATION = "DELETE user WHERE id=?";
 
     public static final String IS_REGISTERED = "DELETE user WHERE id=?";
+
+    public static final String GET_COUNT = "SELECT COUNT(*) FROM user";
 }
