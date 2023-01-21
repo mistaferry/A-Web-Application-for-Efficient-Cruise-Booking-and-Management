@@ -26,7 +26,7 @@ public interface UserDao extends EntityDao<User>{
 
     boolean isRegistered(long userId, long eventId) throws DAOException;
 
-    List<User> getUserPagination(int dishPerPage, int pageNum) throws DAOException, SQLException;
+    List<User> getUserPagination(int cruisePerPage, int pageNum) throws DAOException, SQLException;
 
     int getAmount() throws DAOException, SQLException;
 }

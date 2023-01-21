@@ -15,7 +15,7 @@ public final class ActionFactory {
         ACTION_MAP.put("create-order", new CreateOrderAction());
         ACTION_MAP.put("view-user-cruises", new ViewUserCruisesAction());
         ACTION_MAP.put("view-cruises", new ViewCruiseCatalogAction());
-        ACTION_MAP.put("view-all-users", new ViewAlUsersAction());
+        ACTION_MAP.put("view-all-users", new ViewAllUsersAction());
     }
 
     private ActionFactory(){ }

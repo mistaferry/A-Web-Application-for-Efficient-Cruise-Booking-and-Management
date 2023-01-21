@@ -16,10 +16,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ViewAlUsersAction implements Action {
+public class ViewAllUsersAction implements Action {
     private final GeneralService generalService;
 
-    public ViewAlUsersAction() {
+    public ViewAllUsersAction() {
         this.generalService = ServiceFactory.getInstance().getGeneralService();
     }
 
@@ -27,7 +27,7 @@ public class ViewAlUsersAction implements Action {
     public String execute(HttpServletRequest request) throws Exception {
         HttpSession session = request.getSession();
         int pageNum = Integer.parseInt(request.getParameter("page"));
-        int cruisePerPage = Integer.parseInt(request.getParameter("cruisePerPage"));
+        int cruisePerPage = Integer.parseInt(request.getParameter("userPerPage"));
         System.out.println(request.getQueryString());
         String path = null;
         try {

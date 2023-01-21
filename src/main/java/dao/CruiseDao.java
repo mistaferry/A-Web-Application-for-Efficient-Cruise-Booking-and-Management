@@ -22,11 +22,11 @@ public interface CruiseDao extends EntityDao<Cruise> {
 
     void setShip(int id, Ship ship) throws DAOException, SQLException;
 
-    List<Cruise> getCruisePaginationWithFilters(List<String> filters, int dishPerPage, int pageNum) throws DAOException, SQLException;
+    List<Cruise> getCruisePaginationWithFilters(List<String> filters, int cruisePerPage, int pageNum) throws DAOException, SQLException;
 
     int getAmountWithFilters(List<String> filters) throws DAOException, SQLException;
 
-    List<Cruise> getCruisesByUser(long userId, int dishPerPage, int pageNum) throws DAOException, SQLException;
+    List<Cruise> getCruisesByUser(long userId, int cruisePerPage, int pageNum) throws DAOException, SQLException;
 
     int getAmountByUser(long userId) throws DAOException, SQLException;
 

@@ -10,7 +10,7 @@
             </select>
         </label>
         <label>
-            <select name="cruisePerPage" style="display: none">
+            <select name="userPerPage" style="display: none">
                 <option value="7" selected></option>
             </select>
         </label>
@@ -62,13 +62,13 @@
     <ul class="pagination">
         <c:if test="${param.page != 0}">
             <li><a class="page-link"
-                   href="controller?action=view-all-users&page=${param.page-1}&cruisePerPage=${param.cruisePerPage}"
+                   href="controller?action=view-all-users&page=${param.page-1}&userPerPage=${param.userPerPage}"
                    tabindex="-1">Previous</a></li>
         </c:if>
         <c:forEach var="num" begin="0" end="${requestScope.pageAmount}">
             <li class="page-item ${param.page == num ? "active" : ""}">
                 <a class="page-link"
-                   href="controller?action=view-all-users&page=${num}&cruisePerPage=${param.cruisePerPage}">
+                   href="controller?action=view-all-users&page=${num}&userPerPage=${param.userPerPage}">
                         ${num+1}
                 </a>
             </li>
@@ -77,7 +77,7 @@
         <c:if test="${param.page lt requestScope.pageAmount}">
             <li>
                 <a class="page-link"
-                   href="controller?action=view-all-users&page=${param.page+1}&cruisePerPage=${param.cruisePerPage}">
+                   href="controller?action=view-all-users&page=${param.page+1}&userPerPage=${param.userPerPage}">
                     Next
                 </a>
             </li>

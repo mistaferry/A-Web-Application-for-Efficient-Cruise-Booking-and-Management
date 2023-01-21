@@ -203,7 +203,7 @@ public class MySqlCruiseDAO implements CruiseDao {
     }
 
     @Override
-    public List<Cruise> getCruisePaginationWithFilters(List<String> filters, int dishPerPage, int pageNum) throws DAOException, SQLException {
+    public List<Cruise> getCruisePaginationWithFilters(List<String> filters, int cruisePerPage, int pageNum) throws DAOException, SQLException {
         List<Cruise> cruiseList;
         try(Connection connection = DataSource.getConnection()) {
             PreparedStatement preparedStatement = null;
@@ -219,7 +219,7 @@ public class MySqlCruiseDAO implements CruiseDao {
                 int index = 0;
                 preparedStatement.setInt(++index, durationStart);
                 preparedStatement.setInt(++index, durationEnd);
-                setPaginationValues(preparedStatement, dishPerPage, index, pageNum * dishPerPage);
+                setPaginationValues(preparedStatement, cruisePerPage, index, pageNum * cruisePerPage);
             }else{
                 if(!filters.get(0).equals("0") && !filters.get(0).isEmpty()) {
                     if (filters.get(1).equals("0")) {
@@ -229,7 +229,7 @@ public class MySqlCruiseDAO implements CruiseDao {
                         String startDay = filters.get(0);
                         int index = 0;
                         preparedStatement.setString(++index, startDay);
-                        setPaginationValues(preparedStatement, dishPerPage, index, pageNum * dishPerPage);
+                        setPaginationValues(preparedStatement, cruisePerPage, index, pageNum * cruisePerPage);
                     } else {
                         query += CruiseMysqlQuery.GET_BY_START_DAY_FILTER +
                                 " AND (" + CruiseMysqlQuery.GET_BY_DURATION_FILTER + ") ";
@@ -242,13 +242,13 @@ public class MySqlCruiseDAO implements CruiseDao {
                         preparedStatement.setString(++index, startDay);
                         preparedStatement.setInt(++index, durationStart);
                         preparedStatement.setInt(++index, durationEnd);
-                        setPaginationValues(preparedStatement, dishPerPage, index, pageNum * dishPerPage);
+                        setPaginationValues(preparedStatement, cruisePerPage, index, pageNum * cruisePerPage);
                     }
                 }else{
                     query += CruiseMysqlQuery.GET_PAGINATION;
                     int index = 0;
                     preparedStatement = connection.prepareStatement(query);
-                    setPaginationValues(preparedStatement, dishPerPage, index, pageNum * dishPerPage);
+                    setPaginationValues(preparedStatement, cruisePerPage, index, pageNum * cruisePerPage);
                 }
             }
             cruiseList = new ArrayList<>();
@@ -266,9 +266,9 @@ public class MySqlCruiseDAO implements CruiseDao {
         return cruiseList;
     }
 
-    public static void setPaginationValues(PreparedStatement preparedStatement, int dishPerPage, int index, int i) throws SQLException {
+    public static void setPaginationValues(PreparedStatement preparedStatement, int cruisePerPage, int index, int i) throws SQLException {
         preparedStatement.setInt(++index, i);
-        preparedStatement.setInt(++index, dishPerPage);
+        preparedStatement.setInt(++index, cruisePerPage);
     }
 
     @Override
@@ -324,7 +324,7 @@ public class MySqlCruiseDAO implements CruiseDao {
     }
 
     @Override
-    public List<Cruise> getCruisesByUser(long userId, int dishPerPage, int pageNum) throws DAOException, SQLException {
+    public List<Cruise> getCruisesByUser(long userId, int cruisePerPage, int pageNum) throws DAOException, SQLException {
         List<Cruise> cruiseList;
         try(Connection connection = DataSource.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(CruiseMysqlQuery.GET_USER_CRUISES +
@@ -332,7 +332,7 @@ public class MySqlCruiseDAO implements CruiseDao {
             cruiseList = new ArrayList<>();
             int index = 0;
             preparedStatement.setLong(++index, userId);
-            setPaginationValues(preparedStatement, dishPerPage, index, pageNum * dishPerPage);
+            setPaginationValues(preparedStatement, cruisePerPage, index, pageNum * cruisePerPage);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     Cruise cruise = setCruiseValues(resultSet);

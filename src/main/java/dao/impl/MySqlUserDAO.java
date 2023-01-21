@@ -172,7 +172,7 @@ public class MySqlUserDAO implements UserDao {
     }
 
     @Override
-    public List<User> getUserPagination(int dishPerPage, int pageNum) throws DAOException, SQLException {
+    public List<User> getUserPagination(int cruisePerPage, int pageNum) throws DAOException, SQLException {
         List<User> userList;
         try(Connection connection = DataSource.getConnection()) {
             PreparedStatement preparedStatement;
@@ -180,7 +180,7 @@ public class MySqlUserDAO implements UserDao {
             query += UserMysqlQuery.GET_PAGINATION;
             preparedStatement = connection.prepareStatement(query);
             int index = 0;
-            setPaginationValues(preparedStatement, dishPerPage, index, pageNum * dishPerPage);
+            setPaginationValues(preparedStatement, cruisePerPage, index, pageNum * cruisePerPage);
             userList = new ArrayList<>();
             ResultSet resultSet = preparedStatement.executeQuery();
             try {
