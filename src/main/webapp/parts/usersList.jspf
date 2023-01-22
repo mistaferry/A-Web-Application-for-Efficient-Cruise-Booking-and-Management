@@ -28,7 +28,8 @@
                 <td><fmt:message key="person.surname"/></td>
                 <td><fmt:message key="person.role"/></td>
                 <td><fmt:message key="person.is.blocked"/></td>
-                <td>       </td>
+                <td style="all: unset"></td>
+                <td style="all: unset"></td>
             </tr>
             </thead>
             <tbody>
@@ -51,6 +52,13 @@
                     </td>
                     <td>
                             ${user.blocked}
+                    </td>
+                    <td class="max-width">
+                        <form action="controller" method="get">
+                            <input type="hidden" name="action" value="get-user-info">
+                            <input type="hidden" name="user_id" value="${user.id}">
+                            <input class="button-order max-width" type="submit" value="User info"/>
+                        </form>
                     </td>
                     <td class="max-width">
                         <form action="controller" method="get">

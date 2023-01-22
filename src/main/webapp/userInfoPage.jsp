@@ -48,8 +48,8 @@
                     <option value="false" ${sessionScope.chosenUser.blocked eq false ? "selected" : ""}>UNBLOCKED</option>
                 </select>
             </label>
-            <br>
             <div>
+                <br>
                 <button id="form-button" type="submit"><fmt:message key="button.save.changes"/>
             </div>
         </div>
