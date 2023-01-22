@@ -20,10 +20,11 @@ public class CreateOrderAction implements actions.Action {
 
     @Override
     public String execute(HttpServletRequest request) throws Exception {
+        HttpSession session = request.getSession();
         try {
             long cruiseId = Long.parseLong(request.getParameter("cruise_id"));
             CruiseDTO chosenCruise = userService.getChosenCruise(cruiseId);
-            request.setAttribute("chosenCruise", chosenCruise);
+            session.setAttribute("chosenCruise", chosenCruise);
             return "placeOrder.jsp";
         } catch (DAOException | SQLException e) {
             return "errorPage.jsp";

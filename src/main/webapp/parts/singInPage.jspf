@@ -29,8 +29,8 @@
         </div>
         <br>
         <div class="login-option">
-            <p>Don't have an account? <a href="register.jsp">Register here</a></p>
-            <a href="changePassword.jsp" class="login-option">I forgot my password</a>
+            <p><fmt:message key="no.account"/> <a href="register.jsp"><fmt:message key="register.here"/></a></p>
+            <a href="changePassword.jsp" class="login-option"><fmt:message key="forgot.password"/></a>
         </div>
         <br><br><br>
     </form>

@@ -23,11 +23,12 @@
             <thead>
             <tr>
                 <td>Id</td>
-                <td>Login</td>
-                <td>First name</td>
-                <td>Surname</td>
-                <td>Role</td>
-                <td>Blocked</td>
+                <td><fmt:message key="person.login"/></td>
+                <td><fmt:message key="person.name"/></td>
+                <td><fmt:message key="person.surname"/></td>
+                <td><fmt:message key="person.role"/></td>
+                <td><fmt:message key="person.is.blocked"/></td>
+                <td>       </td>
             </tr>
             </thead>
             <tbody>
@@ -51,6 +52,13 @@
                     <td>
                             ${user.blocked}
                     </td>
+                    <td class="max-width">
+                        <form action="controller" method="get">
+                            <input type="hidden" name="action" value="get-user-info">
+                            <input type="hidden" name="user_id" value="${user.id}">
+                            <input class="button-order max-width" type="submit" value="User info"/>
+                        </form>
+                    </td>
                 </tr>
             </c:forEach>
             </tbody>
@@ -63,7 +71,7 @@
         <c:if test="${param.page != 0}">
             <li><a class="page-link"
                    href="controller?action=view-all-users&page=${param.page-1}&userPerPage=${param.userPerPage}"
-                   tabindex="-1">Previous</a></li>
+                   tabindex="-1"><fmt:message key="pagination.previous"/></a></li>
         </c:if>
         <c:forEach var="num" begin="0" end="${requestScope.pageAmount}">
             <li class="page-item ${param.page == num ? "active" : ""}">
@@ -78,7 +86,7 @@
             <li>
                 <a class="page-link"
                    href="controller?action=view-all-users&page=${param.page+1}&userPerPage=${param.userPerPage}">
-                    Next
+                    <fmt:message key="pagination.next"/>
                 </a>
             </li>
         </c:if>

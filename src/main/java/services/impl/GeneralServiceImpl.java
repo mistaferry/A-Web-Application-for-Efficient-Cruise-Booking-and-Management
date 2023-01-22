@@ -9,6 +9,7 @@ import exceptions.DAOException;
 import model.entity.Cruise;
 import model.entity.User;
 import services.GeneralService;
+import utils.Convertor;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -105,5 +106,11 @@ public class GeneralServiceImpl implements GeneralService {
         } catch (DAOException | SQLException e) {
             throw new ServiceException(e);
         }
+    }
+
+    @Override
+    public UserDTO getChosenUser(long userId) throws DAOException, SQLException {
+        User user = userDao.getById(userId).get();
+        return Convertor.convertUserToDTO(user);
     }
 }

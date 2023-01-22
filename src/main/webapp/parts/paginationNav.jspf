@@ -3,7 +3,7 @@
         <c:if test="${param.page != 0}">
             <li><a class="page-link"
                    href="controller?action=view-cruises&startDay=${param.startDay}&duration=${param.duration}&page=${param.page-1}&cruisePerPage=${param.cruisePerPage}"
-                   tabindex="-1">Previous</a></li>
+                   tabindex="-1"><fmt:message key="pagination.previous"/></a></li>
         </c:if>
         <c:forEach var="num" begin="0" end="${requestScope.pageAmount}">
             <li class="page-item ${param.page == num ? "active" : ""}">
@@ -18,7 +18,7 @@
             <li>
                 <a class="page-link"
                    href="controller?action=view-cruises&startDay=${param.startDay}&duration=${param.duration}&page=${param.page+1}&cruisePerPage=${param.cruisePerPage}">
-                    Next
+                    <fmt:message key="pagination.next"/>
                 </a>
             </li>
         </c:if>

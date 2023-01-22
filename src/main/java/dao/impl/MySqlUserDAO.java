@@ -213,4 +213,9 @@ public class MySqlUserDAO implements UserDao {
         }
         return amount;
     }
+
+    @Override
+    public void updateUserValuesByAdmin(User chosenUser, boolean accountStatus, int role) throws DAOException, SQLException {
+          
+    }
 }

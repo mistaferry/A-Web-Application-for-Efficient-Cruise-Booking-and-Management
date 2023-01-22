@@ -5,6 +5,7 @@ import dto.CruiseDTO;
 import dto.UserDTO;
 import exceptions.DAOException;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface GeneralService {
@@ -22,4 +23,6 @@ public interface GeneralService {
     int getCruiseAmount(List<String> filters) throws ServiceException;
 
     List<UserDTO> viewAllUsersWithPagination(int cruisePerPage, int pageNum)  throws ServiceException;
+
+    UserDTO getChosenUser(long userId) throws ServiceException, DAOException, SQLException;
 }

@@ -328,10 +328,30 @@ button {
 
 table td {
     padding: 15px;
+    text-align: center;
 }
 
 table thead td {
     background-color: #54585d;
     color: #ffffff;
     font-weight: bold;
+}
+
+.parts{
+    display: flex;
+    justify-content: start;
+    flex-wrap: wrap;
+}
+
+.left-part{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-width: 20%;
+    text-align: center;
+}
+
+.max-width{
+    padding: 0;
+    width: 100%;
 }

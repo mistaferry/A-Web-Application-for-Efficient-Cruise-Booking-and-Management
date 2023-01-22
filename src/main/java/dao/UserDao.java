@@ -1,5 +1,6 @@
 package dao;
 
+import dto.UserDTO;
 import exceptions.DAOException;
 import model.entity.Cruise;
 import model.entity.Role;
@@ -29,4 +30,6 @@ public interface UserDao extends EntityDao<User>{
     List<User> getUserPagination(int cruisePerPage, int pageNum) throws DAOException, SQLException;
 
     int getAmount() throws DAOException, SQLException;
+
+    void updateUserValuesByAdmin(User chosenUser, boolean accountStatus, int role) throws DAOException, SQLException;
 }
