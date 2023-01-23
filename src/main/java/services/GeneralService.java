@@ -4,6 +4,8 @@ import com.google.protobuf.ServiceException;
 import dto.CruiseDTO;
 import dto.UserDTO;
 import exceptions.DAOException;
+import model.entity.User;
+import utils.Convertor;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -25,4 +27,10 @@ public interface GeneralService {
     List<UserDTO> viewAllUsersWithPagination(int cruisePerPage, int pageNum)  throws ServiceException;
 
     UserDTO getChosenUser(long userId) throws ServiceException, DAOException, SQLException;
+
+    void updateCruise(CruiseDTO cruise) throws DAOException, SQLException;
+
+    List<CruiseDTO> getCruisesByUser(long userId, int cruisePerPage, int pageNum) throws ServiceException;
+
+    CruiseDTO getChosenCruise(long cruiseId) throws ServiceException, DAOException, SQLException;
 }

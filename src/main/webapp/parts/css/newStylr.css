@@ -352,6 +352,15 @@ table thead td {
 }
 
 .max-width{
-    padding: 0;
-    width: 80%;
+    padding: 0 2px;
+    width: 100px;
+}
+
+.white{
+    background-color: white;
+    color: black;
+}
+
+.no-style{
+    all: unset;
 }

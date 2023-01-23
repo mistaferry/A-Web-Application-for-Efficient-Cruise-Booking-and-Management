@@ -88,4 +88,9 @@ public class Cruise extends Entity {
     public void setPaid(boolean paid) {
         this.paid = paid;
     }
+
+    @Override
+    public void setId(long id) {
+        super.setId(id);
+    }
 }

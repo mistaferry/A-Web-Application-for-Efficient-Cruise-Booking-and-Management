@@ -28,8 +28,8 @@
                 <td><fmt:message key="person.surname"/></td>
                 <td><fmt:message key="person.role"/></td>
                 <td><fmt:message key="person.is.blocked"/></td>
-                <td style="all: unset"></td>
-                <td style="all: unset"></td>
+                <td class="no-style"></td>
+                <td class="no-style"></td>
             </tr>
             </thead>
             <tbody>
@@ -57,14 +57,16 @@
                         <form action="controller" method="get">
                             <input type="hidden" name="action" value="get-user-info">
                             <input type="hidden" name="user_id" value="${user.id}">
-                            <input class="button-order max-width" type="submit" value="User info"/>
+                            <input class="button-order max-width white" type="submit" value="Personal Info"/>
                         </form>
                     </td>
                     <td class="max-width">
                         <form action="controller" method="get">
-                            <input type="hidden" name="action" value="get-user-info">
-                            <input type="hidden" name="user_id" value="${user.id}">
-                            <input class="button-order max-width" type="submit" value="User info"/>
+                            <input type="hidden" name="action" value="admin-get-user-cruises">
+                            <input type="hidden" name="user" value="${user.id}">
+                            <input type="hidden" name="page" value="0">
+                            <input type="hidden" name="cruisePerPage" value="7">
+                            <input class="button-order max-width white" type="submit" value="User Cruises"/>
                         </form>
                     </td>
                 </tr>

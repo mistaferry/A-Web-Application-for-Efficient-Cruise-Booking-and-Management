@@ -42,4 +42,15 @@ public final class Convertor {
                 .paid(cruise.isPaid())
                 .build();
     }
+
+    public static Cruise convertDTOToCruise(CruiseDTO cruiseDTO) {
+        Cruise cruise = new Cruise();
+        cruise.setId(cruiseDTO.getId());
+        cruise.setPrice(cruiseDTO.getPrice());
+        cruise.setPaid(cruiseDTO.isPaid());
+        cruise.setStartDate(cruiseDTO.getStartDate());
+        cruise.setDuration(cruiseDTO.getDuration());
+        cruise.setShip(cruiseDTO.getShip());
+        return cruise;
+    }
 }

@@ -11,6 +11,7 @@ import model.entity.User;
 import services.GeneralService;
 import utils.Convertor;
 
+import javax.servlet.annotation.WebServlet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -112,5 +113,29 @@ public class GeneralServiceImpl implements GeneralService {
     public UserDTO getChosenUser(long userId) throws DAOException, SQLException {
         User user = userDao.getById(userId).get();
         return Convertor.convertUserToDTO(user);
+    }
+
+    @Override
+    public void updateCruise(CruiseDTO cruise) throws DAOException, SQLException {
+        Cruise convertedCruise = Convertor.convertDTOToCruise(cruise);
+        cruiseDao.update(convertedCruise);
+    }
+
+    @Override
+    public List<CruiseDTO> getCruisesByUser(long userId, int cruisePerPage, int pageNum) throws ServiceException {
+        List<CruiseDTO> cruiseDTO = new ArrayList<>();
+        try {
+            List<Cruise> cruiseList = cruiseDao.getCruisesByUser(userId, cruisePerPage, pageNum);
+            cruiseList.forEach(cruise -> cruiseDTO.add(convertCruiseToDTO(cruise)));
+            return cruiseDTO;
+        } catch (DAOException | SQLException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public CruiseDTO getChosenCruise(long cruiseId) throws DAOException, SQLException {
+        Cruise cruise = cruiseDao.getById(cruiseId).get();
+        return Convertor.convertCruiseToDTO(cruise);
     }
 }
