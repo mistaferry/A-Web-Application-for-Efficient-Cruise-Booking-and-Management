@@ -138,4 +138,16 @@ public class GeneralServiceImpl implements GeneralService {
         Cruise cruise = cruiseDao.getById(cruiseId).get();
         return Convertor.convertCruiseToDTO(cruise);
     }
+
+    @Override
+    public List<CruiseDTO> viewCatalog(int cruisePerPage, int pageNum) throws ServiceException {
+        List<CruiseDTO> cruiseDTOList = new ArrayList<>();
+        try {
+            List<Cruise> cruiseList = cruiseDao.getCruisePagination(cruisePerPage, pageNum);
+            cruiseList.forEach(cruise -> cruiseDTOList.add(convertCruiseToDTO(cruise)));
+            return cruiseDTOList;
+        } catch (DAOException | SQLException e) {
+            throw new ServiceException(e);
+        }
+    }
 }

@@ -30,4 +30,7 @@ public interface CruiseDao extends EntityDao<Cruise> {
 
     int getAmountByUser(long userId) throws DAOException, SQLException;
 
+    int getAmount() throws DAOException, SQLException;
+
+    List<Cruise> getCruisePagination(int cruisePerPage, int pageNum) throws DAOException, SQLException;
 }

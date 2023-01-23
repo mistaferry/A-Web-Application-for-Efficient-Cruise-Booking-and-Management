@@ -363,4 +363,49 @@ public class MySqlCruiseDAO implements CruiseDao {
         }
         return amount;
     }
+
+    @Override
+    public int getAmount() throws DAOException, SQLException {
+        int amount = 0;
+        try(Connection connection = DataSource.getConnection()) {
+            PreparedStatement preparedStatement = null;
+            String query = CruiseMysqlQuery.GET_CRUISE_COUNT;
+            preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            try {
+                if(resultSet.next()){
+                    amount = resultSet.getInt(1);
+                }
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+        return amount;
+    }
+
+    @Override
+    public List<Cruise> getCruisePagination(int cruisePerPage, int pageNum) throws DAOException, SQLException {
+        List<Cruise> cruiseList;
+        try(Connection connection = DataSource.getConnection()) {
+            PreparedStatement preparedStatement = null;
+            String query = CruiseMysqlQuery.GET_ALL;
+                query += CruiseMysqlQuery.GET_PAGINATION;
+                preparedStatement = connection.prepareStatement(query);
+                int index = 0;
+                setPaginationValues(preparedStatement, cruisePerPage, index, pageNum * cruisePerPage);
+
+            cruiseList = new ArrayList<>();
+            ResultSet resultSet = preparedStatement.executeQuery();
+            try {
+                while (resultSet.next()) {
+                    Cruise cruise = setCruiseValues(resultSet);
+                    cruiseList.add(cruise);
+                }
+            } catch (SQLException | DAOException throwables) {
+                throwables.printStackTrace();
+            }
+
+        }
+        return cruiseList;
+    }
 }

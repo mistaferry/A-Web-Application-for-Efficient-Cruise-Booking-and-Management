@@ -20,6 +20,7 @@ public final class ActionFactory {
         ACTION_MAP.put("admin-get-user-cruises", new AdminGetUserCruisesAction());
         ACTION_MAP.put("change-user-values-by-admin", new ChangeUserValuesByAdminAction());
         ACTION_MAP.put("change-payment-value", new ChangePaymentValueByAdminAction());
+        ACTION_MAP.put("admin-view-all-cruises", new ViewCruises());
     }
 
     private ActionFactory(){ }

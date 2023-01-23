@@ -33,4 +33,6 @@ public interface GeneralService {
     List<CruiseDTO> getCruisesByUser(long userId, int cruisePerPage, int pageNum) throws ServiceException;
 
     CruiseDTO getChosenCruise(long cruiseId) throws ServiceException, DAOException, SQLException;
+
+    List<CruiseDTO> viewCatalog(int cruisePerPage, int pageNum) throws ServiceException;
 }

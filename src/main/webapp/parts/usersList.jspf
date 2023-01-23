@@ -1,5 +1,4 @@
 <%@ page pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <form method="get" action="controller">
     <input type="hidden" name="action" value="view-all-users">
