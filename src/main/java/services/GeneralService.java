@@ -2,6 +2,7 @@ package services;
 
 import com.google.protobuf.ServiceException;
 import dto.CruiseDTO;
+import dto.ShipDTO;
 import dto.UserDTO;
 import exceptions.DAOException;
 import model.entity.User;
@@ -35,4 +36,6 @@ public interface GeneralService {
     CruiseDTO getChosenCruise(long cruiseId) throws ServiceException, DAOException, SQLException;
 
     List<CruiseDTO> viewCatalog(int cruisePerPage, int pageNum) throws ServiceException;
+
+    List<ShipDTO> getAllShips() throws ServiceException;
 }

@@ -36,6 +36,10 @@
     </div>
 </form>
 
+<div class="button-add-new">
+    <a href="controller?action=view-existing-data">Add new cruise</a>
+</div>
+
 <section class="table">
     <div>
         <table>
@@ -73,8 +77,8 @@
     </div>
 </section>
 
-<nav>
-    <ul class="pagination button">
+<nav class="page-nav">
+    <ul class="pagination">
         <c:if test="${param.page != 0}">
             <li><a class="page-link"
                    href="controller?action=admin-view-all-cruises&page=${param.page-1}&cruisePerPage=${param.cruisePerPage}"

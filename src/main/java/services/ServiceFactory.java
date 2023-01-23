@@ -12,7 +12,8 @@ public class ServiceFactory {
     public ServiceFactory(){
         this.generalService = new GeneralServiceImpl(
                 DAOFactory.getInstance().getUserDao(),
-                DAOFactory.getInstance().getCruiseDao());
+                DAOFactory.getInstance().getCruiseDao(),
+                DAOFactory.getInstance().getShipDao());
         this.userService = new UserServiceImpl(
                 DAOFactory.getInstance().getUserDao(),
                 DAOFactory.getInstance().getCruiseDao());

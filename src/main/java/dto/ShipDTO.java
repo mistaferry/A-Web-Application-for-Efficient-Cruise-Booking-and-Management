@@ -6,6 +6,7 @@ import model.entity.City;
 import model.entity.Staff;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 @Builder
@@ -16,6 +17,6 @@ public class ShipDTO implements Serializable {
     private String name;
     private int numberOfPorts;
     private Set<Staff> staff;
-    private Set<City> route;
+    private List<City> route;
     private int capacity;
 }

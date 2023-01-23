@@ -2,11 +2,14 @@ package services.impl;
 
 import com.google.protobuf.ServiceException;
 import dao.CruiseDao;
+import dao.ShipDao;
 import dao.UserDao;
 import dto.CruiseDTO;
+import dto.ShipDTO;
 import dto.UserDTO;
 import exceptions.DAOException;
 import model.entity.Cruise;
+import model.entity.Ship;
 import model.entity.User;
 import services.GeneralService;
 import utils.Convertor;
@@ -16,16 +19,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static utils.Convertor.convertCruiseToDTO;
-import static utils.Convertor.convertUserToDTO;
+import static utils.Convertor.*;
 
 public class GeneralServiceImpl implements GeneralService {
     private final UserDao userDao;
     private final CruiseDao cruiseDao;
+    private final ShipDao shipDao;
 
-    public GeneralServiceImpl(UserDao userDao, CruiseDao cruiseDao) {
+    public GeneralServiceImpl(UserDao userDao, CruiseDao cruiseDao, ShipDao shipDao) {
         this.userDao = userDao;
         this.cruiseDao = cruiseDao;
+        this.shipDao = shipDao;
     }
 
     @Override
@@ -146,6 +150,18 @@ public class GeneralServiceImpl implements GeneralService {
             List<Cruise> cruiseList = cruiseDao.getCruisePagination(cruisePerPage, pageNum);
             cruiseList.forEach(cruise -> cruiseDTOList.add(convertCruiseToDTO(cruise)));
             return cruiseDTOList;
+        } catch (DAOException | SQLException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public List<ShipDTO> getAllShips() throws ServiceException {
+        List<ShipDTO> shipDTOList = new ArrayList<>();
+        try {
+            List<Ship> shipList = shipDao.getAll();
+            shipList.forEach(ship -> shipDTOList.add(convertShipToDTO(ship)));
+            return shipDTOList;
         } catch (DAOException | SQLException e) {
             throw new ServiceException(e);
         }

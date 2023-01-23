@@ -2,6 +2,7 @@ package utils;
 
 import dto.*;
 import model.entity.Cruise;
+import model.entity.Ship;
 import model.entity.User;
 
 public final class Convertor {
@@ -52,5 +53,15 @@ public final class Convertor {
         cruise.setDuration(cruiseDTO.getDuration());
         cruise.setShip(cruiseDTO.getShip());
         return cruise;
+    }
+
+    public static ShipDTO convertShipToDTO(Ship ship) {
+        return ShipDTO.builder()
+                .id(ship.getId())
+                .capacity(ship.getCapacity())
+                .numberOfPorts(ship.getNumberOfPorts())
+                .route(ship.getRoute())
+                .staff(ship.getStaff())
+                .build();
     }
 }

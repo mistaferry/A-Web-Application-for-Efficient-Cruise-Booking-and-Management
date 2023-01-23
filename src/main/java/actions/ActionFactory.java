@@ -1,5 +1,6 @@
 package actions;
 import actions.general.*;
+import actions.general.AdminGetUserCruisesAction;
 
 import java.util.*;
 
@@ -21,6 +22,8 @@ public final class ActionFactory {
         ACTION_MAP.put("change-user-values-by-admin", new ChangeUserValuesByAdminAction());
         ACTION_MAP.put("change-payment-value", new ChangePaymentValueByAdminAction());
         ACTION_MAP.put("admin-view-all-cruises", new ViewCruises());
+        ACTION_MAP.put("add-new-cruise", new AddCruiseAction());
+        ACTION_MAP.put("view-existing-data", new ViewExistingDataAction());
     }
 
     private ActionFactory(){ }

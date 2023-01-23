@@ -364,3 +364,22 @@ table thead td {
 .no-style{
     all: unset;
 }
+
+
+.button-add-new{
+    width: 150px;
+    height: 50px;
+    margin-left: 2%;
+    margin-top: 2%;
+    background-color: black;
+    border-radius: 60px;
+    display: flex;
+    justify-content: center;
+}
+
+.button-add-new a{
+    text-decoration: none;
+    color: white;
+    display: flex;
+    align-items: center;
+}
