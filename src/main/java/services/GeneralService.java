@@ -13,9 +13,9 @@ import java.util.List;
 
 public interface GeneralService {
 
-    UserDTO signIn(String login, String password) throws ServiceException, DAOException;
+    UserDTO signIn(String login, String password) throws ServiceException;
 
-    void register(String login, String password, String firstName, String surname) throws ServiceException, DAOException;
+    void register(String login, String password, String firstName, String surname) throws ServiceException;
 
     List<UserDTO> viewAllUsers() throws ServiceException;
 
@@ -27,13 +27,13 @@ public interface GeneralService {
 
     List<UserDTO> viewAllUsersWithPagination(int cruisePerPage, int pageNum)  throws ServiceException;
 
-    UserDTO getChosenUser(long userId) throws ServiceException, DAOException, SQLException;
+    UserDTO getChosenUser(long userId) throws ServiceException;
 
-    void updateCruise(CruiseDTO cruise) throws DAOException, SQLException;
+    void updateCruise(CruiseDTO cruise) throws ServiceException;
 
     List<CruiseDTO> getCruisesByUser(long userId, int cruisePerPage, int pageNum) throws ServiceException;
 
-    CruiseDTO getChosenCruise(long cruiseId) throws ServiceException, DAOException, SQLException;
+    CruiseDTO getChosenCruise(long cruiseId) throws ServiceException;
 
     List<CruiseDTO> viewCatalog(int cruisePerPage, int pageNum) throws ServiceException;
 

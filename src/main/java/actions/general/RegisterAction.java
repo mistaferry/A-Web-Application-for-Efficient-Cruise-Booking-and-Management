@@ -5,6 +5,7 @@ import com.google.protobuf.ServiceException;
 import dao.impl.MySqlUserDAO;
 import dto.UserDTO;
 import exceptions.DAOException;
+import exceptions.DbException;
 import model.entity.Role;
 import model.entity.User;
 import services.GeneralService;
@@ -32,13 +33,18 @@ public class RegisterAction implements Action {
         String surname = request.getParameter("surname");
         try {
             generalService.register(login, password, firstName, surname);
-            User user = (new MySqlUserDAO()).getByEmail(login, password).get();
+            User user = null;
+            try {
+                user = (new MySqlUserDAO()).getByEmail(login, password).get();
+            } catch (DbException e) {
+                throw new ServiceException(e);
+            }
             UserDTO userDTO = Convertor.convertUserToDTO(user);
             session.setAttribute("user", userDTO);
             Role loggedUserRole = Role.getRoleByRoleId(user.getRoleId());
             session.setAttribute("role", loggedUserRole);
             path = "profile.jsp";
-        } catch (DAOException | ServiceException e) {
+        } catch (ServiceException e) {
             errorMessage = "login.uniqueness";
             session.setAttribute("error", errorMessage);
             return path;

@@ -2,7 +2,7 @@ package dao.impl;
 
 import connection.DataSource;
 import dao.CruiseDao;
-import exceptions.DAOException;
+import exceptions.DbException;
 import model.entity.Cruise;
 import model.entity.Ship;
 import dao.constants.*;
@@ -15,7 +15,7 @@ public class MySqlCruiseDAO implements CruiseDao {
 
 
     @Override
-    public List<Cruise> getSorted(String query) throws DAOException, SQLException {
+    public List<Cruise> getSorted(String query) throws DbException {
         List<Cruise> cruiseList;
         try(Connection connection = DataSource.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(CruiseMysqlQuery.GET_SORTED);
@@ -28,12 +28,14 @@ public class MySqlCruiseDAO implements CruiseDao {
                     cruiseList.add(cruise);
                 }
             }
+        }catch (SQLException e){
+            throw new DbException("Cannot get Sorted list of cruises");
         }
         return cruiseList;
     }
 
     @Override
-    public List<Cruise> getByFilters(List<String> filters) throws DAOException, SQLException {
+    public List<Cruise> getByFilters(List<String> filters) throws DbException {
         List<Cruise> cruiseList;
         try(Connection connection = DataSource.getConnection()) {
             PreparedStatement preparedStatement = null;
@@ -64,12 +66,14 @@ public class MySqlCruiseDAO implements CruiseDao {
                     cruiseList.add(cruise);
                 }
             }
+        }catch (SQLException e){
+            throw new DbException("Cannot get cruise list", e);
         }
         return cruiseList;
     }
 
     @Override
-    public Optional<Cruise> getByDate(Date date) throws DAOException, SQLException {
+    public Optional<Cruise> getByDate(Date date) throws DbException {
         Cruise cruise;
         try(Connection connection = DataSource.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(CruiseMysqlQuery.GET_BY_DATE);
@@ -81,12 +85,14 @@ public class MySqlCruiseDAO implements CruiseDao {
                     cruise = setCruiseValues(resultSet);
                 }
             }
+        }catch (SQLException e){
+            throw new DbException("Cannot get Cruise by Date", e);
         }
         return Optional.of(cruise);
     }
 
     @Override
-    public Optional<Cruise> getByDuration(int duration) throws DAOException, SQLException {
+    public Optional<Cruise> getByDuration(int duration) throws DbException {
         Cruise cruise;
         try(Connection connection = DataSource.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(CruiseMysqlQuery.GET_BY_DURATION);
@@ -98,28 +104,34 @@ public class MySqlCruiseDAO implements CruiseDao {
                     cruise = setCruiseValues(resultSet);
                 }
             }
+        }catch (SQLException e){
+            throw new DbException("Cannot get Cruise by Email", e);
         }
         return Optional.of(cruise);
     }
 
     @Override
-    public void setShip(int id, Ship ship) throws DAOException, SQLException {
+    public void setShip(int id, Ship ship) throws DbException {
         try(Connection connection = DataSource.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(CruiseMysqlQuery.SET_SHIP);
             int index = 0;
             preparedStatement.setLong(++index, ship.getId());
             preparedStatement.setInt(++index, id);
             preparedStatement.execute();
+        }catch (SQLException e){
+            throw new DbException("Cannot set Ship", e);
         }
     }
 
     @Override
-    public void add(Cruise cruise) throws DAOException, SQLException {
+    public void add(Cruise cruise) throws DbException {
         try(Connection connection = DataSource.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(CruiseMysqlQuery.ADD_CRUISE);
             int index = 0;
             setValuesToStatement(cruise, preparedStatement, index);
             preparedStatement.execute();
+        }catch (SQLException e){
+            throw new DbException("Cannot add Cruise", e);
         }
     }
 
@@ -133,7 +145,7 @@ public class MySqlCruiseDAO implements CruiseDao {
     }
 
     @Override
-    public Optional<Cruise> getById(long id) throws DAOException, SQLException {
+    public Optional<Cruise> getById(long id) throws DbException {
         Cruise cruise;
         try(Connection connection = DataSource.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(CruiseMysqlQuery.GET_BY_ID);
@@ -145,12 +157,14 @@ public class MySqlCruiseDAO implements CruiseDao {
                     cruise = setCruiseValues(resultSet);
                 }
             }
+        }catch (SQLException e){
+            throw new DbException("Cannot get Cruise by Id", e);
         }
         return Optional.of(cruise);
     }
 
     @Override
-    public List<Cruise> getAll() throws DAOException, SQLException {
+    public List<Cruise> getAll() throws DbException {
         List<Cruise> cruiseList;
         try(Connection connection = DataSource.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(CruiseMysqlQuery.GET_ALL);
@@ -161,11 +175,13 @@ public class MySqlCruiseDAO implements CruiseDao {
                     cruiseList.add(cruise);
                 }
             }
+        }catch (SQLException e){
+            throw new DbException("Cannot get all Cruises", e);
         }
         return cruiseList;
     }
 
-    private Cruise setCruiseValues(ResultSet resultSet) throws SQLException, DAOException {
+    private Cruise setCruiseValues(ResultSet resultSet) throws SQLException, DbException {
         Cruise cruise = new Cruise();
         cruise.setId(resultSet.getInt("cruise"));
         Ship ship = new Ship();
@@ -173,7 +189,11 @@ public class MySqlCruiseDAO implements CruiseDao {
         ship.setName(resultSet.getString("ship_name"));
         ship.setCapacity(resultSet.getInt("capacity"));
         ship.setNumberOfPorts(resultSet.getInt("number_of_ports"));
-        ship.setRoute((new MySqlCityDAO()).getAllCitiesByShipId(ship.getId()));
+        try {
+            ship.setRoute((new MySqlCityDAO()).getAllCitiesByShipId(ship.getId()));
+        } catch (DbException e) {
+            throw new DbException("Cannot get All Cities by Ship Id", e);
+        }
         cruise.setShip(ship);
         cruise.setDuration(resultSet.getInt("duration"));
         cruise.setPrice(resultSet.getDouble("price"));
@@ -183,27 +203,31 @@ public class MySqlCruiseDAO implements CruiseDao {
     }
 
     @Override
-    public void update(Cruise cruise) throws DAOException, SQLException {
+    public void update(Cruise cruise) throws DbException {
         try(Connection connection = DataSource.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(CruiseMysqlQuery.UPDATE);
             int index = 0;
             setValuesToStatement(cruise, preparedStatement, index);
             preparedStatement.execute();
+        }catch (SQLException e){
+            throw new DbException("Cannot update Cruise", e);
         }
     }
 
     @Override
-    public void delete(long id) throws DAOException, SQLException {
+    public void delete(long id) throws DbException {
         try(Connection connection = DataSource.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(CruiseMysqlQuery.DELETE);
             int index = 0;
             preparedStatement.setLong(++index, id);
             preparedStatement.execute();
+        }catch (SQLException e){
+            throw new DbException("Cannot update Cruise", e);
         }
     }
 
     @Override
-    public List<Cruise> getCruisePaginationWithFilters(List<String> filters, int cruisePerPage, int pageNum) throws DAOException, SQLException {
+    public List<Cruise> getCruisePaginationWithFilters(List<String> filters, int cruisePerPage, int pageNum) throws DbException {
         List<Cruise> cruiseList;
         try(Connection connection = DataSource.getConnection()) {
             PreparedStatement preparedStatement = null;
@@ -258,10 +282,11 @@ public class MySqlCruiseDAO implements CruiseDao {
                     Cruise cruise = setCruiseValues(resultSet);
                     cruiseList.add(cruise);
                 }
-            } catch (SQLException | DAOException throwables) {
-                throwables.printStackTrace();
+            } catch (SQLException e) {
+                throw new DbException("Cannot set Cruise values", e);
             }
-
+        }catch (SQLException e){
+            throw new DbException("Cannot get Cruise catalog", e);
         }
         return cruiseList;
     }
@@ -272,7 +297,7 @@ public class MySqlCruiseDAO implements CruiseDao {
     }
 
     @Override
-    public int getAmountWithFilters(List<String> filters) throws DAOException, SQLException {
+    public int getAmountWithFilters(List<String> filters) throws DbException {
         int amount = 0;
         try(Connection connection = DataSource.getConnection()) {
             PreparedStatement preparedStatement = null;
@@ -316,15 +341,17 @@ public class MySqlCruiseDAO implements CruiseDao {
                 if(resultSet.next()){
                     amount = resultSet.getInt(1);
                 }
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
+            } catch (SQLException e) {
+                throw new DbException("Cannot get amount", e);
             }
+        }catch (SQLException e) {
+            throw new DbException("Cannot get amount", e);
         }
         return amount;
     }
 
     @Override
-    public List<Cruise> getCruisesByUser(long userId, int cruisePerPage, int pageNum) throws DAOException, SQLException {
+    public List<Cruise> getCruisesByUser(long userId, int cruisePerPage, int pageNum) throws DbException {
         List<Cruise> cruiseList;
         try(Connection connection = DataSource.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(CruiseMysqlQuery.GET_USER_CRUISES +
@@ -338,13 +365,17 @@ public class MySqlCruiseDAO implements CruiseDao {
                     Cruise cruise = setCruiseValues(resultSet);
                     cruiseList.add(cruise);
                 }
+            }catch (SQLException e) {
+                throw new DbException("Cannot set Cruise values", e);
             }
+        }catch (SQLException e) {
+            throw new DbException("Cannot get Cruises by user", e);
         }
         return cruiseList;
     }
 
     @Override
-    public int getAmountByUser(long userId) throws DAOException, SQLException {
+    public int getAmountByUser(long userId) throws DbException {
         int amount = 0;
         try(Connection connection = DataSource.getConnection()) {
             PreparedStatement preparedStatement = null;
@@ -357,15 +388,17 @@ public class MySqlCruiseDAO implements CruiseDao {
                 if(resultSet.next()){
                     amount = resultSet.getInt(1);
                 }
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
+            } catch (SQLException e) {
+                throw new DbException("Cannot get amount by User", e);
             }
+        }catch (SQLException e){
+            throw new DbException("Cannot get amount by User", e);
         }
         return amount;
     }
 
     @Override
-    public int getAmount() throws DAOException, SQLException {
+    public int getAmount() throws DbException {
         int amount = 0;
         try(Connection connection = DataSource.getConnection()) {
             PreparedStatement preparedStatement = null;
@@ -376,15 +409,17 @@ public class MySqlCruiseDAO implements CruiseDao {
                 if(resultSet.next()){
                     amount = resultSet.getInt(1);
                 }
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
+            } catch (SQLException e) {
+                throw new DbException("Cannot get amount", e);
             }
+        }catch (SQLException e){
+            throw new DbException("Cannot get amount", e);
         }
         return amount;
     }
 
     @Override
-    public List<Cruise> getCruisePagination(int cruisePerPage, int pageNum) throws DAOException, SQLException {
+    public List<Cruise> getCruisePagination(int cruisePerPage, int pageNum) throws DbException {
         List<Cruise> cruiseList;
         try(Connection connection = DataSource.getConnection()) {
             PreparedStatement preparedStatement = null;
@@ -401,10 +436,11 @@ public class MySqlCruiseDAO implements CruiseDao {
                     Cruise cruise = setCruiseValues(resultSet);
                     cruiseList.add(cruise);
                 }
-            } catch (SQLException | DAOException throwables) {
-                throwables.printStackTrace();
+            } catch (SQLException e) {
+                throw new DbException("Cannot set Cruise values", e);
             }
-
+        }catch (SQLException e){
+            throw new DbException("Cannot get Cruises");
         }
         return cruiseList;
     }

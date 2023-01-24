@@ -1,6 +1,7 @@
 package dao;
 
 import exceptions.DAOException;
+import exceptions.DbException;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -8,13 +9,13 @@ import java.util.Optional;
 
 public interface EntityDao<T> {
 
-    void add(T t) throws DAOException, SQLException;
+    void add(T t) throws DbException;
 
-    Optional<T> getById(long id) throws DAOException, SQLException;
+    Optional<T> getById(long id) throws DbException;
 
-    List<T> getAll() throws DAOException, SQLException;
+    List<T> getAll() throws DbException;
 
-    void update(T t) throws DAOException, SQLException;
+    void update(T t) throws DbException;
 
-    void delete(long id) throws DAOException, SQLException;
+    void delete(long id) throws DbException;
 }

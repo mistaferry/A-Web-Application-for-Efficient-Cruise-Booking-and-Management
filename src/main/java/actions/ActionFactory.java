@@ -1,8 +1,11 @@
 package actions;
-import actions.general.*;
-import actions.general.AdminGetUserCruisesAction;
 
-import java.util.*;
+import actions.general.*;
+import actions.customer.*;
+import actions.admin.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public final class ActionFactory {
     private static final ActionFactory ACTION_FACTORY = new ActionFactory();

@@ -23,7 +23,7 @@ public class SignInAction implements Action {
     }
 
     @Override
-    public String execute(HttpServletRequest request) throws ServletException, IOException, ServiceException {
+    public String execute(HttpServletRequest request) throws ServiceException {
         HttpSession session = request.getSession();
         String path = "/index.jsp";
         String errorMessage;
@@ -36,7 +36,7 @@ public class SignInAction implements Action {
             session.setAttribute("role", loggedUserRole);
             System.out.println("Role - " + loggedUserRole.name());
             path = "profile.jsp";
-        } catch (Exception e) {
+        } catch (ServiceException e) {
             errorMessage = "There is no such user";
             session.setAttribute("error", errorMessage);
             return path;

@@ -1,6 +1,7 @@
 package dao;
 
 import exceptions.DAOException;
+import exceptions.DbException;
 import model.entity.City;
 import model.entity.Cruise;
 import model.entity.Ship;
@@ -12,25 +13,25 @@ import java.util.Optional;
 
 public interface CruiseDao extends EntityDao<Cruise> {
 
-    List<Cruise> getSorted(String query) throws DAOException, SQLException;
+    List<Cruise> getSorted(String query) throws DbException;
 
-    List<Cruise> getByFilters(List<String> filters) throws DAOException, SQLException;
+    List<Cruise> getByFilters(List<String> filters) throws DbException;
 
-    Optional<Cruise> getByDate(Date date) throws DAOException, SQLException;
+    Optional<Cruise> getByDate(Date date) throws DbException;
 
-    Optional<Cruise> getByDuration(int duration) throws DAOException, SQLException;
+    Optional<Cruise> getByDuration(int duration) throws DbException;
 
-    void setShip(int id, Ship ship) throws DAOException, SQLException;
+    void setShip(int id, Ship ship) throws DbException;
 
-    List<Cruise> getCruisePaginationWithFilters(List<String> filters, int cruisePerPage, int pageNum) throws DAOException, SQLException;
+    List<Cruise> getCruisePaginationWithFilters(List<String> filters, int cruisePerPage, int pageNum) throws DbException;
 
-    int getAmountWithFilters(List<String> filters) throws DAOException, SQLException;
+    int getAmountWithFilters(List<String> filters) throws DbException;
 
-    List<Cruise> getCruisesByUser(long userId, int cruisePerPage, int pageNum) throws DAOException, SQLException;
+    List<Cruise> getCruisesByUser(long userId, int cruisePerPage, int pageNum) throws DbException;
 
-    int getAmountByUser(long userId) throws DAOException, SQLException;
+    int getAmountByUser(long userId) throws DbException;
 
-    int getAmount() throws DAOException, SQLException;
+    int getAmount() throws DbException;
 
-    List<Cruise> getCruisePagination(int cruisePerPage, int pageNum) throws DAOException, SQLException;
+    List<Cruise> getCruisePagination(int cruisePerPage, int pageNum) throws DbException;
 }

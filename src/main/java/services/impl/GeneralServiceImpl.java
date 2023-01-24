@@ -7,15 +7,13 @@ import dao.UserDao;
 import dto.CruiseDTO;
 import dto.ShipDTO;
 import dto.UserDTO;
-import exceptions.DAOException;
+import exceptions.DbException;
 import model.entity.Cruise;
 import model.entity.Ship;
 import model.entity.User;
 import services.GeneralService;
 import utils.Convertor;
 
-import javax.servlet.annotation.WebServlet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,15 +31,20 @@ public class GeneralServiceImpl implements GeneralService {
     }
 
     @Override
-    public UserDTO signIn(String login, String password) throws DAOException {
+    public UserDTO signIn(String login, String password) throws ServiceException {
         UserDTO userDTO;
-        User user = (userDao.getByEmail(login, password)).get();
-        userDTO = convertUserToDTO(user);
+        User user = null;
+        try {
+            user = (userDao.getByEmail(login, password)).get();
+            userDTO = convertUserToDTO(user);
+        } catch (DbException e) {
+            throw new ServiceException(e);
+        }
         return userDTO;
     }
 
     @Override
-    public void register(String login, String password, String firstName, String surname) throws DAOException {
+    public void register(String login, String password, String firstName, String surname) throws ServiceException {
         User user = new User();
         user.setLogin(login);
         user.setPassword(password);
@@ -49,8 +52,8 @@ public class GeneralServiceImpl implements GeneralService {
         user.setSurname(surname);
         try {
             userDao.add(user);
-        } catch (SQLException e) {
-            throw new DAOException(e);
+        } catch (DbException e) {
+            throw new ServiceException(e);
         }
     }
 
@@ -61,7 +64,7 @@ public class GeneralServiceImpl implements GeneralService {
             List<User> userList = userDao.getAll();
             userList.forEach(user -> userDTOList.add(convertUserToDTO(user)));
             return userDTOList;
-        } catch (DAOException | SQLException e) {
+        } catch (DbException e) {
             throw new ServiceException(e);
         }
     }
@@ -73,7 +76,7 @@ public class GeneralServiceImpl implements GeneralService {
             List<Cruise> cruiseList = cruiseDao.getCruisesByUser(userId, cruisePerPage, pageNum);
             cruiseList.forEach(cruise -> cruiseDTOList.add(convertCruiseToDTO(cruise)));
             return cruiseDTOList;
-        } catch (DAOException | SQLException e) {
+        } catch (DbException e) {
             throw new ServiceException(e);
         }
     }
@@ -85,7 +88,7 @@ public class GeneralServiceImpl implements GeneralService {
             List<Cruise> cruiseList = cruiseDao.getCruisePaginationWithFilters(filters, cruisePerPage, pageNum);
             cruiseList.forEach(cruise -> cruiseDTOList.add(convertCruiseToDTO(cruise)));
             return cruiseDTOList;
-        } catch (DAOException | SQLException e) {
+        } catch (DbException e) {
             throw new ServiceException(e);
         }
     }
@@ -96,7 +99,7 @@ public class GeneralServiceImpl implements GeneralService {
         try {
             amount = cruiseDao.getAmountWithFilters(filters);
             return amount;
-        } catch (DAOException | SQLException e) {
+        } catch (DbException e) {
             throw new ServiceException(e);
         }
     }
@@ -108,21 +111,30 @@ public class GeneralServiceImpl implements GeneralService {
             List<User> userList = userDao.getUserPagination(cruisePerPage, pageNum);
             userList.forEach(user -> userDTOList.add(convertUserToDTO(user)));
             return userDTOList;
-        } catch (DAOException | SQLException e) {
+        } catch (DbException e) {
             throw new ServiceException(e);
         }
     }
 
     @Override
-    public UserDTO getChosenUser(long userId) throws DAOException, SQLException {
-        User user = userDao.getById(userId).get();
+    public UserDTO getChosenUser(long userId) throws ServiceException {
+        User user = null;
+        try {
+            user = userDao.getById(userId).get();
+        } catch (DbException e) {
+            throw new ServiceException(e);
+        }
         return Convertor.convertUserToDTO(user);
     }
 
     @Override
-    public void updateCruise(CruiseDTO cruise) throws DAOException, SQLException {
+    public void updateCruise(CruiseDTO cruise) throws ServiceException {
         Cruise convertedCruise = Convertor.convertDTOToCruise(cruise);
-        cruiseDao.update(convertedCruise);
+        try {
+            cruiseDao.update(convertedCruise);
+        } catch (DbException e) {
+            throw new ServiceException(e);
+        }
     }
 
     @Override
@@ -132,14 +144,19 @@ public class GeneralServiceImpl implements GeneralService {
             List<Cruise> cruiseList = cruiseDao.getCruisesByUser(userId, cruisePerPage, pageNum);
             cruiseList.forEach(cruise -> cruiseDTO.add(convertCruiseToDTO(cruise)));
             return cruiseDTO;
-        } catch (DAOException | SQLException e) {
+        } catch (DbException e) {
             throw new ServiceException(e);
         }
     }
 
     @Override
-    public CruiseDTO getChosenCruise(long cruiseId) throws DAOException, SQLException {
-        Cruise cruise = cruiseDao.getById(cruiseId).get();
+    public CruiseDTO getChosenCruise(long cruiseId) throws ServiceException {
+        Cruise cruise = null;
+        try {
+            cruise = cruiseDao.getById(cruiseId).get();
+        } catch (DbException e) {
+            throw new ServiceException(e);
+        }
         return Convertor.convertCruiseToDTO(cruise);
     }
 
@@ -150,7 +167,7 @@ public class GeneralServiceImpl implements GeneralService {
             List<Cruise> cruiseList = cruiseDao.getCruisePagination(cruisePerPage, pageNum);
             cruiseList.forEach(cruise -> cruiseDTOList.add(convertCruiseToDTO(cruise)));
             return cruiseDTOList;
-        } catch (DAOException | SQLException e) {
+        } catch (DbException e) {
             throw new ServiceException(e);
         }
     }
@@ -162,7 +179,7 @@ public class GeneralServiceImpl implements GeneralService {
             List<Ship> shipList = shipDao.getAll();
             shipList.forEach(ship -> shipDTOList.add(convertShipToDTO(ship)));
             return shipDTOList;
-        } catch (DAOException | SQLException e) {
+        } catch (DbException e) {
             throw new ServiceException(e);
         }
     }

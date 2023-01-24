@@ -3,8 +3,7 @@ package dao.impl;
 import connection.DataSource;
 import dao.UserDao;
 import dao.constants.*;
-import exceptions.DAOException;
-import model.entity.Cruise;
+import exceptions.DbException;
 import model.entity.Role;
 import model.entity.User;
 import java.sql.Connection;
@@ -19,7 +18,7 @@ import static dao.impl.MySqlCruiseDAO.setPaginationValues;
 
 public class MySqlUserDAO implements UserDao {
     @Override
-    public Optional<User> getByEmail(String email, String password) throws DAOException {
+    public Optional<User> getByEmail(String email, String password) throws DbException {
         User user = null;
         try(Connection connection = DataSource.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(UserMysqlQuery.GET_BY_EMAIL);
@@ -35,54 +34,56 @@ public class MySqlUserDAO implements UserDao {
                 throw new SQLException();
             }
         } catch (SQLException e) {
-            throw new DAOException(e);
+            throw new DbException("Cannot get User By email", e);
         }
         return Optional.of(user);
     }
 
     @Override
-    public List<User> getSorted(String query) throws DAOException {
+    public List<User> getSorted(String query) throws DbException {
         return null;
     }
 
     @Override
-    public int getNumberOfRecords(String filter) throws DAOException {
+    public int getNumberOfRecords(String filter) throws DbException {
         return 0;
     }
 
     @Override
-    public void changePassword(long id, String newPassword) throws DAOException, SQLException {
+    public void changePassword(long id, String newPassword) throws DbException {
         try(Connection connection = DataSource.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(UserMysqlQuery.CHANGE_PASSWORD);
             int index = 0;
             preparedStatement.setString(++index, newPassword);
             preparedStatement.setLong(++index, id);
             preparedStatement.execute();
+        }catch (SQLException e) {
+            throw new DbException("Cannot change password", e);
         }
     }
 
     @Override
-    public void setUserRole(String userEmail, Role role) throws DAOException {
+    public void setUserRole(String userEmail, Role role) throws DbException {
 
     }
 
     @Override
-    public void registerForCruise(long userId, long eventId) throws DAOException {
+    public void registerForCruise(long userId, long eventId) throws DbException {
 
     }
 
     @Override
-    public void cancelRegistration(long userId, long eventId) throws DAOException {
+    public void cancelRegistration(long userId, long eventId) throws DbException {
 
     }
 
     @Override
-    public boolean isRegistered(long userId, long eventId) throws DAOException {
+    public boolean isRegistered(long userId, long eventId) throws DbException {
         return false;
     }
 
     @Override
-    public void add(User user) throws DAOException{
+    public void add(User user) throws DbException {
         try(Connection connection = DataSource.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(UserMysqlQuery.ADD_USER);
             int index = 0;
@@ -92,12 +93,12 @@ public class MySqlUserDAO implements UserDao {
             preparedStatement.setString(++index, user.getSurname());
             preparedStatement.execute();
         } catch (SQLException e) {
-            throw new DAOException(e);
+            throw new DbException("Cannot add User", e);
         }
     }
 
     @Override
-    public Optional<User> getById(long id) throws DAOException, SQLException {
+    public Optional<User> getById(long id) throws DbException {
         User user = null;
         try(Connection connection = DataSource.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(UserMysqlQuery.GET_BY_ID);
@@ -109,14 +110,14 @@ public class MySqlUserDAO implements UserDao {
                     user = setUserValues(resultSet);
                 }
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            throw new DbException("Cannot get User By id", e);
         }
-        return Optional.ofNullable(user);
+        return Optional.of(user);
     }
 
     @Override
-    public List<User> getAll() throws DAOException, SQLException {
+    public List<User> getAll() throws DbException {
         List<User> userList;
         try(Connection connection = DataSource.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(UserMysqlQuery.GET_ALL);
@@ -127,6 +128,8 @@ public class MySqlUserDAO implements UserDao {
                     userList.add(user);
                 }
             }
+        }catch (SQLException e) {
+            throw new DbException("Cannot get all Users", e);
         }
         return userList;
     }
@@ -144,7 +147,7 @@ public class MySqlUserDAO implements UserDao {
     }
 
     @Override
-    public void update(User user) throws DAOException {
+    public void update(User user) throws DbException {
         try(Connection connection = DataSource.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(UserMysqlQuery.UPDATE);
             int index = 0;
@@ -157,22 +160,24 @@ public class MySqlUserDAO implements UserDao {
             preparedStatement.setLong(++index, user.getId());
             preparedStatement.execute();
         } catch (SQLException e) {
-            throw new DAOException(e);
+            throw new DbException("Cannot update User", e);
         }
     }
 
     @Override
-    public void delete(long id) throws DAOException, SQLException {
+    public void delete(long id) throws DbException {
         try(Connection connection = DataSource.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(UserMysqlQuery.DELETE);
             int index = 0;
             preparedStatement.setLong(++index, id);
             preparedStatement.execute();
+        }catch (SQLException e) {
+            throw new DbException("Cannot delete User", e);
         }
     }
 
     @Override
-    public List<User> getUserPagination(int cruisePerPage, int pageNum) throws DAOException, SQLException {
+    public List<User> getUserPagination(int cruisePerPage, int pageNum) throws DbException {
         List<User> userList;
         try(Connection connection = DataSource.getConnection()) {
             PreparedStatement preparedStatement;
@@ -189,14 +194,16 @@ public class MySqlUserDAO implements UserDao {
                     userList.add(user);
                 }
             } catch (SQLException e) {
-                e.printStackTrace();
+                throw new DbException("Cannot set User values", e);
             }
+        }catch (SQLException e) {
+            throw new DbException("Cannot get Users", e);
         }
         return userList;
     }
 
     @Override
-    public int getAmount() throws DAOException, SQLException {
+    public int getAmount() throws DbException {
         int amount = 0;
         try(Connection connection = DataSource.getConnection()) {
             PreparedStatement preparedStatement = null;
@@ -207,15 +214,17 @@ public class MySqlUserDAO implements UserDao {
                 if(resultSet.next()){
                     amount = resultSet.getInt(1);
                 }
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
+            } catch (SQLException e) {
+                throw new DbException("Cannot get User amount", e);
             }
+        }catch (SQLException e) {
+            throw new DbException("Cannot get User amount", e);
         }
         return amount;
     }
 
     @Override
-    public void updateUserValuesByAdmin(User chosenUser, boolean accountStatus, int role) throws DAOException, SQLException {
+    public void updateUserValuesByAdmin(User chosenUser, boolean accountStatus, int role) throws DbException {
           
     }
 }

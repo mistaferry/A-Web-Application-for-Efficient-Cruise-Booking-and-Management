@@ -21,17 +21,13 @@ public class ChangePasswordAction implements Action {
     }
 
     @Override
-    public String execute(HttpServletRequest request) throws ServletException, IOException, ServiceException {
+    public String execute(HttpServletRequest request) throws ServiceException {
         HttpSession session = request.getSession();
-        try {
-            long loggedUserId = ((UserDTO) session.getAttribute("user")).getId();
-            String oldPassword = request.getParameter("oldPassword");
-            String newPassword = request.getParameter("newPassword");
-            String confirmPassword = request.getParameter("confirmPassword");
-            userService.changePassword(loggedUserId, oldPassword, newPassword, confirmPassword);
-        } catch (DAOException | SQLException e) {
-            e.printStackTrace();
-        }
+        long loggedUserId = ((UserDTO) session.getAttribute("user")).getId();
+        String oldPassword = request.getParameter("oldPassword");
+        String newPassword = request.getParameter("newPassword");
+        String confirmPassword = request.getParameter("confirmPassword");
+        userService.changePassword(loggedUserId, oldPassword, newPassword, confirmPassword);
         return "profile.jsp";
     }
 

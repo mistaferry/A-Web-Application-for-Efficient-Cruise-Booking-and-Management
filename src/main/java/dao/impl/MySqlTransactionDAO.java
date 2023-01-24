@@ -5,6 +5,7 @@ import dao.TransactionDao;
 
 import dao.constants.TransactionMysqlQuery;
 import exceptions.DAOException;
+import exceptions.DbException;
 import model.entity.Transaction;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,7 +18,7 @@ import java.util.Optional;
 public class MySqlTransactionDAO implements TransactionDao {
 
     @Override
-    public void add(Transaction transaction) throws DAOException, SQLException {
+    public void add(Transaction transaction) throws DbException {
         try(Connection connection = DataSource.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(TransactionMysqlQuery.ADD_TRANSACTION);
             int index = 0;
@@ -27,11 +28,13 @@ public class MySqlTransactionDAO implements TransactionDao {
             preparedStatement.setString(++index, transaction.getDescription());
             preparedStatement.setLong(++index, transaction.getCruise());
             preparedStatement.execute();
+        }catch (SQLException e){
+            throw new DbException("Cannot add Transaction", e);
         }
     }
 
     @Override
-    public Optional<Transaction> getById(long id) throws DAOException, SQLException {
+    public Optional<Transaction> getById(long id) throws DbException {
         Transaction transaction;
         try(Connection connection = DataSource.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(TransactionMysqlQuery.GET_BY_ID);
@@ -43,12 +46,14 @@ public class MySqlTransactionDAO implements TransactionDao {
                     transaction = setTransactionValues(resultSet);
                 }
             }
+        }catch (SQLException e){
+            throw new DbException("Cannot get Transaction by id", e);
         }
         return Optional.of(transaction);
     }
 
     @Override
-    public List<Transaction> getAll() throws DAOException, SQLException {
+    public List<Transaction> getAll() throws DbException {
         List<Transaction> transactionList;
         try(Connection connection = DataSource.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(TransactionMysqlQuery.GET_ALL);
@@ -59,6 +64,8 @@ public class MySqlTransactionDAO implements TransactionDao {
                     transactionList.add(transaction);
                 }
             }
+        }catch (SQLException e){
+            throw new DbException("Cannot get all Transactions", e);
         }
         return transactionList;
     }
@@ -74,7 +81,7 @@ public class MySqlTransactionDAO implements TransactionDao {
     }
 
     @Override
-    public void update(Transaction transaction) throws DAOException, SQLException {
+    public void update(Transaction transaction) throws DbException {
         try(Connection connection = DataSource.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(TransactionMysqlQuery.UPDATE);
             int index = 0;
@@ -84,16 +91,20 @@ public class MySqlTransactionDAO implements TransactionDao {
             preparedStatement.setString(++index, transaction.getDescription());
             preparedStatement.setLong(++index, transaction.getCruise());
             preparedStatement.execute();
+        }catch (SQLException e){
+            throw new DbException("Cannot update Transaction", e);
         }
     }
 
     @Override
-    public void delete(long id) throws DAOException, SQLException {
+    public void delete(long id) throws DbException {
         try(Connection connection = DataSource.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(TransactionMysqlQuery.DELETE);
             int index = 0;
             preparedStatement.setLong(++index, id);
             preparedStatement.execute();
+        }catch (SQLException e){
+            throw new DbException("Cannot delete Transaction", e);
         }
     }
 }
