@@ -2,6 +2,7 @@ package utils;
 
 import dto.*;
 import model.entity.Cruise;
+import model.entity.Order;
 import model.entity.Ship;
 import model.entity.User;
 
@@ -53,6 +54,14 @@ public final class Convertor {
         cruise.setShip(cruiseDTO.getShip());
         cruise.setNumber_of_register_people(cruiseDTO.getNumber_of_register_people());
         return cruise;
+    }
+
+    public static OrderDTO convertOrderToDTO(Order order) {
+        return OrderDTO.builder()
+                .cruise(order.getCruise())
+                .dateOfRegistration(order.getDateOfRegistration())
+                .paid(order.isPaid())
+                .build();
     }
 
     public static ShipDTO convertShipToDTO(Ship ship) {

@@ -2,6 +2,7 @@ package services;
 
 import com.google.protobuf.ServiceException;
 import dto.CruiseDTO;
+import dto.OrderDTO;
 import dto.ShipDTO;
 import dto.UserDTO;
 
@@ -40,4 +41,6 @@ public interface GeneralService {
     List<ShipDTO> getAllShips() throws ServiceException;
 
     boolean addCruiseToUser(long userId, long cruiseId) throws ServiceException;
+
+    List<OrderDTO> viewUserOrdersWithPagination(long loggedUserId, int cruisePerPage, int pageNum) throws ServiceException;
 }

@@ -383,3 +383,9 @@ table thead td {
     display: flex;
     align-items: center;
 }
+
+.unavailable{
+    background: lightgray;
+    color: black;
+    border: lightgray;
+}

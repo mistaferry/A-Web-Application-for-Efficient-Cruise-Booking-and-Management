@@ -198,6 +198,7 @@ public class MySqlCruiseDAO implements CruiseDao {
         cruise.setDuration(resultSet.getInt("duration"));
         cruise.setPrice(resultSet.getDouble("price"));
         cruise.setStartDate(resultSet.getDate("start_day"));
+        cruise.setNumber_of_register_people(resultSet.getInt("number_of_register_people"));
         return cruise;
     }
 
@@ -480,6 +481,39 @@ public class MySqlCruiseDAO implements CruiseDao {
             return flag;
         }catch (SQLException e){
             throw new DbException("Problems in your request", e);
+        }
+    }
+
+    @Override
+    public int getNumberOfRegisteredPeople(long cruiseId) throws DbException {
+        int numberOfPeople = 0;
+        try(Connection connection = DataSource.getConnection()) {
+            PreparedStatement preparedStatement = null;
+            String query = CruiseMysqlQuery.GET_NUMBER_OF_REGISTERED_PEOPLE;
+            preparedStatement = connection.prepareStatement(query);
+            int index = 0;
+            preparedStatement.setLong(++index,cruiseId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                numberOfPeople = resultSet.getInt(1);
+            }
+            return numberOfPeople;
+        }catch (SQLException e){
+            throw new DbException("Cannot get numberOfPeople", e);
+        }
+    }
+
+    @Override
+    public void changeRegisterPeopleAmount(long cruiseId) throws DbException {
+        try(Connection connection = DataSource.getConnection()) {
+            PreparedStatement preparedStatement = null;
+            String query = CruiseMysqlQuery.CHANGE_REGISTER_PEOPLE_AMOUNT;
+            preparedStatement = connection.prepareStatement(query);
+            int index = 0;
+            preparedStatement.setLong(++index, cruiseId);
+            preparedStatement.execute();
+        }catch (SQLException e){
+            throw new DbException("Cannot change amount of registered people for Cruise", e);
         }
     }
 }

@@ -66,15 +66,21 @@
                 <div class="price">
                     <fmt:message key="label.price"/> ${cruise.price}
                 </div>
-                <div class="price">
-                    Id - ${cruise.id}
-                </div>
             </div>
-            <form action="controller" method="get">
-                <input type="hidden" name="action" value="create-order">
-                <input type="hidden" name="cruise_id" value="${cruise.id}">
-                <input class="button-order" type="submit" value="Order now"/>
-            </form>
+            <div>
+                <c:choose>
+                    <c:when test="${cruise.number_of_register_people lt cruise.ship.capacity}">
+                        <form action="controller" method="get">
+                            <input type="hidden" name="action" value="create-order">
+                            <input type="hidden" name="cruise_id" value="${cruise.id}">
+                            <input class="button-order" type="submit" value="Order now"/>
+                        </form>
+                    </c:when>
+                    <c:when test="${cruise.number_of_register_people eq cruise.ship.capacity}">
+                        <input class="button-order unavailable" type="button" value="Unavailable"/>
+                    </c:when>
+                </c:choose>
+            </div>
         </div>
     </c:forEach>
 </section>

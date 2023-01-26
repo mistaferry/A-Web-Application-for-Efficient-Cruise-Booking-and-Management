@@ -103,4 +103,21 @@ public class MySqlShipDAO implements ShipDao {
             throw new DbException("Cannot delete Ship", e);
         }
     }
+
+    @Override
+    public int getCapacityByShipId(long id) throws DbException {
+        try(Connection connection = DataSource.getConnection()) {
+            int capacity = 0;
+            PreparedStatement preparedStatement = connection.prepareStatement(ShipMysqlQuery.GET_CAPACITY_BY_SHIP_ID);
+            int index = 0;
+            preparedStatement.setLong(++index, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                capacity = resultSet.getInt(1);
+            }
+            return capacity;
+        }catch (SQLException e){
+            throw new DbException("Cannot get Ship Capacity by Id", e);
+        }
+    }
 }

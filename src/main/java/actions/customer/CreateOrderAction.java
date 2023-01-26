@@ -26,7 +26,8 @@ public class CreateOrderAction implements actions.Action {
         long cruiseId = Long.parseLong(request.getParameter("cruise_id"));
         UserDTO user = (UserDTO) session.getAttribute("user");
         long userId = user.getId();
-        generalService.addCruiseToUser(userId, cruiseId);
-        return "controller?action=view-cruises&startDay=0&duration=0&page=0&cruisePerPage=5";
+        boolean flag = generalService.addCruiseToUser(userId, cruiseId);
+//        return "controller?action=view-cruises&startDay=0&duration=0&page=0&cruisePerPage=5";
+        return "controller?action=view-user-cruises&page=0&cruisePerPage=5";
     }
 }

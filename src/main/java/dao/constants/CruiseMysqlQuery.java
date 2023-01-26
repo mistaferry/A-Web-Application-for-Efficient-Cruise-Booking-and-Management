@@ -3,7 +3,7 @@ package dao.constants;
 public class CruiseMysqlQuery {
     public static final String ADD_CRUISE = "INSERT INTO cruise (ship_id, duration, start_day) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-    public static final String GET_ALL = "SELECT cruise.id as cruise, ship_id as ship, duration, price, start_day, " +
+    public static final String GET_ALL = "SELECT cruise.id as cruise, ship_id as ship, duration, price, start_day, number_of_register_people," +
             "s.name as ship_name, s.capacity as capacity, s.number_of_ports as number_of_ports FROM cruise " +
             "JOIN ship s on s.id = cruise.ship_id ";
 
@@ -36,11 +36,15 @@ public class CruiseMysqlQuery {
             "            s.name as ship_name, s.capacity as capacity, s.number_of_ports as number_of_ports FROM cruise\n" +
             "            JOIN ship s on s.id = cruise.ship_id JOIN users_has_cruises uhc on cruise.id = uhc.cruise_id\n" +
             "            WHERE uhc.user_id=?\n" +
-            "            ORDER BY uhc.date_of_registration\n";
+            "            ORDER BY uhc.date_of_registration DESC\n";
 
     public static final String GET_USER_CRUISE_COUNT = "SELECT COUNT(*) FROM users_has_cruises WHERE user_id=?";
 
     public static final String ADD_CRUISE_TO_USER = "INSERT INTO users_has_cruises (user_id, cruise_id) VALUE (?, ?)";
 
     public static final String FIND_CRUISE_BY_USER = "SELECT date_of_registration FROM users_has_cruises WHERE user_id=? AND cruise_id=?";
+
+    public static final String GET_NUMBER_OF_REGISTERED_PEOPLE = "SELECT number_of_register_people FROM cruise WHERE id=?";
+
+    public static final String CHANGE_REGISTER_PEOPLE_AMOUNT = "UPDATE cruise SET number_of_register_people=number_of_register_people+1 WHERE id=?";
 }

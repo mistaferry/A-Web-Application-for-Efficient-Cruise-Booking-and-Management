@@ -9,6 +9,7 @@ public class MySqlDaoFactory extends DAOFactory {
     private StaffDao staffDAO;
     private TransactionDao transactionDAO;
     private UserDao userDAO;
+    private OrderDao orderDao;
 
     @Override
     public CityDao getCityDao() {
@@ -56,5 +57,13 @@ public class MySqlDaoFactory extends DAOFactory {
             userDAO = new MySqlUserDAO();
         }
         return userDAO;
+    }
+
+    @Override
+    public OrderDao getOrderDao() {
+        if(orderDao == null){
+            orderDao = new MySqlOrderDAO();
+        }
+        return orderDao;
     }
 }

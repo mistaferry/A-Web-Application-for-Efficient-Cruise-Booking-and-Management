@@ -2,13 +2,16 @@ package services.impl;
 
 import com.google.protobuf.ServiceException;
 import dao.CruiseDao;
+import dao.OrderDao;
 import dao.ShipDao;
 import dao.UserDao;
 import dto.CruiseDTO;
+import dto.OrderDTO;
 import dto.ShipDTO;
 import dto.UserDTO;
 import exceptions.DbException;
 import model.entity.Cruise;
+import model.entity.Order;
 import model.entity.Ship;
 import model.entity.User;
 import services.GeneralService;
@@ -23,11 +26,13 @@ public class GeneralServiceImpl implements GeneralService {
     private final UserDao userDao;
     private final CruiseDao cruiseDao;
     private final ShipDao shipDao;
+    private final OrderDao orderDao;
 
-    public GeneralServiceImpl(UserDao userDao, CruiseDao cruiseDao, ShipDao shipDao) {
+    public GeneralServiceImpl(UserDao userDao, CruiseDao cruiseDao, ShipDao shipDao, OrderDao orderDao) {
         this.userDao = userDao;
         this.cruiseDao = cruiseDao;
         this.shipDao = shipDao;
+        this.orderDao = orderDao;
     }
 
     @Override
@@ -187,11 +192,31 @@ public class GeneralServiceImpl implements GeneralService {
     @Override
     public boolean addCruiseToUser(long userId, long cruiseId) throws ServiceException {
         try{
-            if(!cruiseDao.pairExists(userId, cruiseId)) {
-                cruiseDao.addToUser(userId, cruiseId);
+            Cruise cruise = cruiseDao.getById(cruiseId).get();
+            int shipCapacity = shipDao.getCapacityByShipId(cruise.getShip().getId());
+            int numberOfRegisterPeople = cruiseDao.getNumberOfRegisteredPeople(cruiseId);
+            if(numberOfRegisterPeople < shipCapacity){
+                if(!cruiseDao.pairExists(userId, cruiseId)) {
+                    cruiseDao.addToUser(userId, cruiseId);
+                    cruiseDao.changeRegisterPeopleAmount(cruiseId);
+                }
+                return true;
+            }else{
+                return false;
             }
-            return true;
         }catch (DbException e){
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public List<OrderDTO> viewUserOrdersWithPagination(long loggedUserId, int cruisePerPage, int pageNum) throws ServiceException {
+        List<OrderDTO> orderDTOList = new ArrayList<>();
+        try {
+            List<Order> orderList = orderDao.getOrdersByUser(loggedUserId, cruisePerPage, pageNum);
+            orderList.forEach(order -> orderDTOList.add(convertOrderToDTO(order)));
+            return orderDTOList;
+        } catch (DbException e) {
             throw new ServiceException(e);
         }
     }

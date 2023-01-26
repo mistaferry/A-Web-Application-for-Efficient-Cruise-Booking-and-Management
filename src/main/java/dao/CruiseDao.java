@@ -37,4 +37,8 @@ public interface CruiseDao extends EntityDao<Cruise> {
     void addToUser(long userId, long cruiseId) throws DbException;
 
     boolean pairExists(long userId, long cruiseId) throws DbException;
+
+    int getNumberOfRegisteredPeople(long cruiseId) throws DbException;
+
+    void changeRegisterPeopleAmount(long cruiseId) throws DbException;
 }

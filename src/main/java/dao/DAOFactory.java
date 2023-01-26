@@ -24,4 +24,6 @@ public abstract class DAOFactory {
 
     public abstract UserDao getUserDao();
 
+    public abstract OrderDao getOrderDao();
+
 }

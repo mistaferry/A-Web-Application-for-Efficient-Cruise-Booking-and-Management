@@ -24,34 +24,47 @@
     <div>
         <table>
             <thead>
-                <tr>
-                    <td>Id</td>
-                    <td>Ship Name</td>
-                    <td>Start</td>
-                    <td>Duration</td>
-                    <td>Price</td>
-                </tr>
+            <tr>
+                <td>Ship Name</td>
+                <td>Start</td>
+                <td>Duration</td>
+                <td>Price</td>
+                <td>Booking date</td>
+                <td>Status</td>
+            </tr>
             </thead>
             <tbody>
-                <c:forEach var="user" items="${sessionScope.myCruises}">
-                    <tr>
-                        <td>
-                            ${user.id}
-                        </td>
-                        <td>
-                            ${user.ship.name}
-                        </td>
-                        <td>
-                                ${user.startDate.toLocalDate().dayOfMonth} ${user.startDate.toLocalDate().month} ${user.startDate.toLocalDate().year}
-                        </td>
-                        <td>
-                            ${user.duration} days
-                        </td>
-                        <td>
-                            ${user.price} UAH
-                        </td>
-                    </tr>
-                </c:forEach>
+            <c:forEach var="order" items="${sessionScope.myCruises}">
+                <tr>
+                    <td>
+                            ${order.cruise.ship.name}
+                    </td>
+                    <td>
+                            ${order.cruise.startDate.toLocalDate().dayOfMonth} ${order.cruise.startDate.toLocalDate().month} ${order.cruise.startDate.toLocalDate().year}
+                    </td>
+                    <td>
+                            ${order.cruise.duration} days
+                    </td>
+                    <td>
+                            ${order.cruise.price} UAH
+                    </td>
+                    <td>
+                            ${order.dateOfRegistration.toLocalDate().dayOfMonth} ${order.dateOfRegistration.toLocalDate().month} ${order.dateOfRegistration.toLocalDate().year}
+                    </td>
+                    <c:choose>
+                        <c:when test="${order.paid}">
+                            <td style="background: lightgreen">
+                                Paid
+                            </td>
+                        </c:when>
+                        <c:when test="${!order.paid}">
+                            <td style="background: lightcoral">
+                                Unpaid
+                            </td>
+                        </c:when>
+                    </c:choose>
+                </tr>
+            </c:forEach>
             </tbody>
         </table>
     </div>

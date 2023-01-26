@@ -2,6 +2,7 @@ package dto;
 
 import lombok.Builder;
 import lombok.Data;
+import model.entity.Cruise;
 import model.entity.Ship;
 
 import java.sql.Date;
@@ -10,9 +11,8 @@ import java.sql.Date;
 @Data
 public class OrderDTO {
     private static final long serialVersionUID = 1L;
-    private long id;
-    int cruiseId;
-    int userId;
+    Cruise cruise;
+    long userId;
     Date dateOfRegistration;
     boolean paid;
 }

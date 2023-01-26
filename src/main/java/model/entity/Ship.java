@@ -21,6 +21,11 @@ public class Ship extends Entity{
     public Ship() {
     }
 
+    public Ship(long id, String name) {
+        super(id);
+        this.name = name;
+    }
+
     public Ship(String name, int numberOfPorts, Set<Staff> staff, List<City> route, int capacity) {
         this.name = name;
         this.numberOfPorts = numberOfPorts;
