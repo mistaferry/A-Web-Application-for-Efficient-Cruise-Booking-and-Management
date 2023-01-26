@@ -66,6 +66,9 @@
                 <div class="price">
                     <fmt:message key="label.price"/> ${cruise.price}
                 </div>
+                <div class="price">
+                    Id - ${cruise.id}
+                </div>
             </div>
             <form action="controller" method="get">
                 <input type="hidden" name="action" value="create-order">

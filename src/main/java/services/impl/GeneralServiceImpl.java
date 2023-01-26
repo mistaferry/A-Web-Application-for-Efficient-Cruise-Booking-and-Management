@@ -183,4 +183,16 @@ public class GeneralServiceImpl implements GeneralService {
             throw new ServiceException(e);
         }
     }
+
+    @Override
+    public boolean addCruiseToUser(long userId, long cruiseId) throws ServiceException {
+        try{
+            if(!cruiseDao.pairExists(userId, cruiseId)) {
+                cruiseDao.addToUser(userId, cruiseId);
+            }
+            return true;
+        }catch (DbException e){
+            throw new ServiceException(e);
+        }
+    }
 }

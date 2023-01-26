@@ -39,4 +39,8 @@ public class CruiseMysqlQuery {
             "            ORDER BY uhc.date_of_registration\n";
 
     public static final String GET_USER_CRUISE_COUNT = "SELECT COUNT(*) FROM users_has_cruises WHERE user_id=?";
+
+    public static final String ADD_CRUISE_TO_USER = "INSERT INTO users_has_cruises (user_id, cruise_id) VALUE (?, ?)";
+
+    public static final String FIND_CRUISE_BY_USER = "SELECT date_of_registration FROM users_has_cruises WHERE user_id=? AND cruise_id=?";
 }

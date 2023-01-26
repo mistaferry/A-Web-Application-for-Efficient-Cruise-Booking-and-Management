@@ -38,4 +38,6 @@ public interface GeneralService {
     List<CruiseDTO> viewCatalog(int cruisePerPage, int pageNum) throws ServiceException;
 
     List<ShipDTO> getAllShips() throws ServiceException;
+
+    boolean addCruiseToUser(long userId, long cruiseId) throws ServiceException;
 }

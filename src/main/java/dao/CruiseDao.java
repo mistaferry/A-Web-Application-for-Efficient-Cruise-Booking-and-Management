@@ -33,4 +33,8 @@ public interface CruiseDao extends EntityDao<Cruise> {
     int getAmount() throws DbException;
 
     List<Cruise> getCruisePagination(int cruisePerPage, int pageNum) throws DbException;
+
+    void addToUser(long userId, long cruiseId) throws DbException;
+
+    boolean pairExists(long userId, long cruiseId) throws DbException;
 }

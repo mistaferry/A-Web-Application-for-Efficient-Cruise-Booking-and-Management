@@ -7,6 +7,7 @@ import model.entity.Cruise;
 import model.entity.Ship;
 import dao.constants.*;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -441,5 +442,44 @@ public class MySqlCruiseDAO implements CruiseDao {
             throw new DbException("Cannot get Cruises");
         }
         return cruiseList;
+    }
+
+    @Override
+    public void addToUser(long userId, long cruiseId) throws DbException {
+        try(Connection connection = DataSource.getConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(CruiseMysqlQuery.ADD_CRUISE_TO_USER);
+            int index = 0;
+            preparedStatement.setLong(++index, userId);
+            preparedStatement.setLong(++index, cruiseId);
+            preparedStatement.execute();
+        }catch (SQLException e){
+            throw new DbException("Cannot add Cruise to User", e);
+        }
+    }
+
+    @Override
+    public boolean pairExists(long userId, long cruiseId) throws DbException {
+        try(Connection connection = DataSource.getConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(CruiseMysqlQuery.FIND_CRUISE_BY_USER);
+            int index = 0;
+            preparedStatement.setLong(++index, userId);
+            preparedStatement.setLong(++index, cruiseId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            boolean flag = false;
+            try {
+                Date date = null;
+                if(resultSet.next()){
+                    date = resultSet.getDate(1);
+                }
+                if(date!= null) {
+                    flag = date.equals(Date.valueOf(LocalDate.now()));
+                }
+            } catch (SQLException e) {
+                throw new DbException("Cannot get amount", e);
+            }
+            return flag;
+        }catch (SQLException e){
+            throw new DbException("Problems in your request", e);
+        }
     }
 }

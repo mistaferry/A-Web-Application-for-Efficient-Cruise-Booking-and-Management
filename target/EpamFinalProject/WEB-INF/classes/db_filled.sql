@@ -35,11 +35,18 @@ CREATE TABLE staff
 (
     id         INT PRIMARY KEY AUTO_INCREMENT,
     first_name VARCHAR(50) NOT NULL,
-    surname    VARCHAR(50) NOT NULL,
-    ship_id    INT,
-    FOREIGN KEY (ship_id) REFERENCES ship (id)
-        on update cascade
-        on delete cascade
+    surname    VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE ship_has_staff(
+                               staff_id INT NOT NULL,
+                               ship_id INT NOT NULL,
+                               FOREIGN KEY (staff_id) REFERENCES staff (id)
+                                   on update cascade
+                                   on delete cascade,
+                               FOREIGN KEY (ship_id) REFERENCES ship (id)
+                                   on update cascade
+                                   on delete cascade
 );
 
 CREATE TABLE city
@@ -56,7 +63,7 @@ CREATE TABLE cruise
     duration        INT,
     price           DOUBLE NOT NULL,
     start_day       datetime,
-    paid            BOOLEAN,
+    number_of_register_people INT NOT NULL,
     FOREIGN KEY (ship_id) REFERENCES ship (id)
         on update cascade
         on delete cascade
@@ -80,6 +87,7 @@ CREATE TABLE users_has_cruises
     user_id   INT,
     cruise_id INT,
     date_of_registration DATETIME DEFAULT (current_date),
+    paid boolean DEFAULT FALSE,
     FOREIGN KEY (cruise_id) REFERENCES cruise (id)
         on update cascade
         on delete cascade,
@@ -123,26 +131,26 @@ VALUES ('MSC Fantasia', 3959, 5),
        ('MSC Passion', 5, 8),
        ('MSC Sentiaro', 2490, 7);
 
-INSERT INTO staff(first_name, surname, ship_id)
-VALUES ('Adam', 'Romanchenko', 1),
-       ('Larisa', 'Vasiliev', 1),
-       ('Sofia', 'Panasyuk', 2),
-       ('Ruslan', 'Shevchuk', 2),
-       ('Viktor', 'Antonenko', 1),
-       ('Margarita', 'Kravchuk', 1),
-       ('Mykhailo', 'Mykytyuk', NULL),
-       ('Ruslan', 'Shevchenko', NULL),
-       ('Josyp', 'Brovarchuk', 1),
-       ('Olga', 'Miroshnychenko', 2);
+INSERT INTO staff(first_name, surname)
+VALUES ('Adam', 'Romanchenko'),
+       ('Larisa', 'Vasiliev'),
+       ('Sofia', 'Panasyuk'),
+       ('Ruslan', 'Shevchuk'),
+       ('Viktor', 'Antonenko'),
+       ('Margarita', 'Kravchuk'),
+       ('Mykhailo', 'Mykytyuk'),
+       ('Ruslan', 'Shevchenko'),
+       ('Josyp', 'Brovarchuk'),
+       ('Olga', 'Miroshnychenko');
 
-INSERT INTO cruise(ship_id, duration, price, start_day, paid)
-VALUES (1, 4, 6300, '2023-04-30', true),
-       (2, 8, 12000, '2023-04-30', true),
-       (3, 12, 22220, '2023-04-30', true),
-       (5, 8, 11300, '2023-04-30', true),
-       (4, 8, 9000, '2023-04-30', true),
-       (3, 12, 19200, '2023-09-01', true),
-       (1, 12, 31999, '2023-05-31', true);
+INSERT INTO cruise(ship_id, duration, price, start_day, number_of_register_people)
+VALUES (1, 4, 6300, '2023-04-30', 3),
+       (2, 8, 12000, '2023-04-30', 4),
+       (3, 12, 22220, '2023-04-30', 2),
+       (5, 8, 11300, '2023-04-30', 2),
+       (4, 8, 9000, '2023-04-30', 1),
+       (3, 12, 19200, '2023-09-01', 1),
+       (1, 12, 31999, '2023-05-31', 1);
 
 INSERT INTO transaction(cruise_id, timestamp, amount, completed, description)
 VALUES (1, current_date, 11714, true, 'Succesfully paid'),
@@ -166,21 +174,21 @@ VALUES ('huryn@gmail.com', 'huryn', 'Inna', 'Kamarenko', 1, false),
 select *
 from user;
 
-INSERT INTO users_has_cruises(user_id, cruise_id, date_of_registration)
-VALUES (1, 2, '2023-03-12'),
-       (2, 1, '2023-04-12'),
-       (3, 2, '2023-01-03'),
-       (4, 2, '2023-02-28'),
-       (5, 4, '2023-03-11'),
-       (6, 1, '2023-04-01'),
-       (3, 4, '2023-02-10'),
-       (2, 3, '2023-01-04'),
-       (1, 5, '2023-02-19'),
-       (1, 7, '2023-04-29'),
-       (1, 1, '2023-01-28'),
-       (1, 2, '2023-01-05'),
-       (1, 3, '2022-12-30'),
-       (1, 6, '2022-03-05');
+INSERT INTO users_has_cruises(user_id, cruise_id, date_of_registration, paid)
+VALUES (1, 2, '2023-03-12', true),
+       (2, 1, '2023-04-12', true),
+       (3, 2, '2023-01-03', true),
+       (4, 2, '2023-02-28', true),
+       (5, 4, '2023-03-11', true),
+       (6, 1, '2023-04-01', true),
+       (3, 4, '2023-02-10', true),
+       (2, 3, '2023-01-04', true),
+       (1, 5, '2023-02-19', true),
+       (1, 7, '2023-04-29', true),
+       (1, 1, '2023-01-28', true),
+       (1, 2, '2023-01-05', true),
+       (1, 3, '2022-12-30', true),
+       (1, 6, '2022-03-05', true);
 
 # route
 INSERT INTO ship_has_cities(ship_id, city_id)
@@ -223,6 +231,23 @@ VALUES (1, 7),
        (5, 2),
        (5, 6),
        (5, 5);
+
+INSERT INTO ship_has_staff (ship_id, staff_id)
+VALUES (1, 1),
+       (1, 2),
+       (1, 3),
+       (1, 4),
+       (1, 5),
+       (1, 6),
+       (1, 7),
+       (2, 10),
+       (2, 9),
+       (2, 8),
+       (2, 7),
+       (2, 5),
+       (2, 1),
+       (2, 4),
+       (2, 3);
 
 select * from users_has_cruises
 
