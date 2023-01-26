@@ -30,7 +30,6 @@
                     <td>Start</td>
                     <td>Duration</td>
                     <td>Price</td>
-                    <td>Paid</td>
                 </tr>
             </thead>
             <tbody>
@@ -50,9 +49,6 @@
                         </td>
                         <td>
                             ${user.price} UAH
-                        </td>
-                        <td>
-                            ${user.paid}
                         </td>
                     </tr>
                 </c:forEach>

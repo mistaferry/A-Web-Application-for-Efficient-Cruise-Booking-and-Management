@@ -5,7 +5,6 @@ import com.google.protobuf.ServiceException;
 import dao.impl.MySqlUserDAO;
 import dto.CruiseDTO;
 import dto.UserDTO;
-import exceptions.DAOException;
 import exceptions.DbException;
 import model.entity.User;
 import services.GeneralService;

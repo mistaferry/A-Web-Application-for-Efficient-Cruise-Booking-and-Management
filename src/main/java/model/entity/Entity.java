@@ -1,5 +1,9 @@
 package model.entity;
 
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import java.io.Serializable;
 
 public abstract class Entity implements Serializable {

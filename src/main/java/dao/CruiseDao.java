@@ -1,6 +1,5 @@
 package dao;
 
-import exceptions.DAOException;
 import exceptions.DbException;
 import model.entity.City;
 import model.entity.Cruise;

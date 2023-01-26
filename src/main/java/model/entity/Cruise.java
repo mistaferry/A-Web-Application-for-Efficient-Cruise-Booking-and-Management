@@ -15,7 +15,7 @@ public class Cruise extends Entity {
     private int duration;
     private double price;
     private Date startDate;
-    private boolean paid;
+    private int number_of_register_people;
 
     public Cruise() {
     }
@@ -24,28 +24,27 @@ public class Cruise extends Entity {
         this.ship = ship;
     }
 
-    public Cruise(Ship ship, int duration, Date startDate, boolean paid) {
+    public Cruise(Ship ship, int duration, Date startDate) {
         this.ship = ship;
         this.duration = duration;
         this.startDate = startDate;
-        this.paid = paid;
     }
 
-    public Cruise(Ship ship, int duration, double price, Date startDate, boolean paid) {
+    public Cruise(Ship ship, int duration, double price, Date startDate, int number_of_register_people) {
         this.ship = ship;
         this.duration = duration;
         this.price = price;
         this.startDate = startDate;
-        this.paid = paid;
+        this.number_of_register_people = number_of_register_people;
     }
 
-    public Cruise(long id, Ship ship, int duration, double price, Date startDate, boolean paid) {
+    public Cruise(long id, Ship ship, int duration, double price, Date startDate, int number_of_register_people) {
         super(id);
         this.ship = ship;
         this.duration = duration;
         this.price = price;
         this.startDate = startDate;
-        this.paid = paid;
+        this.number_of_register_people = number_of_register_people;
     }
 
 
@@ -81,12 +80,12 @@ public class Cruise extends Entity {
         this.startDate = startDate;
     }
 
-    public boolean isPaid() {
-        return paid;
+    public int getNumber_of_register_people() {
+        return number_of_register_people;
     }
 
-    public void setPaid(boolean paid) {
-        this.paid = paid;
+    public void setNumber_of_register_people(int number_of_register_people) {
+        this.number_of_register_people = number_of_register_people;
     }
 
     @Override

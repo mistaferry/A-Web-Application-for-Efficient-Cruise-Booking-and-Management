@@ -4,7 +4,7 @@ import actions.Action;
 import com.google.protobuf.ServiceException;
 import dao.impl.MySqlCruiseDAO;
 import dto.CruiseDTO;
-import exceptions.DAOException;
+
 import exceptions.DbException;
 import services.GeneralService;
 import services.ServiceFactory;

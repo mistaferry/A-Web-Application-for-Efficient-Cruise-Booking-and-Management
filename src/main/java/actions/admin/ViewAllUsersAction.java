@@ -6,7 +6,6 @@ import dao.impl.MySqlCruiseDAO;
 import dao.impl.MySqlUserDAO;
 import dto.CruiseDTO;
 import dto.UserDTO;
-import exceptions.DAOException;
 import exceptions.DbException;
 import services.GeneralService;
 import services.ServiceFactory;

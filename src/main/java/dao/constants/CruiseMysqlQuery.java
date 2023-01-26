@@ -1,9 +1,9 @@
 package dao.constants;
 
 public class CruiseMysqlQuery {
-    public static final String ADD_CRUISE = "INSERT INTO cruise (ship_id, duration, start_day, paid) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    public static final String ADD_CRUISE = "INSERT INTO cruise (ship_id, duration, start_day) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-    public static final String GET_ALL = "SELECT cruise.id as cruise, ship_id as ship, duration, price, start_day, paid, " +
+    public static final String GET_ALL = "SELECT cruise.id as cruise, ship_id as ship, duration, price, start_day, " +
             "s.name as ship_name, s.capacity as capacity, s.number_of_ports as number_of_ports FROM cruise " +
             "JOIN ship s on s.id = cruise.ship_id ";
 
@@ -32,7 +32,7 @@ public class CruiseMysqlQuery {
     public static final String GET_CRUISE_COUNT = "SELECT COUNT(*) FROM cruise ";
 
     public static final String GET_USER_CRUISES = "SELECT uhc.user_id as user, cruise.id as cruise,\n" +
-            "            cruise.ship_id as ship, cruise.duration, cruise.price, cruise.start_day, cruise.paid,\n" +
+            "            cruise.ship_id as ship, cruise.duration, cruise.price, cruise.start_day,\n" +
             "            s.name as ship_name, s.capacity as capacity, s.number_of_ports as number_of_ports FROM cruise\n" +
             "            JOIN ship s on s.id = cruise.ship_id JOIN users_has_cruises uhc on cruise.id = uhc.cruise_id\n" +
             "            WHERE uhc.user_id=?\n" +

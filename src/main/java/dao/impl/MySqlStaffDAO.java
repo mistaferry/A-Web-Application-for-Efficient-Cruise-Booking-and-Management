@@ -3,7 +3,7 @@ package dao.impl;
 import connection.DataSource;
 import dao.StaffDao;
 import dao.constants.*;
-import exceptions.DAOException;
+
 import exceptions.DbException;
 import model.entity.Staff;
 

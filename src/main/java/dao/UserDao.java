@@ -1,7 +1,7 @@
 package dao;
 
 import dto.UserDTO;
-import exceptions.DAOException;
+
 import exceptions.DbException;
 import model.entity.Cruise;
 import model.entity.Role;

@@ -3,7 +3,7 @@ package actions.customer;
 import actions.Action;
 import com.google.protobuf.ServiceException;
 import dto.UserDTO;
-import exceptions.DAOException;
+
 import services.ServiceFactory;
 import services.UserService;
 

@@ -17,6 +17,5 @@ public class CruiseDTO implements Serializable {
     private int duration;
     private double price;
     private Date startDate;
-    private boolean paid;
-
+    private int number_of_register_people;
 }

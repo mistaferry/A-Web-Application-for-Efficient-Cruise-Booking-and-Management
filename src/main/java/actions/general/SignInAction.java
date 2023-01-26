@@ -2,7 +2,7 @@ package actions.general;
 
 import actions.Action;
 import dto.UserDTO;
-import exceptions.DAOException;
+
 import model.entity.Role;
 import services.GeneralService;
 import services.ServiceFactory;

@@ -40,7 +40,7 @@ public final class Convertor {
                 .duration(cruise.getDuration())
                 .price(cruise.getPrice())
                 .startDate(cruise.getStartDate())
-                .paid(cruise.isPaid())
+                .number_of_register_people(cruise.getNumber_of_register_people())
                 .build();
     }
 
@@ -48,10 +48,10 @@ public final class Convertor {
         Cruise cruise = new Cruise();
         cruise.setId(cruiseDTO.getId());
         cruise.setPrice(cruiseDTO.getPrice());
-        cruise.setPaid(cruiseDTO.isPaid());
         cruise.setStartDate(cruiseDTO.getStartDate());
         cruise.setDuration(cruiseDTO.getDuration());
         cruise.setShip(cruiseDTO.getShip());
+        cruise.setNumber_of_register_people(cruiseDTO.getNumber_of_register_people());
         return cruise;
     }
 

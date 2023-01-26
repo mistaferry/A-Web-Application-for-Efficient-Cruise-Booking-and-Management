@@ -4,7 +4,7 @@ import actions.Action;
 import com.google.protobuf.ServiceException;
 import dao.impl.MySqlUserDAO;
 import dto.UserDTO;
-import exceptions.DAOException;
+
 import exceptions.DbException;
 import model.entity.Role;
 import model.entity.User;

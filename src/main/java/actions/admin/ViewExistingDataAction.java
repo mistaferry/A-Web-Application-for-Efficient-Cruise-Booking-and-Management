@@ -4,7 +4,7 @@ import actions.Action;
 import com.google.protobuf.ServiceException;
 import dto.CruiseDTO;
 import dto.ShipDTO;
-import exceptions.DAOException;
+
 import services.GeneralService;
 import services.ServiceFactory;
 

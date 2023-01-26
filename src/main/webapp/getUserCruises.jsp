@@ -49,7 +49,6 @@
                     <td>Start</td>
                     <td>Duration</td>
                     <td>Price</td>
-                    <td>Paid</td>
                     <td class="no-style"></td>
                 </tr>
                 </thead>
@@ -70,9 +69,6 @@
                         </td>
                         <td>
                                 ${cruise.price} UAH
-                        </td>
-                        <td>
-                                ${cruise.paid}
                         </td>
                         <td class="max-width">
                             <input type="hidden" value="${cruise.id}" name="cruise_id">

@@ -4,7 +4,7 @@ import connection.DataSource;
 import dao.TransactionDao;
 
 import dao.constants.TransactionMysqlQuery;
-import exceptions.DAOException;
+
 import exceptions.DbException;
 import model.entity.Transaction;
 import java.sql.Connection;

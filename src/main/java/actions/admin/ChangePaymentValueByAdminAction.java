@@ -4,7 +4,6 @@ import actions.Action;
 import com.google.protobuf.ServiceException;
 import dto.CruiseDTO;
 import dto.UserDTO;
-import exceptions.DAOException;
 import services.GeneralService;
 import services.ServiceFactory;
 
@@ -42,7 +41,7 @@ public class ChangePaymentValueByAdminAction implements Action {
                 .duration(cruise.getDuration())
                 .price(cruise.getPrice())
                 .startDate(cruise.getStartDate())
-                .paid(Boolean.parseBoolean(request.getParameter("order_status")))
+                .number_of_register_people(cruise.getNumber_of_register_people())
                 .build();
     }
 }

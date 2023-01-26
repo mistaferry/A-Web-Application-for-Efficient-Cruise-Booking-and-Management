@@ -5,7 +5,7 @@ import dao.CruiseDao;
 import dao.UserDao;
 import dto.CruiseDTO;
 import dto.UserDTO;
-import exceptions.DAOException;
+
 import exceptions.DbException;
 import model.entity.Cruise;
 import model.entity.User;

@@ -1,6 +1,6 @@
 package dao;
 
-import exceptions.DAOException;
+
 import model.entity.Ship;
 import model.entity.Staff;
 import java.util.List;
