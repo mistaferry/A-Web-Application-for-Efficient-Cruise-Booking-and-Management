@@ -1,0 +1,37 @@
+<%@ page pageEncoding="UTF-8" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : 'en'}" scope="session" />
+<fmt:setLocale value="${language}"/>
+<fmt:setBundle basename="resources"/>
+
+<div class="form">
+    <form method="post" action="controller">
+        <input type="hidden" name="action" value="sign-in">
+        <div>
+            <label for="login"><fmt:message key="login.label.username"/></label><br>
+            <input type="text" id="login" name="login"
+                   pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}"><br><br>
+        </div>
+        <div>
+            <label for="password"><fmt:message key="login.label.password"/></label><br>
+            <input type="password" id="password" name="password"
+                   required minlength="2" maxlength="10">
+        </div>
+        <c:if test="${sessionScope.error ne null}">
+            <span class="error-text"><fmt:message key="login.error"/></span>
+            <%session.removeAttribute("error"); %>
+        </c:if>
+        <div>
+            <br>
+            <button id="form-button" type="submit"><fmt:message key="button.submit"/></button>
+        </div>
+        <br>
+        <div class="login-option">
+            <p><fmt:message key="no.account"/> <a href="register.jsp"><fmt:message key="register.here"/></a></p>
+            <a href="changePassword.jsp" class="login-option"><fmt:message key="forgot.password"/></a>
+        </div>
+        <br><br><br>
+    </form>
+</div>

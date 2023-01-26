@@ -1,0 +1,49 @@
+<%@ page pageEncoding="UTF-8" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<form class="form-reg" action="controller">
+    <div>
+        <h1><fmt:message key="edit.profile"/></h1>
+    </div>
+    <div class="flex">
+        <input type="hidden" name="action" value="create-order">
+        <div class="form-left-right">
+            <label><fmt:message key="person.name"/><br>
+                <input class="input1" type="text" value="${sessionScope.user.firstName}" readonly/>
+            </label><br><br>
+            <label><fmt:message key="person.surname"/><br>
+                <input class="input1" type="text" value="${sessionScope.user.surname}" readonly/>
+            </label><br><br>
+            <div>
+                <div class="gender-chose">
+                    <label><fmt:message key="label.adult"/>
+                        <input type="number" size="2" name="num" min="1" max="10" value="1" required>
+                    </label>
+                </div>
+                <div class="gender-chose">
+                    <label><fmt:message key="label.children"/>
+                        <input type="number" size="2" name="num" min="0" max="10" value="0" required>
+                    </label>
+                </div>
+            </div>
+            <br>
+            <label><fmt:message key="label.phone.number"/><br>
+                <input class="input1" type="tel" name="telNo" pattern="\+380\-[0-9]{3}\-[0-9]{3}\-[0-9]{3}">
+            </label>
+            <br><br>
+            <label><fmt:message key="login.label.username"/><br>
+                <input class="input1" type="email" value="${sessionScope.user.login}" readonly>
+            </label>
+            <br><br>
+            <label><fmt:message key="label.documents.upload"/><br>
+                <input class="input1" type="file">
+            </label>
+        </div>
+    </div>
+
+    <div class="button">
+        <br>
+        <button type="submit"><fmt:message key="button.submit"/></button>&nbsp;
+        <button type="reset"><fmt:message key="button.cancel"/></button>
+    </div>
+</form>

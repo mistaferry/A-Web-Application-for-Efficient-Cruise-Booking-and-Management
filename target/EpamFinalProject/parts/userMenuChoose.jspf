@@ -1,0 +1,8 @@
+<c:choose>
+    <c:when test="${sessionScope.role.name() eq 'ADMIN'}">
+        <%@ include file="adminMenu.jspf" %>
+    </c:when>
+    <c:when test="${sessionScope.role.name() eq 'CUSTOMER'}">
+        <%@ include file="customerMenu.jspf" %>
+    </c:when>
+</c:choose>

@@ -1,0 +1,103 @@
+<%@ page pageEncoding="UTF-8" %>
+
+<form method="get" action="controller">
+    <input type="hidden" name="action" value="view-all-users">
+    <div>
+        <label>
+            <select name="page" style="display: none">
+                <option value="0" selected></option>
+            </select>
+        </label>
+        <label>
+            <select name="userPerPage" style="display: none">
+                <option value="7" selected></option>
+            </select>
+        </label>
+    </div>
+</form>
+
+<section class="table">
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <td>Id</td>
+                <td><fmt:message key="person.login"/></td>
+                <td><fmt:message key="person.name"/></td>
+                <td><fmt:message key="person.surname"/></td>
+                <td><fmt:message key="person.role"/></td>
+                <td><fmt:message key="person.is.blocked"/></td>
+                <td class="no-style"></td>
+                <td class="no-style"></td>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach var="user" items="${sessionScope.allUsers}">
+                <tr>
+                    <td>
+                            ${user.id}
+                    </td>
+                    <td>
+                            ${user.login}
+                    </td>
+                    <td>
+                            ${user.firstName}
+                    </td>
+                    <td>
+                            ${user.surname}
+                    </td>
+                    <td>
+                            ${user.roleId}
+                    </td>
+                    <td>
+                            ${user.blocked}
+                    </td>
+                    <td class="max-width">
+                        <form action="controller" method="get">
+                            <input type="hidden" name="action" value="get-user-info">
+                            <input type="hidden" name="user_id" value="${user.id}">
+                            <input class="button-order max-width white" type="submit" value="Personal Info"/>
+                        </form>
+                    </td>
+                    <td class="max-width">
+                        <form action="controller" method="get">
+                            <input type="hidden" name="action" value="admin-get-user-cruises">
+                            <input type="hidden" name="user" value="${user.id}">
+                            <input type="hidden" name="page" value="0">
+                            <input type="hidden" name="cruisePerPage" value="7">
+                            <input class="button-order max-width white" type="submit" value="User Cruises"/>
+                        </form>
+                    </td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<nav class="page-nav">
+    <ul class="pagination">
+        <c:if test="${param.page != 0}">
+            <li><a class="page-link"
+                   href="controller?action=view-all-users&page=${param.page-1}&userPerPage=${param.userPerPage}"
+                   tabindex="-1"><fmt:message key="pagination.previous"/></a></li>
+        </c:if>
+        <c:forEach var="num" begin="0" end="${requestScope.pageAmount}">
+            <li class="page-item ${param.page == num ? "active" : ""}">
+                <a class="page-link"
+                   href="controller?action=view-all-users&page=${num}&userPerPage=${param.userPerPage}">
+                        ${num+1}
+                </a>
+            </li>
+        </c:forEach>
+
+        <c:if test="${param.page lt requestScope.pageAmount}">
+            <li>
+                <a class="page-link"
+                   href="controller?action=view-all-users&page=${param.page+1}&userPerPage=${param.userPerPage}">
+                    <fmt:message key="pagination.next"/>
+                </a>
+            </li>
+        </c:if>
+    </ul>
+</nav>
