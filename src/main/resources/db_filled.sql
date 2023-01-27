@@ -69,19 +69,6 @@ CREATE TABLE cruise
         on delete cascade
 );
 
-CREATE TABLE transaction
-(
-    id          INT PRIMARY KEY AUTO_INCREMENT,
-    cruise_id   INT,
-    timestamp   TIMESTAMP,
-    amount      double,
-    completed   BOOLEAN,
-    description VARCHAR(255),
-    FOREIGN KEY (cruise_id) REFERENCES cruise (id)
-        on update cascade
-        on delete cascade
-);
-
 CREATE TABLE users_has_cruises
 (
     user_id   INT,
@@ -151,11 +138,6 @@ VALUES (1, 4, 6300, '2023-04-30', 3),
        (4, 8, 9000, '2023-04-30', 4),
        (3, 12, 19200, '2023-09-01', 1),
        (1, 12, 31999, '2023-05-31', 1);
-
-INSERT INTO transaction(cruise_id, timestamp, amount, completed, description)
-VALUES (1, current_date, 11714, true, 'Succesfully paid'),
-       (2, current_date, 18938, true, 'Succesfully paid'),
-       (3, current_date, 32000, true, 'Succesfully paid');
 
 INSERT INTO role(name)
 VALUES ('CLIENT'),
