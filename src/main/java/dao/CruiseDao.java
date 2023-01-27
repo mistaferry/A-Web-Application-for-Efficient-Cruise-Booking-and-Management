@@ -26,8 +26,6 @@ public interface CruiseDao extends EntityDao<Cruise> {
 
     int getAmountWithFilters(List<String> filters) throws DbException;
 
-    List<Cruise> getCruisesByUser(long userId, int cruisePerPage, int pageNum) throws DbException;
-
     int getAmountByUser(long userId) throws DbException;
 
     int getAmount() throws DbException;

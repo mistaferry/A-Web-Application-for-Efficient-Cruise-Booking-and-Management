@@ -9,6 +9,7 @@ import dto.UserDTO;
 import model.entity.User;
 import utils.Convertor;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -20,7 +21,7 @@ public interface GeneralService {
 
     List<UserDTO> viewAllUsers() throws ServiceException;
 
-    List<CruiseDTO> viewUserCruisesWithPagination(long userId, int cruisePerPage, int pageNum) throws ServiceException;
+//    List<CruiseDTO> viewUserCruisesWithPagination(long userId, int cruisePerPage, int pageNum) throws ServiceException;
 
     List<CruiseDTO> viewCatalogWithPagination(List<String> filters, int cruisePerPage, int pageNum) throws ServiceException;
 
@@ -32,7 +33,7 @@ public interface GeneralService {
 
     void updateCruise(CruiseDTO cruise) throws ServiceException;
 
-    List<CruiseDTO> getCruisesByUser(long userId, int cruisePerPage, int pageNum) throws ServiceException;
+    List<OrderDTO> getOrdersByUser(long userId, int cruisePerPage, int pageNum) throws ServiceException;
 
     CruiseDTO getChosenCruise(long cruiseId) throws ServiceException;
 
@@ -43,4 +44,6 @@ public interface GeneralService {
     boolean addCruiseToUser(long userId, long cruiseId) throws ServiceException;
 
     List<OrderDTO> viewUserOrdersWithPagination(long loggedUserId, int cruisePerPage, int pageNum) throws ServiceException;
+
+    void updateOrderPaymentStatus(long userId, long cruiseId, Date date) throws ServiceException;
 }

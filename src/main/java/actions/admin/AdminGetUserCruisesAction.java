@@ -4,6 +4,7 @@ import actions.Action;
 import com.google.protobuf.ServiceException;
 import dao.impl.MySqlUserDAO;
 import dto.CruiseDTO;
+import dto.OrderDTO;
 import dto.UserDTO;
 import exceptions.DbException;
 import model.entity.User;
@@ -37,8 +38,8 @@ public class AdminGetUserCruisesAction implements Action {
         session.setAttribute("chosenUser", userDTO);
         int cruisePerPage = Integer.parseInt(request.getParameter("cruisePerPage"));
         int page = Integer.parseInt(request.getParameter("page"));
-        List<CruiseDTO> cruiseDTOList = generalService.getCruisesByUser(userId, cruisePerPage, page);
-        request.setAttribute("userCruises", cruiseDTOList);
+        List<OrderDTO> orderDTOList = generalService.getOrdersByUser(userId, cruisePerPage, page);
+        request.setAttribute("userCruises", orderDTOList);
         return "getUserCruises.jsp";
 
     }

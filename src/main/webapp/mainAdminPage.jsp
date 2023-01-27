@@ -20,8 +20,6 @@
 
 <%@ include file="parts/userMenuChoose.jspf" %>
 
-<%@ include file="parts/adminMainNav.jspf" %>
-
 <%@ include file="parts/usersList.jspf" %>
 
 <%@ include file="/parts/footer.jspf" %>

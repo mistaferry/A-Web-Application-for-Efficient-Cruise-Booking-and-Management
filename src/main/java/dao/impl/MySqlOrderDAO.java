@@ -9,10 +9,7 @@ import model.entity.Cruise;
 import model.entity.Order;
 import model.entity.Ship;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -70,7 +67,7 @@ public class MySqlOrderDAO implements OrderDao {
     public List<Order> getOrdersByUser(long loggedUserId, int cruisePerPage, int pageNum) throws DbException {
         List<Order> orderList;
         try(Connection connection = DataSource.getConnection()) {
-            PreparedStatement preparedStatement = connection.prepareStatement(OrderMysqlQuery.GET_USER_ORDERS +
+            PreparedStatement preparedStatement = connection.prepareStatement(OrderMysqlQuery.GET_ALL +
                     CruiseMysqlQuery.GET_PAGINATION);
             orderList = new ArrayList<>();
             int index = 0;
@@ -88,6 +85,20 @@ public class MySqlOrderDAO implements OrderDao {
             throw new DbException("Cannot get Orders by User", e);
         }
         return orderList;
+    }
+
+    @Override
+    public void updatePaymentStatus(long userId, long cruiseId, Date date) throws DbException {
+        try(Connection connection = DataSource.getConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(OrderMysqlQuery.UPDATE_PAYMENT_STATUS);
+            int index = 0;
+            preparedStatement.setLong(++index, userId);
+            preparedStatement.setLong(++index, cruiseId);
+            preparedStatement.setDate(++index, date);
+            preparedStatement.execute();
+        }catch (SQLException e){
+            throw new DbException("Cannot update Order payment status", e);
+        }
     }
 
     private Order setOrderValues(ResultSet resultSet)  throws SQLException, DbException {

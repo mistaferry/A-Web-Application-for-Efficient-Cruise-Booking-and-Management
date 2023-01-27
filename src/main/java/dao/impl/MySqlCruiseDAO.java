@@ -351,30 +351,6 @@ public class MySqlCruiseDAO implements CruiseDao {
     }
 
     @Override
-    public List<Cruise> getCruisesByUser(long userId, int cruisePerPage, int pageNum) throws DbException {
-        List<Cruise> cruiseList;
-        try(Connection connection = DataSource.getConnection()) {
-            PreparedStatement preparedStatement = connection.prepareStatement(CruiseMysqlQuery.GET_USER_CRUISES +
-                    CruiseMysqlQuery.GET_PAGINATION);
-            cruiseList = new ArrayList<>();
-            int index = 0;
-            preparedStatement.setLong(++index, userId);
-            setPaginationValues(preparedStatement, cruisePerPage, index, pageNum * cruisePerPage);
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                while (resultSet.next()) {
-                    Cruise cruise = setCruiseValues(resultSet);
-                    cruiseList.add(cruise);
-                }
-            }catch (SQLException e) {
-                throw new DbException("Cannot set Cruise values", e);
-            }
-        }catch (SQLException e) {
-            throw new DbException("Cannot get Cruises by user", e);
-        }
-        return cruiseList;
-    }
-
-    @Override
     public int getAmountByUser(long userId) throws DbException {
         int amount = 0;
         try(Connection connection = DataSource.getConnection()) {
@@ -480,7 +456,7 @@ public class MySqlCruiseDAO implements CruiseDao {
             }
             return flag;
         }catch (SQLException e){
-            throw new DbException("Problems in your request", e);
+            throw new DbException("Problems in your request (to check if the pair user-cruise has already exist)", e);
         }
     }
 

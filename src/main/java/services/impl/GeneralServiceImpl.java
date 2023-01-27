@@ -17,6 +17,7 @@ import model.entity.User;
 import services.GeneralService;
 import utils.Convertor;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,17 +75,18 @@ public class GeneralServiceImpl implements GeneralService {
         }
     }
 
-    @Override
-    public List<CruiseDTO> viewUserCruisesWithPagination(long userId, int cruisePerPage, int pageNum) throws ServiceException {
-        List<CruiseDTO> cruiseDTOList = new ArrayList<>();
-        try {
-            List<Cruise> cruiseList = cruiseDao.getCruisesByUser(userId, cruisePerPage, pageNum);
-            cruiseList.forEach(cruise -> cruiseDTOList.add(convertCruiseToDTO(cruise)));
-            return cruiseDTOList;
-        } catch (DbException e) {
-            throw new ServiceException(e);
-        }
-    }
+
+//    @Override
+//    public List<CruiseDTO> viewUserCruisesWithPagination(long userId, int cruisePerPage, int pageNum) throws ServiceException {
+//        List<CruiseDTO> cruiseDTOList = new ArrayList<>();
+//        try {
+//            List<Cruise> cruiseList = cruiseDao.getOrdersByUser(userId, cruisePerPage, pageNum);
+//            cruiseList.forEach(cruise -> cruiseDTOList.add(convertCruiseToDTO(cruise)));
+//            return cruiseDTOList;
+//        } catch (DbException e) {
+//            throw new ServiceException(e);
+//        }
+//    }
 
     @Override
     public List<CruiseDTO> viewCatalogWithPagination(List<String> filters, int cruisePerPage, int pageNum) throws ServiceException {
@@ -143,12 +145,12 @@ public class GeneralServiceImpl implements GeneralService {
     }
 
     @Override
-    public List<CruiseDTO> getCruisesByUser(long userId, int cruisePerPage, int pageNum) throws ServiceException {
-        List<CruiseDTO> cruiseDTO = new ArrayList<>();
+    public List<OrderDTO> getOrdersByUser(long userId, int orderPerPage, int pageNum) throws ServiceException {
+        List<OrderDTO> orderDTO = new ArrayList<>();
         try {
-            List<Cruise> cruiseList = cruiseDao.getCruisesByUser(userId, cruisePerPage, pageNum);
-            cruiseList.forEach(cruise -> cruiseDTO.add(convertCruiseToDTO(cruise)));
-            return cruiseDTO;
+            List<Order> orderList = orderDao.getOrdersByUser(userId, orderPerPage, pageNum);
+            orderList.forEach(order -> orderDTO.add(convertOrderToDTO(order)));
+            return orderDTO;
         } catch (DbException e) {
             throw new ServiceException(e);
         }
@@ -216,6 +218,15 @@ public class GeneralServiceImpl implements GeneralService {
             List<Order> orderList = orderDao.getOrdersByUser(loggedUserId, cruisePerPage, pageNum);
             orderList.forEach(order -> orderDTOList.add(convertOrderToDTO(order)));
             return orderDTOList;
+        } catch (DbException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public void updateOrderPaymentStatus(long userId, long cruiseId, Date date) throws ServiceException {
+        try {
+            orderDao.updatePaymentStatus(userId, cruiseId, date);
         } catch (DbException e) {
             throw new ServiceException(e);
         }
