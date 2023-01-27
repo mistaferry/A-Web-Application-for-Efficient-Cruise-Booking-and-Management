@@ -37,77 +37,111 @@
     </div>
 </form>
 
-<section class="table">
-    <form action="controller" method="get">
-        <input type="hidden" name="action" value="change-payment-value">
-        <div>
+<c:choose>
+    <c:when test="${empty requestScope.userCruises}">
+        <section class="table">
             <table>
-                <thead>
                 <tr>
-                    <td>Id</td>
-                    <td>Ship Name</td>
-                    <td>Start</td>
-                    <td>Duration</td>
-                    <td>Price</td>
-                    <td class="no-style"></td>
+                    <td>
+                        <h2>All cruises are paid</h2>
+                    </td>
                 </tr>
-                </thead>
-                <tbody>
-                <c:forEach var="cruise" items="${requestScope.userCruises}">
-                    <tr>
-                        <td>
-                                ${cruise.id}
-                        </td>
-                        <td>
-                                ${cruise.ship.name}
-                        </td>
-                        <td>
-                                ${cruise.startDate.toLocalDate().dayOfMonth} ${cruise.startDate.toLocalDate().month} ${cruise.startDate.toLocalDate().year}
-                        </td>
-                        <td>
-                                ${cruise.duration} days
-                        </td>
-                        <td>
-                                ${cruise.price} UAH
-                        </td>
-                        <td class="max-width">
-                            <input type="hidden" value="${cruise.id}" name="cruise_id">
-                            <input class="button-order max-width white" type="submit" value="Change payment status"/>
-                        </td>
-                    </tr>
-                </c:forEach>
-                </tbody>
             </table>
-        </div>
-    </form>
-</section>
+        </section>
+    </c:when>
+    <c:otherwise>
+        <section class="table">
+            <form action="controller" method="get">
+                <input type="hidden" name="action" value="change-payment-value">
+                <div>
+                    <table>
+                        <thead>
+                        <tr>
+                            <td>cruise id</td>
+                            <td>Ship Name</td>
+                            <td>Start</td>
+                            <td>Duration</td>
+                            <td>Price</td>
+                            <td>Booking date</td>
+                            <td>Status</td>
+                            <td class="no-style"></td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach var="order" items="${requestScope.userCruises}">
+                            <tr>
+                                <td>
+                                    <input type="hidden" name="order_cruise_id" value="${order.cruise.id}">
+                                    ${order.cruise.id}
+                                </td>
+                                <td>
+                                        ${order.cruise.ship.name}
+                                </td>
+                                <td>
+                                        ${order.cruise.startDate.toLocalDate().dayOfMonth} ${order.cruise.startDate.toLocalDate().month} ${order.cruise.startDate.toLocalDate().year}
+                                </td>
+                                <td>
+                                        ${order.cruise.duration} days
+                                </td>
+                                <td>
+                                        ${order.cruise.price} UAH
+                                </td>
+                                <td>
+                                        ${order.dateOfRegistration.toLocalDate().dayOfMonth} ${order.dateOfRegistration.toLocalDate().month} ${order.dateOfRegistration.toLocalDate().year}
+                                </td>
+                                <c:choose>
+                                    <c:when test="${order.paid}">
+                                        <td style="background: lightgreen">
+                                            Paid
+                                        </td>
+                                    </c:when>
+                                    <c:when test="${!order.paid}">
+                                        <td style="background: lightcoral">
+                                            Unpaid
+                                        </td>
+                                    </c:when>
+                                </c:choose>
+                                <td class="max-width">
+<%--                                    <input type="hidden" value="${order.cruise.id}" name="order_cruise_id">--%>
+                                    <input type="hidden" value="${order.dateOfRegistration}" name="date">
+                                    <input class="button-order max-width white" type="submit" value="Change payment status"/>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+            </form>
+        </section>
 
-<nav class="page-nav">
-    <ul class="pagination">
-        <c:if test="${param.page != 0}">
-            <li><a class="page-link"
-                   href="controller?action=view-user-cruises&page=${param.page-1}&cruisePerPage=${param.cruisePerPage}"
-                   tabindex="-1">Previous</a></li>
-        </c:if>
-        <c:forEach var="num" begin="0" end="${requestScope.pageAmount}">
-            <li class="page-item ${param.page == num ? "active" : ""}">
-                <a class="page-link"
-                   href="controller?action=view-user-cruises&page=${num}&cruisePerPage=${param.cruisePerPage}">
-                        ${num+1}
-                </a>
-            </li>
-        </c:forEach>
+        <nav class="page-nav">
+            <ul class="pagination">
+                <c:if test="${param.page != 0}">
+                    <li><a class="page-link"
+                           href="controller?action=view-user-cruises&page=${param.page-1}&cruisePerPage=${param.cruisePerPage}"
+                           tabindex="-1">Previous</a></li>
+                </c:if>
+                <c:forEach var="num" begin="0" end="${requestScope.pageAmount}">
+                    <li class="page-item ${param.page == num ? "active" : ""}">
+                        <a class="page-link"
+                           href="controller?action=view-user-cruises&page=${num}&cruisePerPage=${param.cruisePerPage}">
+                                ${num+1}
+                        </a>
+                    </li>
+                </c:forEach>
 
-        <c:if test="${param.page lt requestScope.pageAmount}">
-            <li>
-                <a class="page-link"
-                   href="controller?action=view-user-cruises&page=${param.page+1}&cruisePerPage=${param.cruisePerPage}">
-                    Next
-                </a>
-            </li>
-        </c:if>
-    </ul>
-</nav>
+                <c:if test="${param.page lt requestScope.pageAmount}">
+                    <li>
+                        <a class="page-link"
+                           href="controller?action=view-user-cruises&page=${param.page+1}&cruisePerPage=${param.cruisePerPage}">
+                            Next
+                        </a>
+                    </li>
+                </c:if>
+            </ul>
+        </nav>
+    </c:otherwise>
+</c:choose>
 
 <%@ include file="/parts/footer.jspf" %>
 
