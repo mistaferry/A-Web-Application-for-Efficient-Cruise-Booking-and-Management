@@ -131,7 +131,7 @@ public class GeneralServiceImpl implements GeneralService {
         } catch (DbException e) {
             throw new ServiceException(e);
         }
-        return Convertor.convertUserToDTO(user);
+        return convertUserToDTO(user);
     }
 
     @Override
@@ -227,6 +227,24 @@ public class GeneralServiceImpl implements GeneralService {
     public void updateOrderPaymentStatus(long userId, long cruiseId, Date date) throws ServiceException {
         try {
             orderDao.updatePaymentStatus(userId, cruiseId, date);
+        } catch (DbException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public int getAmountWithFilters(List<String> filters) throws ServiceException {
+        try {
+            return cruiseDao.getAmountWithFilters(filters);
+        } catch (DbException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public int getUserAmount() throws ServiceException {
+        try {
+            return userDao.getAmount();
         } catch (DbException e) {
             throw new ServiceException(e);
         }

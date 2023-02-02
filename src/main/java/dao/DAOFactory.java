@@ -20,8 +20,6 @@ public abstract class DAOFactory {
 
     public abstract StaffDao getStaffDao();
 
-    public abstract TransactionDao getTransactionDao();
-
     public abstract UserDao getUserDao();
 
     public abstract OrderDao getOrderDao();

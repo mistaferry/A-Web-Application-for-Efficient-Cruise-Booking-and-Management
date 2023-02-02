@@ -7,7 +7,6 @@ public class MySqlDaoFactory extends DAOFactory {
     private CruiseDao cruiseDAO;
     private ShipDao shipDAO;
     private StaffDao staffDAO;
-    private TransactionDao transactionDAO;
     private UserDao userDAO;
     private OrderDao orderDao;
 
@@ -41,14 +40,6 @@ public class MySqlDaoFactory extends DAOFactory {
             staffDAO = new MySqlStaffDAO();
         }
         return staffDAO;
-    }
-
-    @Override
-    public TransactionDao getTransactionDao() {
-        if(transactionDAO == null){
-            transactionDAO = new MySqlTransactionDAO();
-        }
-        return transactionDAO;
     }
 
     @Override

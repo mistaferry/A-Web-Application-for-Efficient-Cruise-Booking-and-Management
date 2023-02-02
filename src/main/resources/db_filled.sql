@@ -112,10 +112,10 @@ VALUES ('Kiel', 'Germany'),
        ('Marseille', 'France');
 
 INSERT INTO ship(name, capacity, number_of_ports)
-VALUES ('MSC Fantasia', 3959, 5),
+VALUES ('MSC Fantasia', 5, 5),
        ('MSC Magnifica', 3013, 8),
        ('MSC Preziosa', 4363, 12),
-       ('MSC Passion', 5, 8),
+       ('MSC Passion', 3959, 8),
        ('MSC Sentiaro', 2490, 7);
 
 INSERT INTO staff(first_name, surname)
@@ -131,7 +131,7 @@ VALUES ('Adam', 'Romanchenko'),
        ('Olga', 'Miroshnychenko');
 
 INSERT INTO cruise(ship_id, duration, price, start_day, number_of_register_people)
-VALUES (1, 4, 6300, '2023-04-30', 3),
+VALUES (1, 4, 6300, '2023-04-30', 4),
        (2, 8, 12000, '2023-04-30', 4),
        (3, 12, 22220, '2023-04-30', 2),
        (5, 8, 11300, '2023-04-30', 2),

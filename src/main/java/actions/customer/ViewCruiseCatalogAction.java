@@ -32,18 +32,14 @@ public class ViewCruiseCatalogAction implements Action {
 
         System.out.println(request.getQueryString());
         String path = null;
-        try {
-            List<CruiseDTO> cruiseDTOList = generalService.viewCatalogWithPagination(filters, cruisePerPage, pageNum);
-            int pageAmount = 0;
-            pageAmount = (new MySqlCruiseDAO()).getAmountWithFilters(filters);
-            pageAmount /= cruisePerPage;
-            System.out.println("pageAmount - " + pageAmount);
-            request.setAttribute("pageAmount", pageAmount);
-            session.setAttribute("allCruises", cruiseDTOList);
-            path = "/catalog.jsp";
-        } catch (DbException e) {
-            throw new ServiceException(e);
-        }
+        List<CruiseDTO> cruiseDTOList = generalService.viewCatalogWithPagination(filters, cruisePerPage, pageNum);
+        int pageAmount = 0;
+        pageAmount = generalService.getCruiseAmount(filters);
+        pageAmount /= cruisePerPage;
+        System.out.println("pageAmount - " + pageAmount);
+        request.setAttribute("pageAmount", pageAmount);
+        session.setAttribute("allCruises", cruiseDTOList);
+        path = "/catalog.jsp";
         return path;
     }
 

@@ -11,7 +11,7 @@ import java.sql.SQLException;
 public interface UserService {
     void updateUser(UserDTO user) throws ServiceException;
 
-    void changePassword(long userId, String oldPassword, String newPassword, String confirmPassword) throws ServiceException;
+    void changePassword(String login, String oldPassword, String newPassword, String confirmPassword) throws ServiceException;
 
     CruiseDTO getChosenCruise(long cruiseId) throws ServiceException;
 }

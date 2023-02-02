@@ -31,16 +31,12 @@ public class ViewAllUsersAction implements Action {
         System.out.println(request.getQueryString());
         String path = null;
         int pageAmount = 0;
-        try {
-            List<UserDTO> userDTOList = generalService.viewAllUsersWithPagination(cruisePerPage, pageNum);
-            pageAmount = (new MySqlUserDAO()).getAmount();
-            pageAmount /= cruisePerPage;
-            request.setAttribute("pageAmount", pageAmount);
-            session.setAttribute("allUsers", userDTOList);
-            path = "/mainAdminPage.jsp";
-        } catch (DbException e) {
-            throw new ServiceException(e);
-        }
+        List<UserDTO> userDTOList = generalService.viewAllUsersWithPagination(cruisePerPage, pageNum);
+        pageAmount = generalService.getUserAmount();
+        pageAmount /= cruisePerPage;
+        request.setAttribute("pageAmount", pageAmount);
+        session.setAttribute("allUsers", userDTOList);
+        path = "/mainAdminPage.jsp";
         return path;
     }
 }

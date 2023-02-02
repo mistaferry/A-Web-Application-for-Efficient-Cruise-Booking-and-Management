@@ -29,6 +29,7 @@ public class SignInAction implements Action {
         String errorMessage;
         String login = request.getParameter("login");
         String password = request.getParameter("password");
+        session.removeAttribute("error");
         try {
             UserDTO user = generalService.signIn(login, password);
             session.setAttribute("user", user);

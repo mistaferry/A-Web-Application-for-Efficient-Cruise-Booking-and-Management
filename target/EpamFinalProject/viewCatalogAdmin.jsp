@@ -36,9 +36,9 @@
     </div>
 </form>
 
-<div class="button-add-new">
-    <a href="controller?action=view-existing-data">Add new cruise</a>
-</div>
+<%--<div class="button-add-new">--%>
+<%--    <a href="controller?action=view-existing-data">Add new cruise</a>--%>
+<%--</div>--%>
 
 <section class="table">
     <div>

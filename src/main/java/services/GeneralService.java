@@ -46,4 +46,8 @@ public interface GeneralService {
     List<OrderDTO> viewUserOrdersWithPagination(long loggedUserId, int cruisePerPage, int pageNum) throws ServiceException;
 
     void updateOrderPaymentStatus(long userId, long cruiseId, Date date) throws ServiceException;
+
+    int getAmountWithFilters(List<String> filters) throws ServiceException;
+
+    int getUserAmount() throws ServiceException;
 }

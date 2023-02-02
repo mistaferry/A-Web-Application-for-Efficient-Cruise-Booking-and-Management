@@ -33,14 +33,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void changePassword(long userId, String oldPassword, String newPassword, String confirmPassword) throws ServiceException {
+    public void changePassword(String login, String oldPassword, String newPassword, String confirmPassword) throws ServiceException {
         try {
-            User user = userDao.getById(userId).get();
-            if(!user.getPassword().equals(oldPassword)){
-                System.out.println("ex");
-            }
+            User user = userDao.getByEmail(login, oldPassword).get();
             if(!newPassword.equals(confirmPassword)){
-                System.out.println("ex");
+                throw new ServiceException("Passwords aren't equal");
             }
             userDao.changePassword(user.getId(), newPassword);
         }  catch (DbException e) {

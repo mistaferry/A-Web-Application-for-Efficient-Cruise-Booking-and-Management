@@ -46,12 +46,30 @@
                     <td>
                             ${user.surname}
                     </td>
-                    <td>
-                            ${user.roleId}
-                    </td>
-                    <td>
-                            ${user.blocked}
-                    </td>
+                    <c:choose>
+                        <c:when test="${user.roleId == 1}">
+                            <td>
+                                CUSTOMER
+                            </td>
+                        </c:when>
+                        <c:when test="${user.roleId == 2}">
+                            <td>
+                                ADMIN
+                            </td>
+                        </c:when>
+                    </c:choose>
+                    <c:choose>
+                        <c:when test="${!user.blocked}">
+                            <td style="background: lightgreen">
+                                Unblocked
+                            </td>
+                        </c:when>
+                        <c:when test="${user.blocked}">
+                            <td style="background: lightcoral">
+                                Blocked
+                            </td>
+                        </c:when>
+                    </c:choose>
                     <td class="max-width">
                         <form action="controller" method="get">
                             <input type="hidden" name="action" value="get-user-info">
