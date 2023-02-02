@@ -1,9 +1,12 @@
 package actions.general;
 
 import actions.Action;
+import controller.Controller;
 import dto.UserDTO;
 
 import model.entity.Role;
+import org.slf4j.*;
+import org.slf4j.event.Level;
 import services.GeneralService;
 import services.ServiceFactory;
 import com.google.protobuf.ServiceException;
@@ -17,6 +20,7 @@ import java.io.IOException;
 
 public class SignInAction implements Action {
     private final GeneralService generalService;
+    private static final Logger logger = LoggerFactory.getLogger(SignInAction.class);
 
     public SignInAction() {
         this.generalService = ServiceFactory.getInstance().getGeneralService();
@@ -35,7 +39,7 @@ public class SignInAction implements Action {
             session.setAttribute("user", user);
             Role loggedUserRole = Role.getRoleByRoleId(user.getRoleId());
             session.setAttribute("role", loggedUserRole);
-            System.out.println("Role - " + loggedUserRole.name());
+            logger.info(user.getLogin() + " entered the app");
             path = "profile.jsp";
         } catch (ServiceException e) {
             errorMessage = "There is no such user";
