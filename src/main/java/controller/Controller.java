@@ -2,20 +2,14 @@ package controller;
 
 import actions.Action;
 import actions.ActionFactory;
-import com.google.protobuf.ServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import services.GeneralService;
-import services.ServiceFactory;
-
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-//@WebServlet("/controller")
 public class Controller extends HttpServlet {
     private static final Logger logger = LoggerFactory.getLogger(Controller.class);
 
@@ -30,11 +24,11 @@ public class Controller extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.sendRedirect(process(req));
     }
 
-    private String process(HttpServletRequest req) throws ServletException, IOException {
+    private String process(HttpServletRequest req) {
         Action action = ActionFactory.getAction(req.getParameter("action"));
         try {
             return action.execute(req);

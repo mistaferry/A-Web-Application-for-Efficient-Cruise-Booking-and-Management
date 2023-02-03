@@ -1,4 +1,0 @@
-[2023-02-02 19:04:53.197] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-[2023-02-02 19:04:53.930] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@62173b71
-[2023-02-02 19:04:53.937] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-[2023-02-02 19:04:54.030] INFO  actions.general.SignInAction - huryn@gmail.com entered the app

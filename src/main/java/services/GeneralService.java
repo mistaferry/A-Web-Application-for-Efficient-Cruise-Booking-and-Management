@@ -5,12 +5,7 @@ import dto.CruiseDTO;
 import dto.OrderDTO;
 import dto.ShipDTO;
 import dto.UserDTO;
-
-import model.entity.User;
-import utils.Convertor;
-
 import java.sql.Date;
-import java.sql.SQLException;
 import java.util.List;
 
 public interface GeneralService {

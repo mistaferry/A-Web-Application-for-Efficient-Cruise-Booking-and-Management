@@ -16,7 +16,6 @@ import model.entity.Ship;
 import model.entity.User;
 import services.GeneralService;
 import utils.Convertor;
-
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;

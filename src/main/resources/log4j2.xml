@@ -2,7 +2,7 @@
 <Configuration>
     <Appenders>
         <File name="File"
-              fileName="\resources\output.log">
+              fileName="logs/project.log">
             <PatternLayout
                     pattern="%d{[yyyy-MM-dd HH:mm:ss.SSS]} %-5level %logger{36} - %msg%n"/>
         </File>

@@ -2,14 +2,9 @@ package actions.customer;
 
 import actions.Action;
 import com.google.protobuf.ServiceException;
-import dao.impl.MySqlCruiseDAO;
 import dto.CruiseDTO;
-
-import exceptions.DbException;
 import services.GeneralService;
 import services.ServiceFactory;
-
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -30,17 +25,12 @@ public class ViewCruiseCatalogAction implements Action {
         int cruisePerPage = Integer.parseInt(request.getParameter("cruisePerPage"));
         getFiltersFromPage(request, filters);
 
-        System.out.println(request.getQueryString());
-        String path = null;
         List<CruiseDTO> cruiseDTOList = generalService.viewCatalogWithPagination(filters, cruisePerPage, pageNum);
-        int pageAmount = 0;
-        pageAmount = generalService.getCruiseAmount(filters);
+        int pageAmount = generalService.getCruiseAmount(filters);
         pageAmount /= cruisePerPage;
-        System.out.println("pageAmount - " + pageAmount);
         request.setAttribute("pageAmount", pageAmount);
         session.setAttribute("allCruises", cruiseDTOList);
-        path = "/catalog.jsp";
-        return path;
+        return "/catalog.jsp";
     }
 
     private void getFiltersFromPage(HttpServletRequest request, List<String> filters) {
