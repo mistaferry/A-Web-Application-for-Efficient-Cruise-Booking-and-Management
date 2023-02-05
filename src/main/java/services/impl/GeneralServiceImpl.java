@@ -166,6 +166,7 @@ public class GeneralServiceImpl implements GeneralService {
         return Convertor.convertCruiseToDTO(cruise);
     }
 
+
     @Override
     public List<CruiseDTO> viewCatalog(int cruisePerPage, int pageNum) throws ServiceException {
         List<CruiseDTO> cruiseDTOList = new ArrayList<>();
