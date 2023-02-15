@@ -85,8 +85,9 @@ class GeneralServiceImplTest {
     }
 
     @Test
-    void getCruiseAmount() {
-
+    void getCruiseAmount() throws DbException, ServiceException {
+        when(cruiseDao.getAmountWithFilters(List.of("2022-4-20","4"))).thenReturn(List.of(getTestCruise(), getTestCruise()).size());
+        assertEquals(2, generalService.getAmountWithFilters(List.of("2022-4-20","4")));
     }
 
     private List<OrderDTO> getTestOrderDTOList() {
