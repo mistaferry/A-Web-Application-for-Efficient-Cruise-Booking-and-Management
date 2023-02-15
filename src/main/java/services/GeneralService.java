@@ -28,7 +28,7 @@ public interface GeneralService {
 
     void updateCruise(CruiseDTO cruise) throws ServiceException;
 
-    List<OrderDTO> getOrdersByUser(long userId, int cruisePerPage, int pageNum) throws ServiceException;
+    List<OrderDTO> getOrdersByUserAdmin(long userId, int cruisePerPage, int pageNum) throws ServiceException;
 
     CruiseDTO getChosenCruise(long cruiseId) throws ServiceException;
 
@@ -45,4 +45,8 @@ public interface GeneralService {
     int getAmountWithFilters(List<String> filters) throws ServiceException;
 
     int getUserAmount() throws ServiceException;
+
+    void updateUser(UserDTO user) throws ServiceException;
+
+    void changePassword(String login, String oldPassword, String newPassword, String confirmPassword) throws ServiceException;
 }

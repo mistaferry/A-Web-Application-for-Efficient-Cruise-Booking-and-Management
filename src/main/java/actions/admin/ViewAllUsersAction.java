@@ -28,7 +28,7 @@ public class ViewAllUsersAction implements Action {
         HttpSession session = request.getSession();
         int pageNum = Integer.parseInt(request.getParameter("page"));
         int cruisePerPage = Integer.parseInt(request.getParameter("userPerPage"));
-        System.out.println(request.getQueryString());
+//        System.out.println(request.getQueryString());
         String path = null;
         int pageAmount = 0;
         List<UserDTO> userDTOList = generalService.viewAllUsersWithPagination(cruisePerPage, pageNum);

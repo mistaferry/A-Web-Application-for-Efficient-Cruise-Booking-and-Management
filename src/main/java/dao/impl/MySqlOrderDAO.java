@@ -101,6 +101,30 @@ public class MySqlOrderDAO implements OrderDao {
         }
     }
 
+    @Override
+    public List<Order> getOrdersByUserAdmin(long loggedUserId, int cruisePerPage, int pageNum) throws DbException {
+        List<Order> orderList;
+        try(Connection connection = DataSource.getConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(OrderMysqlQuery.GET_USER_ORDERS +
+                    CruiseMysqlQuery.GET_PAGINATION);
+            orderList = new ArrayList<>();
+            int index = 0;
+            preparedStatement.setLong(++index, loggedUserId);
+            setPaginationValues(preparedStatement, cruisePerPage, index, pageNum * cruisePerPage);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    Order order = setOrderValues(resultSet);
+                    orderList.add(order);
+                }
+            }catch (SQLException e) {
+                throw new DbException("Admin cannot get Orders values", e);
+            }
+        }catch (SQLException e) {
+            throw new DbException("Admin cannot get Orders by User", e);
+        }
+        return orderList;
+    }
+
     private Order setOrderValues(ResultSet resultSet)  throws SQLException, DbException {
         Order order = new Order();
         Cruise cruise= new Cruise();

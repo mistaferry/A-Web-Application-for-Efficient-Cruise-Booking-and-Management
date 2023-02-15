@@ -12,4 +12,6 @@ public final class CityMysqlQuery {
     public static final String DELETE = "DELETE city WHERE id=?";
 
     public static final String GET_ALL_CITIES_BY_SHIP_ID = "SELECT city_id FROM ship_has_cities WHERE ship_id=?";
+
+    public static final String GET_STAFF_BY_SHIP_ID = "SELECT staff_id FROM ship_has_staff WHERE ship_id=?";
 }

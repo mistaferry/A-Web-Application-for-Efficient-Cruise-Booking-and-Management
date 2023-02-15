@@ -3,7 +3,7 @@ package dao.constants;
 public class StaffMysqlQuery {
     public static final String ADD_SHIP = "INSERT INTO staff (duration, start_day, number_of_ports, start_port, end_port) VALUES (?, ?, ?, ?, ?, ?)";
 
-    public static final String GET_BY_ID = "SELECT staff WHERE id=?";
+    public static final String GET_BY_ID = "SELECT * FROM staff WHERE id=?";
 
     public static final String GET_ALL = "SELECT * FROM staff";
 

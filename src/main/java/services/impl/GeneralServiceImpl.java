@@ -144,10 +144,10 @@ public class GeneralServiceImpl implements GeneralService {
     }
 
     @Override
-    public List<OrderDTO> getOrdersByUser(long userId, int orderPerPage, int pageNum) throws ServiceException {
+    public List<OrderDTO> getOrdersByUserAdmin(long userId, int orderPerPage, int pageNum) throws ServiceException {
         List<OrderDTO> orderDTO = new ArrayList<>();
         try {
-            List<Order> orderList = orderDao.getOrdersByUser(userId, orderPerPage, pageNum);
+            List<Order> orderList = orderDao.getOrdersByUserAdmin(userId, orderPerPage, pageNum);
             orderList.forEach(order -> orderDTO.add(convertOrderToDTO(order)));
             return orderDTO;
         } catch (DbException e) {
@@ -246,6 +246,29 @@ public class GeneralServiceImpl implements GeneralService {
         try {
             return userDao.getAmount();
         } catch (DbException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public void updateUser(UserDTO user) throws ServiceException {
+        User convertedUser = Convertor.convertDTOToUser(user);
+        try {
+            userDao.update(convertedUser);
+        }  catch (DbException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public void changePassword(String login, String oldPassword, String newPassword, String confirmPassword) throws ServiceException {
+        try {
+            User user = userDao.getByEmail(login, oldPassword).get();
+            if(!newPassword.equals(confirmPassword)){
+                throw new ServiceException("Passwords aren't equal");
+            }
+            userDao.changePassword(user.getId(), newPassword);
+        }  catch (DbException e) {
             throw new ServiceException(e);
         }
     }

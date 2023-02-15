@@ -29,11 +29,12 @@ public class ViewUserCruisesAction implements Action {
         int pageNum = Integer.parseInt(request.getParameter("page"));
         int cruisePerPage = Integer.parseInt(request.getParameter("cruisePerPage"));
         long loggedUserId = getUserFromSession.getId();
-        System.out.println(request.getQueryString());
+//        System.out.println(request.getQueryString());
         String path = null;
         int pageAmount = 0;
         try {
             List<OrderDTO> orderDTOList = generalService.viewUserOrdersWithPagination(loggedUserId, cruisePerPage, pageNum);
+            //!
             pageAmount = (new MySqlOrderDAO()).getAmountByUser(loggedUserId);
             pageAmount /= cruisePerPage;
             request.setAttribute("pageAmount", pageAmount);

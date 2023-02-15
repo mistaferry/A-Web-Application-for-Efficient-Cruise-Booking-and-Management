@@ -194,6 +194,11 @@ public class MySqlCruiseDAO implements CruiseDao {
         } catch (DbException e) {
             throw new DbException("Cannot get All Cities by Ship Id", e);
         }
+        try {
+            ship.setStaff((new MySqlStaffDAO()).getAllStaffByShipId(ship.getId()));
+        } catch (DbException e) {
+            throw new DbException("Cannot get Staff by Ship Id", e);
+        }
         cruise.setShip(ship);
         cruise.setDuration(resultSet.getInt("duration"));
         cruise.setPrice(resultSet.getDouble("price"));

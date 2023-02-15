@@ -13,4 +13,6 @@ public interface OrderDao extends EntityDao<Order>{
     List<Order> getOrdersByUser(long loggedUserId, int cruisePerPage, int pageNum) throws DbException;
 
     void updatePaymentStatus(long userId, long cruiseId, Date date) throws DbException;
+
+    List<Order> getOrdersByUserAdmin(long loggedUserId, int cruisePerPage, int pageNum) throws DbException;
 }

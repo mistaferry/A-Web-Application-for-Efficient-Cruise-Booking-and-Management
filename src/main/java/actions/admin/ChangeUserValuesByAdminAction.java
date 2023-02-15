@@ -3,18 +3,19 @@ package actions.admin;
 import actions.Action;
 import com.google.protobuf.ServiceException;
 import dto.UserDTO;
+import services.GeneralService;
 import services.ServiceFactory;
-import services.UserService;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 
 public class ChangeUserValuesByAdminAction implements Action {
-    private final UserService userService;
+    private final GeneralService generalService;
 
     public ChangeUserValuesByAdminAction() {
-        this.userService = ServiceFactory.getInstance().getUserService();
+        this.generalService = ServiceFactory.getInstance().getGeneralService();
     }
 
     @Override
@@ -24,7 +25,7 @@ public class ChangeUserValuesByAdminAction implements Action {
         UserDTO getChosenUserFromSession = (UserDTO) session.getAttribute("chosenUser");
         //нові дані, введені
         UserDTO user = getUserDTOValues(request, getChosenUserFromSession);
-        userService.updateUser(user);
+        generalService.updateUser(user);
         getChosenUserFromSession.setBlocked(user.isBlocked());
         getChosenUserFromSession.setRoleId(user.getRoleId());
 

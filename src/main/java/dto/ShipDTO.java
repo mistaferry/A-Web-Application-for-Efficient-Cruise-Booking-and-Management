@@ -16,7 +16,7 @@ public class ShipDTO implements Serializable {
     private long id;
     private String name;
     private int numberOfPorts;
-    private Set<Staff> staff;
+    private List<Staff> staff;
     private List<City> route;
     private int capacity;
 }

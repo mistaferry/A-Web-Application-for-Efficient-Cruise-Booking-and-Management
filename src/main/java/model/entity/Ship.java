@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.util.List;
-import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true)
 @Builder
@@ -14,7 +13,7 @@ public class Ship extends Entity{
     private static final long serialVersionUID = 1L;
     private String name;
     private int numberOfPorts;
-    private Set<Staff> staff;
+    private List<Staff> staff;
     private List<City> route;
     private int capacity;
 
@@ -26,7 +25,7 @@ public class Ship extends Entity{
         this.name = name;
     }
 
-    public Ship(String name, int numberOfPorts, Set<Staff> staff, List<City> route, int capacity) {
+    public Ship(String name, int numberOfPorts, List<Staff> staff, List<City> route, int capacity) {
         this.name = name;
         this.numberOfPorts = numberOfPorts;
         this.staff = staff;
@@ -34,7 +33,7 @@ public class Ship extends Entity{
         this.capacity = capacity;
     }
 
-    public Ship(long id, String name, int numberOfPorts, Set<Staff> staff, List<City> route, int capacity) {
+    public Ship(long id, String name, int numberOfPorts, List<Staff> staff, List<City> route, int capacity) {
         super(id);
         this.name = name;
         this.numberOfPorts = numberOfPorts;
@@ -51,11 +50,11 @@ public class Ship extends Entity{
         this.name = name;
     }
 
-    public Set<Staff> getStaff() {
+    public List<Staff> getStaff() {
         return staff;
     }
 
-    public void setStaff(Set<Staff> staff) {
+    public void setStaff(List<Staff> staff) {
         this.staff = staff;
     }
 

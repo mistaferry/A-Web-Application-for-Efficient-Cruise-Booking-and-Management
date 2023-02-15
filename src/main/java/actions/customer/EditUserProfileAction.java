@@ -4,8 +4,8 @@ import actions.Action;
 import com.google.protobuf.ServiceException;
 import dto.UserDTO;
 
+import services.GeneralService;
 import services.ServiceFactory;
-import services.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -14,10 +14,10 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 public class EditUserProfileAction implements Action {
-    private final UserService userService;
+    private final GeneralService generalService;
 
     public EditUserProfileAction() {
-        this.userService = ServiceFactory.getInstance().getUserService();
+        this.generalService = ServiceFactory.getInstance().getGeneralService();
     }
 
     @Override
@@ -26,7 +26,7 @@ public class EditUserProfileAction implements Action {
         UserDTO getUserFromSession = (UserDTO) session.getAttribute("user");
         UserDTO user = getUserDTOValues(request, getUserFromSession);
         try {
-            userService.updateUser(user);
+            generalService.updateUser(user);
             getUserFromSession.setFirstName(user.getFirstName());
             getUserFromSession.setSurname(user.getSurname());
             getUserFromSession.setLogin(user.getLogin());

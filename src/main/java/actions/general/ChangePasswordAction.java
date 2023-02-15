@@ -5,9 +5,8 @@ import com.google.protobuf.ServiceException;
 import dto.UserDTO;
 
 import model.entity.Role;
+import services.GeneralService;
 import services.ServiceFactory;
-import services.UserService;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -15,10 +14,10 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 public class ChangePasswordAction implements Action {
-    private final UserService userService;
+    private final GeneralService generalService;
 
     public ChangePasswordAction() {
-        this.userService = ServiceFactory.getInstance().getUserService();
+        this.generalService = ServiceFactory.getInstance().getGeneralService();
     }
 
     @Override
@@ -30,7 +29,7 @@ public class ChangePasswordAction implements Action {
         String confirmPassword = request.getParameter("confirmPassword");
         session.removeAttribute("error");
         try {
-            userService.changePassword(login, oldPassword, newPassword, confirmPassword);
+            generalService.changePassword(login, oldPassword, newPassword, confirmPassword);
         } catch (ServiceException e) {
             session.setAttribute("error", "Input data is wrong");
         }

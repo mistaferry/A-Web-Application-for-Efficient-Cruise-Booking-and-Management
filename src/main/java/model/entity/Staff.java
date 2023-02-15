@@ -5,6 +5,20 @@ public class Staff extends Entity{
     private String firstName;
     private String surname;
 
+    public Staff() {
+    }
+
+    public Staff(String firstName, String surname) {
+        this.firstName = firstName;
+        this.surname = surname;
+    }
+
+    public Staff(long id, String firstName, String surname) {
+        super(id);
+        this.firstName = firstName;
+        this.surname = surname;
+    }
+
     public String getFirstName() {
         return firstName;
     }

@@ -3,7 +3,6 @@ package actions.admin;
 import actions.Action;
 import com.google.protobuf.ServiceException;
 import dao.impl.MySqlUserDAO;
-import dto.CruiseDTO;
 import dto.OrderDTO;
 import dto.UserDTO;
 import exceptions.DbException;
@@ -14,7 +13,6 @@ import utils.Convertor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.sql.SQLException;
 import java.util.List;
 
 public class AdminGetUserCruisesAction implements Action {
@@ -38,7 +36,7 @@ public class AdminGetUserCruisesAction implements Action {
         session.setAttribute("chosenUser", userDTO);
         int cruisePerPage = Integer.parseInt(request.getParameter("cruisePerPage"));
         int page = Integer.parseInt(request.getParameter("page"));
-        List<OrderDTO> orderDTOList = generalService.getOrdersByUser(userId, cruisePerPage, page);
+        List<OrderDTO> orderDTOList = generalService.getOrdersByUserAdmin(userId, cruisePerPage, page);
         request.setAttribute("userCruises", orderDTOList);
         return "getUserCruises.jsp";
 

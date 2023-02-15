@@ -8,6 +8,7 @@ import dao.constants.*;
 import exceptions.DbException;
 import model.entity.City;
 import model.entity.Ship;
+import model.entity.Staff;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -42,6 +43,7 @@ public class MySqlShipDAO implements ShipDao {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     List<City> city = (new MySqlCityDAO()).getAllCitiesByShipId(id);
+                    List<Staff> staff = (new MySqlStaffDAO()).getAllStaffByShipId(id);
                     ship.setId(resultSet.getLong("id"));
                     ship.setName(resultSet.getString("name"));
                     ship.setCapacity(resultSet.getInt("capacity"));
