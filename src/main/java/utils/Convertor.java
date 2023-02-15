@@ -61,6 +61,7 @@ public final class Convertor {
                 .cruise(order.getCruise())
                 .dateOfRegistration(order.getDateOfRegistration())
                 .paid(order.isPaid())
+                .userId(order.getUserId())
                 .build();
     }
 
