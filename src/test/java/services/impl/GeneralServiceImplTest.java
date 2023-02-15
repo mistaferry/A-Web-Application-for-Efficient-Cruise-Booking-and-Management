@@ -75,10 +75,6 @@ class GeneralServiceImplTest {
     }
 
     @Test
-    void updateOrderPaymentStatus() {
-    }
-
-    @Test
     void getUserAmount() throws DbException, ServiceException {
         when(userDao.getAmount()).thenReturn(List.of(getTestUser(), getTestUser(), getTestUser()).size());
         assertEquals(3, generalService.getUserAmount());
@@ -201,5 +197,16 @@ class GeneralServiceImplTest {
                 .route(getTestRouteList())
                 .staff(getTestStaffList())
                 .build();
+    }
+
+    @Test
+    void signIn() throws DbException, ServiceException {
+        User user = getTestUser();
+        when(userDao.getByEmail("test@gmail.com", "test")).thenReturn(Optional.of(user));
+        assertEquals(getTestUserDTO(), generalService.signIn("test@gmail.com", "test"));
+    }
+
+    @Test
+    void register() {
     }
 }
