@@ -1,16 +1,15 @@
-package model.entity;
+package model;
 
 import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import java.sql.Date;
 
-@EqualsAndHashCode(callSuper = true)
 @Builder
 @Data
-public class Cruise extends Entity {
+public class Cruise{
     private static final long serialVersionUID = 1L;
+    private long id;
     private Ship ship;
     private int duration;
     private double price;
@@ -39,7 +38,7 @@ public class Cruise extends Entity {
     }
 
     public Cruise(long id, Ship ship, int duration, double price, Date startDate, int number_of_register_people) {
-        super(id);
+        this.id = id;
         this.ship = ship;
         this.duration = duration;
         this.price = price;
@@ -88,8 +87,11 @@ public class Cruise extends Entity {
         this.number_of_register_people = number_of_register_people;
     }
 
-    @Override
+    public long getId() {
+        return id;
+    }
+
     public void setId(long id) {
-        super.setId(id);
+        this.id = id;
     }
 }

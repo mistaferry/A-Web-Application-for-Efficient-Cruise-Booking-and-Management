@@ -5,9 +5,9 @@ import dao.OrderDao;
 import dao.constants.CruiseMysqlQuery;
 import dao.constants.OrderMysqlQuery;
 import exceptions.DbException;
-import model.entity.Cruise;
-import model.entity.Order;
-import model.entity.Ship;
+import model.Cruise;
+import model.Order;
+import model.Ship;
 
 import java.sql.*;
 import java.util.ArrayList;

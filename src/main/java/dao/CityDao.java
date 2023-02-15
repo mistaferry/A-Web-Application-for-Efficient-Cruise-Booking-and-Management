@@ -2,9 +2,8 @@ package dao;
 
 
 import exceptions.DbException;
-import model.entity.City;
+import model.City;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public interface CityDao extends EntityDao<City>{

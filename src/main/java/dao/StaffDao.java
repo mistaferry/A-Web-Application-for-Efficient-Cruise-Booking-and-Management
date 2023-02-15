@@ -1,7 +1,7 @@
 package dao;
 
 import exceptions.DbException;
-import model.entity.Staff;
+import model.Staff;
 
 import java.util.List;
 

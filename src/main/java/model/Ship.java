@@ -1,16 +1,15 @@
-package model.entity;
+package model;
 
 import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
-@EqualsAndHashCode(callSuper = true)
-@Builder
 @Data
-public class Ship extends Entity{
+@Builder
+public class Ship{
     private static final long serialVersionUID = 1L;
+    private long id;
     private String name;
     private int numberOfPorts;
     private List<Staff> staff;
@@ -21,7 +20,7 @@ public class Ship extends Entity{
     }
 
     public Ship(long id, String name) {
-        super(id);
+        this.id = id;
         this.name = name;
     }
 
@@ -34,12 +33,20 @@ public class Ship extends Entity{
     }
 
     public Ship(long id, String name, int numberOfPorts, List<Staff> staff, List<City> route, int capacity) {
-        super(id);
+        this.id = id;
         this.name = name;
         this.numberOfPorts = numberOfPorts;
         this.staff = staff;
         this.route = route;
         this.capacity = capacity;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getName() {

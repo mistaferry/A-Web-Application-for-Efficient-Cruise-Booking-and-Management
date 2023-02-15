@@ -1,10 +1,10 @@
 package utils;
 
 import dto.*;
-import model.entity.Cruise;
-import model.entity.Order;
-import model.entity.Ship;
-import model.entity.User;
+import model.Cruise;
+import model.Order;
+import model.Ship;
+import model.User;
 
 public final class Convertor {
     private Convertor() {}
@@ -67,6 +67,7 @@ public final class Convertor {
     public static ShipDTO convertShipToDTO(Ship ship) {
         return ShipDTO.builder()
                 .id(ship.getId())
+                .name(ship.getName())
                 .capacity(ship.getCapacity())
                 .numberOfPorts(ship.getNumberOfPorts())
                 .route(ship.getRoute())

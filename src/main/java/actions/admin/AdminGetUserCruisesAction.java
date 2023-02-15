@@ -6,7 +6,7 @@ import dao.impl.MySqlUserDAO;
 import dto.OrderDTO;
 import dto.UserDTO;
 import exceptions.DbException;
-import model.entity.User;
+import model.User;
 import services.GeneralService;
 import services.ServiceFactory;
 import utils.Convertor;

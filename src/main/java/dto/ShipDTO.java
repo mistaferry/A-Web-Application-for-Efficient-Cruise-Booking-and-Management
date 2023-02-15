@@ -2,12 +2,11 @@ package dto;
 
 import lombok.Builder;
 import lombok.Data;
-import model.entity.City;
-import model.entity.Staff;
+import model.City;
+import model.Staff;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
 
 @Builder
 @Data

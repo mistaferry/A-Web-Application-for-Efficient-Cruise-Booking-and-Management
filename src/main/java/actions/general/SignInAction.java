@@ -2,7 +2,7 @@ package actions.general;
 
 import actions.Action;
 import dto.UserDTO;
-import model.entity.Role;
+import model.Role;
 import org.slf4j.*;
 import services.GeneralService;
 import services.ServiceFactory;

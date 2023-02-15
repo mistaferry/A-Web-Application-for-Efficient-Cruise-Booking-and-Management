@@ -1,7 +1,7 @@
 package dao.constants;
 
 public final class CityMysqlQuery {
-    public static final String ADD_CITY = "INSERT INTO city (name, country, ship_id) VALUES (?,?,?)";
+    public static final String ADD_CITY = "INSERT INTO city (id, name, country) VALUES (?,?,?)";
 
     public static final String GET_BY_ID = "SELECT * FROM city WHERE id=?";
 

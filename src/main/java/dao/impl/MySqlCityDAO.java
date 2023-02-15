@@ -5,7 +5,7 @@ import dao.CityDao;
 import dao.constants.*;
 
 import exceptions.DbException;
-import model.entity.City;
+import model.City;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -22,6 +22,7 @@ public class MySqlCityDAO implements CityDao {
         try(Connection connection = DataSource.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(CityMysqlQuery.ADD_CITY);
             int index = 0;
+            preparedStatement.setLong(++index, city.getId());
             preparedStatement.setString(++index, city.getName());
             preparedStatement.setString(++index, city.getCountry());
             preparedStatement.execute();

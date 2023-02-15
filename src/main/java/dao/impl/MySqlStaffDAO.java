@@ -5,8 +5,7 @@ import dao.StaffDao;
 import dao.constants.*;
 
 import exceptions.DbException;
-import model.entity.City;
-import model.entity.Staff;
+import model.Staff;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,15 +14,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 public class MySqlStaffDAO implements StaffDao {
 
     @Override
     public void add(Staff staff) throws DbException {
         try(Connection connection = DataSource.getConnection()) {
-            PreparedStatement preparedStatement = connection.prepareStatement(ShipMysqlQuery.ADD_SHIP);
+            PreparedStatement preparedStatement = connection.prepareStatement(StaffMysqlQuery.ADD_STAFF);
             int index = 0;
+            preparedStatement.setLong(++index, staff.getId());
             preparedStatement.setString(++index, staff.getFirstName());
             preparedStatement.setString(++index, staff.getSurname());
             preparedStatement.execute();
@@ -41,7 +40,7 @@ public class MySqlStaffDAO implements StaffDao {
             preparedStatement.setLong(++index, id);
             staff = new Staff();
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
+                while (resultSet.next()) {
                     staff.setId(id);
                     staff.setFirstName(resultSet.getString("first_name"));
                     staff.setSurname(resultSet.getString("surname"));
@@ -57,11 +56,12 @@ public class MySqlStaffDAO implements StaffDao {
     public List<Staff> getAll() throws DbException {
         List<Staff> staffList;
         try(Connection connection = DataSource.getConnection()) {
-            PreparedStatement preparedStatement = connection.prepareStatement(ShipMysqlQuery.GET_ALL);
+            PreparedStatement preparedStatement = connection.prepareStatement(StaffMysqlQuery.GET_ALL);
             staffList = new ArrayList<>();
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     Staff staff = new Staff();
+                    staff.setId(resultSet.getLong("id"));
                     staff.setFirstName(resultSet.getString("first_name"));
                     staff.setSurname(resultSet.getString("surname"));
                     staffList.add(staff);
@@ -76,10 +76,11 @@ public class MySqlStaffDAO implements StaffDao {
     @Override
     public void update(Staff staff) throws DbException {
         try(Connection connection = DataSource.getConnection()) {
-            PreparedStatement preparedStatement = connection.prepareStatement(ShipMysqlQuery.UPDATE);
+            PreparedStatement preparedStatement = connection.prepareStatement(StaffMysqlQuery.UPDATE);
             int index = 0;
             preparedStatement.setString(++index, staff.getFirstName());
             preparedStatement.setString(++index, staff.getSurname());
+            preparedStatement.setLong(++index, staff.getId());
             preparedStatement.execute();
         }catch (SQLException e){
             throw new DbException("Cannot update Staff", e);
@@ -89,12 +90,12 @@ public class MySqlStaffDAO implements StaffDao {
     @Override
     public void delete(long id) throws DbException {
         try(Connection connection = DataSource.getConnection()) {
-            PreparedStatement preparedStatement = connection.prepareStatement(ShipMysqlQuery.DELETE);
+            PreparedStatement preparedStatement = connection.prepareStatement(StaffMysqlQuery.DELETE);
             int index = 0;
             preparedStatement.setLong(++index, id);
             preparedStatement.execute();
         }catch (SQLException e){
-            throw new DbException("Cannot delete Ship", e);
+            throw new DbException("Cannot delete Staff", e);
         }
     }
 
@@ -122,9 +123,9 @@ public class MySqlStaffDAO implements StaffDao {
         long staff_id = 0;
         try {
             staff_id = resultSet.getLong("staff_id");
+            return (new MySqlStaffDAO()).getById(staff_id).get();
         } catch (SQLException e){
             throw new DbException("Cannot get Staff from Db", e);
         }
-        return (new MySqlStaffDAO()).getById(staff_id).get();
     }
 }

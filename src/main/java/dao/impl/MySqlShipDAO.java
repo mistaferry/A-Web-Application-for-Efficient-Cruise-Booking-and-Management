@@ -1,14 +1,13 @@
 package dao.impl;
 
 import connection.DataSource;
-import dao.CityDao;
 import dao.ShipDao;
 import dao.constants.*;
 
 import exceptions.DbException;
-import model.entity.City;
-import model.entity.Ship;
-import model.entity.Staff;
+import model.City;
+import model.Ship;
+import model.Staff;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -49,6 +48,7 @@ public class MySqlShipDAO implements ShipDao {
                     ship.setCapacity(resultSet.getInt("capacity"));
                     ship.setNumberOfPorts(resultSet.getInt("number_of_ports"));
                     ship.setRoute(city);
+                    ship.setStaff(staff);
                 }
             }catch (SQLException e){
                 throw new DbException("Cannot get All Cities", e);
@@ -60,17 +60,14 @@ public class MySqlShipDAO implements ShipDao {
     }
 
     @Override
-    public List<Ship> getAll() throws DbException {
+    public List<Ship> getShips() throws DbException {
         List<Ship> shipList;
         try(Connection connection = DataSource.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(ShipMysqlQuery.GET_ALL);
             shipList = new ArrayList<>();
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
-                    Ship ship = new Ship();
-                    ship.setName(resultSet.getString("name"));
-                    ship.setCapacity(resultSet.getInt("capacity"));
-                    ship.setNumberOfPorts(resultSet.getInt("number_of_ports"));
+                    Ship ship = setShipValues(resultSet);
                     shipList.add(ship);
                 }
             }
@@ -78,6 +75,37 @@ public class MySqlShipDAO implements ShipDao {
             throw new DbException("Cannot get all Ships", e);
         }
         return shipList;
+    }
+
+    @Override
+    public List<Ship> getAll() throws DbException {
+        List<Ship> shipList;
+        try(Connection connection = DataSource.getConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(ShipMysqlQuery.GET_ALL);
+            shipList = new ArrayList<>();
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    Ship ship = setShipValues(resultSet);
+                    shipList.add(ship);
+                }
+            }
+        }catch (SQLException e){
+            throw new DbException("Cannot get all Ships", e);
+        }
+        return shipList;
+    }
+
+    private Ship setShipValues(ResultSet resultSet) throws SQLException, DbException {
+        Ship ship = new Ship();
+        ship.setId(resultSet.getLong("id"));
+        ship.setName(resultSet.getString("name"));
+        ship.setNumberOfPorts(resultSet.getInt("number_of_ports"));
+        List<City> route = (new MySqlCityDAO()).getAllCitiesByShipId(ship.getId());
+        List<Staff> staff = (new MySqlStaffDAO()).getAllStaffByShipId(ship.getId());
+        ship.setRoute(route);
+        ship.setStaff(staff);
+        ship.setCapacity(resultSet.getInt("capacity"));
+        return ship;
     }
 
     @Override

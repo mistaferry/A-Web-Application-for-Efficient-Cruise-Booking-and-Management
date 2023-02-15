@@ -1,7 +1,7 @@
 package dao;
 
 import exceptions.DbException;
-import model.entity.Order;
+import model.Order;
 
 import java.sql.Date;
 import java.util.List;

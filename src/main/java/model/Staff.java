@@ -1,7 +1,13 @@
-package model.entity;
+package model;
 
-public class Staff extends Entity{
+import lombok.Builder;
+import lombok.Data;
+
+@Builder
+@Data
+public class Staff{
     private static final long serialVersionUID = 1L;
+    private long id;
     private String firstName;
     private String surname;
 
@@ -14,9 +20,17 @@ public class Staff extends Entity{
     }
 
     public Staff(long id, String firstName, String surname) {
-        super(id);
+        this.id = id;
         this.firstName = firstName;
         this.surname = surname;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getFirstName() {

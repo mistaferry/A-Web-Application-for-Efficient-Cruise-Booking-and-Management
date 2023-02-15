@@ -2,8 +2,7 @@ package dto;
 
 import lombok.Builder;
 import lombok.Data;
-import model.entity.Cruise;
-import model.entity.Ship;
+import model.Cruise;
 
 import java.sql.Date;
 

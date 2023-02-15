@@ -1,13 +1,13 @@
-package model.entity;
+package model;
 
 import lombok.*;
 
 
-@EqualsAndHashCode(callSuper = true)
 @Data
 @Builder
-public class User extends Entity{
+public class User{
     private static final long serialVersionUID = 1L;
+    private long id;
     private String login;
     private String password;
     private String firstName;
@@ -30,18 +30,13 @@ public class User extends Entity{
     }
 
     public User(long id, String login, String password, String firstName, String surname, int roleId, boolean blocked) {
-        super(id);
+        this.id = id;
         this.login = login;
         this.password = password;
         this.firstName = firstName;
         this.surname = surname;
         this.roleId = roleId;
         this.blocked = blocked;
-    }
-
-    @Override
-    public void setId(long id) {
-        super.setId(id);
     }
 
     public String getLogin() {
@@ -99,4 +94,13 @@ public class User extends Entity{
 //    public void setCruises(Set<Cruise> cruises) {
 //        this.cruises = cruises;
 //    }
+
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 }

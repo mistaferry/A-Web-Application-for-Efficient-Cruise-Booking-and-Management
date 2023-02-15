@@ -1,13 +1,9 @@
 package dao;
 
-import dto.UserDTO;
-
 import exceptions.DbException;
-import model.entity.Cruise;
-import model.entity.Role;
-import model.entity.User;
+import model.Role;
+import model.User;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 

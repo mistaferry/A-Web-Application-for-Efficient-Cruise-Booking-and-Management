@@ -2,8 +2,7 @@ package dto;
 
 import lombok.Builder;
 import lombok.Data;
-import model.entity.City;
-import model.entity.Ship;
+import model.Ship;
 
 import java.io.Serializable;
 import java.sql.Date;

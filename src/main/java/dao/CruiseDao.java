@@ -1,12 +1,10 @@
 package dao;
 
 import exceptions.DbException;
-import model.entity.City;
-import model.entity.Cruise;
-import model.entity.Ship;
+import model.Cruise;
+import model.Ship;
 
 import java.sql.Date;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 

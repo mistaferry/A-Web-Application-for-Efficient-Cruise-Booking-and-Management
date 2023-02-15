@@ -5,9 +5,9 @@ public class ShipMysqlQuery {
 
     public static final String GET_BY_ID = "SELECT id, name, capacity, number_of_ports FROM ship WHERE id=?";
 
-    public static final String GET_ALL = "SELECT id, name, capacity, number_of_ports FROM ship";
+    public static final String GET_ALL = "SELECT * FROM ship";
 
-    public static final String UPDATE = "UPDATE ship WHERE id=?";
+    public static final String UPDATE = "UPDATE ship SET name=?, capacity=?, number_of_ports=? WHERE id=?";
 
     public static final String DELETE = "DELETE ship WHERE id=?";
 

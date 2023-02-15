@@ -1,14 +1,14 @@
-package model.entity;
+package model;
 
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@EqualsAndHashCode(callSuper = true)
 @Builder
 @Data
-public class City extends Entity{
+public class City{
     private static final long serialVersionUID = 1L;
+    private long id;
     private String name;
     private String country;
 
@@ -21,9 +21,17 @@ public class City extends Entity{
     }
 
     public City(long id, String name, String country) {
-        super(id);
+        this.id = id;
         this.name = name;
         this.country = country;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getCountry() {
