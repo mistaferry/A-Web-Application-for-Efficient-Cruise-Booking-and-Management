@@ -207,6 +207,14 @@ class GeneralServiceImplTest {
     }
 
     @Test
-    void register() {
+    void register() throws DbException {
+        User user = new User();
+        user.setLogin("test@gmail.com");
+        user.setPassword("test");
+        user.setFirstName("First Name");
+        user.setSurname("Surname");
+        doNothing().when(userDao).add(isA(User.class));
+        when(userDao.getById(1L)).thenReturn(Optional.of(user));
+        assertDoesNotThrow(() -> generalService.register(user.getLogin(), user.getPassword(), user.getFirstName(), user.getSurname()));
     }
 }
