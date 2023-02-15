@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: services.impl.GeneralServiceImplTest
+-------------------------------------------------------------------------------
+Tests run: 11, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.604 s <<< FAILURE! - in services.impl.GeneralServiceImplTest
+getChosenCruise  Time elapsed: 0.047 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: dto.CruiseDTO@4108fa66<CruiseDTO(id=1, ship=Ship(name=Ship1, numberOfPorts=12, staff=null, route=null, capacity=200), duration=3, price=3123.0, startDate=2022-04-20, number_of_register_people=3)> but was: dto.CruiseDTO@1f130eaf<CruiseDTO(id=1, ship=Ship(name=Ship1, numberOfPorts=12, staff=null, route=null, capacity=200), duration=3, price=3123.0, startDate=2022-04-20, number_of_register_people=3)>
+	at services.impl.GeneralServiceImplTest.getChosenCruise(GeneralServiceImplTest.java:39)
+

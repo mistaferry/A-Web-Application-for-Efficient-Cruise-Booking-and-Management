@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Appenders>
+        <File name="File"
+              fileName="logs/project.log">
+            <PatternLayout
+                    pattern="%d{[yyyy-MM-dd HH:mm:ss.SSS]} %-5level %logger{36} - %msg%n"/>
+        </File>
+
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout
+                    disableAnsi="false"
+                    pattern="%highlight{%d{[yyyy-MM-dd HH:mm:ss.SSS]} %-5level %logger{36} - %msg%n}"/>
+        </Console>
+
+    </Appenders>
+    <Loggers>
+        <Root level="INFO">
+            <AppenderRef ref="File"/>
+            <AppenderRef ref="Console"/>
+        </Root>
+    </Loggers>
+</Configuration>
