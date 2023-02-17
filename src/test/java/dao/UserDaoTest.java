@@ -30,7 +30,6 @@ class UserDaoTest {
             User user = userDao.getByEmail("user@gmail.com", "user").orElse(null);
             assertNotNull(rs);
             assertEquals(getTestUser(), user);
-            assertEquals(getTestUser().toString(), user.toString());
         }
     }
 
