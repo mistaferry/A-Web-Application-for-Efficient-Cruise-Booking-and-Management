@@ -15,7 +15,7 @@ public class UserMysqlQuery {
 
     public static final String UPDATE_PASSWORD = "UPDATE user SET password=? WHERE id=";
 
-    public static final String DELETE = "DELETE user WHERE id=?";
+    public static final String DELETE = "DELETE FROM user WHERE id=?";
 
     public static final String GET_BY_ID = "SELECT * FROM user WHERE id=?";
 

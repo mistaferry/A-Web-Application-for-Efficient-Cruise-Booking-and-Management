@@ -5,7 +5,10 @@ import dao.impl.MySqlUserDAO;
 import exceptions.DbException;
 import model.Ship;
 import model.User;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -18,9 +21,11 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.*;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class UserDaoTest {
 
     @Test
+    @Order(1)
     void add() throws SQLException{
         UserDao userDao = new MySqlUserDAO();
         HikariDataSource dataSource = mock(HikariDataSource.class);
@@ -30,6 +35,7 @@ class UserDaoTest {
     }
 
     @Test
+    @Order(2)
     void update() throws SQLException {
         UserDao userDao = new MySqlUserDAO();
         HikariDataSource dataSource = mock(HikariDataSource.class);
@@ -40,12 +46,13 @@ class UserDaoTest {
     }
 
     @Test
+    @Order(3)
     void checkThereAreSomeUsers() throws SQLException, DbException {
         HikariDataSource dataSource = mock(HikariDataSource.class);
         UserDao userDao = new MySqlUserDAO();
-        try (PreparedStatement preparedStatement = createPreparedStatement(dataSource)) {
+        try (PreparedStatement pst = createPreparedStatement(dataSource)) {
             ResultSet resultSet = mock(ResultSet.class);
-            when(preparedStatement.executeQuery()).thenReturn(resultSet);
+            when(pst.executeQuery()).thenReturn(resultSet);
             when(resultSet.next()).thenReturn(false);
             List<User> users = userDao.getAll();
             assertNotEquals(0, users.size());
@@ -53,6 +60,7 @@ class UserDaoTest {
     }
 
     @Test
+    @Order(4)
     void getById() throws SQLException, DbException {
         UserDao userDao = new MySqlUserDAO();
         HikariDataSource dataSource = mock(HikariDataSource.class);
@@ -67,6 +75,7 @@ class UserDaoTest {
     }
 
     @Test
+    @Order(5)
     void getByEmail() throws SQLException, DbException {
         UserDao userDao = new MySqlUserDAO();
         HikariDataSource dataSource = mock(HikariDataSource.class);
@@ -81,22 +90,29 @@ class UserDaoTest {
     }
 
     @Test
+    @Order(6)
     void changePassword() throws SQLException {
         UserDao userDao = new MySqlUserDAO();
         HikariDataSource dataSource = mock(HikariDataSource.class);
         try(PreparedStatement pst = createPreparedStatement(dataSource)) {
-            assertDoesNotThrow(() -> userDao.changePassword(7L, "huryn1"));
+            assertDoesNotThrow(() -> userDao.changePassword(9L, "huryn1"));
         }
     }
 
     @Test
+    @Order(7)
     void getUserPagination() {
 
     }
 
     @Test
-    void delete(){
-
+    @Order(8)
+    void delete() throws SQLException {
+        HikariDataSource dataSource = mock(HikariDataSource.class);
+        UserDao user = new MySqlUserDAO();
+        try (PreparedStatement pst = createPreparedStatement(dataSource)) {
+            assertDoesNotThrow(() -> user.delete(9L));
+        }
     }
 
     private PreparedStatement createPreparedStatement(HikariDataSource dataSource) throws SQLException {
