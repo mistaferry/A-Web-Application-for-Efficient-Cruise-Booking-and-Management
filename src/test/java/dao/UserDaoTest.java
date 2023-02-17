@@ -34,7 +34,20 @@ class UserDaoTest {
     }
 
     @Test
-    void changePassword() {
+    void changePassword() throws SQLException {
+        UserDao userDao = new MySqlUserDAO();
+        HikariDataSource dataSource = mock(HikariDataSource.class);
+        try(PreparedStatement pst = createPreparedStatement(dataSource)) {
+            assertDoesNotThrow(() -> userDao.changePassword(7L, "huryn1"));
+        }
+    }
+
+    @Test
+    void getUserPagination() {
+    }
+
+    @Test
+    void getAmount() {
     }
 
     private PreparedStatement createPreparedStatement(HikariDataSource dataSource) throws SQLException {
