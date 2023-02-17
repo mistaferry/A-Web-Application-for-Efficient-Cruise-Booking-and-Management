@@ -1,23 +1,70 @@
 package dao;
 
 import com.zaxxer.hikari.HikariDataSource;
-import connection.DataSource;
 import dao.impl.MySqlUserDAO;
 import exceptions.DbException;
 import model.Ship;
 import model.User;
 import org.junit.jupiter.api.Test;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.*;
 
 class UserDaoTest {
+
+    @Test
+    void add() throws SQLException{
+        UserDao userDao = new MySqlUserDAO();
+        HikariDataSource dataSource = mock(HikariDataSource.class);
+        try(PreparedStatement pst = createPreparedStatement(dataSource)) {
+            assertDoesNotThrow(() -> userDao.add(getTestUser()));
+        }
+    }
+
+    @Test
+    void update() throws SQLException {
+        UserDao userDao = new MySqlUserDAO();
+        HikariDataSource dataSource = mock(HikariDataSource.class);
+        try(PreparedStatement pst = createPreparedStatement(dataSource)) {
+            getTestUser().setLogin("login@gmail.com");
+            assertDoesNotThrow(() -> userDao.update(getTestUser()));
+        }
+    }
+
+    @Test
+    void checkThereAreSomeUsers() throws SQLException, DbException {
+        HikariDataSource dataSource = mock(HikariDataSource.class);
+        UserDao userDao = new MySqlUserDAO();
+        try (PreparedStatement preparedStatement = createPreparedStatement(dataSource)) {
+            ResultSet resultSet = mock(ResultSet.class);
+            when(preparedStatement.executeQuery()).thenReturn(resultSet);
+            when(resultSet.next()).thenReturn(false);
+            List<User> users = userDao.getAll();
+            assertNotEquals(0, users.size());
+        }
+    }
+
+    @Test
+    void getById() throws SQLException, DbException {
+        UserDao userDao = new MySqlUserDAO();
+        HikariDataSource dataSource = mock(HikariDataSource.class);
+        try(PreparedStatement pst = createPreparedStatement(dataSource)) {
+            ResultSet rs = mock(ResultSet.class);
+            when(pst.executeQuery()).thenReturn(rs);
+            setResultSetValues(rs);
+            User user = userDao.getById(9L).orElse(null);
+            assertNotNull(rs);
+            assertEquals(getTestUser(), user);
+        }
+    }
 
     @Test
     void getByEmail() throws SQLException, DbException {
@@ -27,7 +74,7 @@ class UserDaoTest {
             ResultSet rs = mock(ResultSet.class);
             when(pst.executeQuery()).thenReturn(rs);
             setResultSetValues(rs);
-            User user = userDao.getByEmail("user@gmail.com", "user").orElse(null);
+            User user = userDao.getByEmail("newuser@gmail.com", "newUser").orElse(null);
             assertNotNull(rs);
             assertEquals(getTestUser(), user);
         }
@@ -44,10 +91,12 @@ class UserDaoTest {
 
     @Test
     void getUserPagination() {
+
     }
 
     @Test
-    void getAmount() {
+    void delete(){
+
     }
 
     private PreparedStatement createPreparedStatement(HikariDataSource dataSource) throws SQLException {
@@ -76,11 +125,11 @@ class UserDaoTest {
 
     private User getTestUser() {
         return User.builder()
-                .id(7L)
-                .login("user@gmail.com")
-                .password("user")
-                .firstName("User")
-                .surname("User")
+                .id(9L)
+                .login("newuser@gmail.com")
+                .password("newUser")
+                .firstName("UserName")
+                .surname("UserSurname")
                 .roleId(1)
                 .blocked(false)
                 .build();
