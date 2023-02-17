@@ -60,24 +60,6 @@ public class MySqlShipDAO implements ShipDao {
     }
 
     @Override
-    public List<Ship> getShips() throws DbException {
-        List<Ship> shipList;
-        try(Connection connection = DataSource.getConnection()) {
-            PreparedStatement preparedStatement = connection.prepareStatement(ShipMysqlQuery.GET_ALL);
-            shipList = new ArrayList<>();
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                while (resultSet.next()) {
-                    Ship ship = setShipValues(resultSet);
-                    shipList.add(ship);
-                }
-            }
-        }catch (SQLException e){
-            throw new DbException("Cannot get all Ships", e);
-        }
-        return shipList;
-    }
-
-    @Override
     public List<Ship> getAll() throws DbException {
         List<Ship> shipList;
         try(Connection connection = DataSource.getConnection()) {

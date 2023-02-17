@@ -5,7 +5,6 @@ import dao.CruiseDao;
 import dao.OrderDao;
 import dao.ShipDao;
 import dao.UserDao;
-import dto.CruiseDTO;
 import dto.OrderDTO;
 import dto.ShipDTO;
 import dto.UserDTO;
@@ -86,11 +85,23 @@ class GeneralServiceImplTest {
         assertEquals(2, generalService.getAmountWithFilters(List.of("2022-4-20","4")));
     }
 
-    private List<OrderDTO> getTestOrderDTOList() {
-        List<OrderDTO> list = new ArrayList<>();
-        list.add(getTestOrderDTO());
-        list.add(getTestOrderDTO());
-        return list;
+    @Test
+    void signIn() throws DbException, ServiceException {
+        User user = getTestUser();
+        when(userDao.getByEmail("test@gmail.com", "test")).thenReturn(Optional.of(user));
+        assertEquals(getTestUserDTO(), generalService.signIn("test@gmail.com", "test"));
+    }
+
+    @Test
+    void register() throws DbException {
+        User user = new User();
+        user.setLogin("test@gmail.com");
+        user.setPassword("test");
+        user.setFirstName("First Name");
+        user.setSurname("Surname");
+        doNothing().when(userDao).add(isA(User.class));
+        when(userDao.getById(1L)).thenReturn(Optional.of(user));
+        assertDoesNotThrow(() -> generalService.register(user.getLogin(), user.getPassword(), user.getFirstName(), user.getSurname()));
     }
 
     private OrderDTO getTestOrderDTO() {
@@ -108,19 +119,6 @@ class GeneralServiceImplTest {
                 .cruise(getTestCruise())
                 .paid(true)
                 .dateOfRegistration(Date.valueOf("2022-4-20"))
-                .build();
-    }
-
-    private CruiseDTO getTestCruiseDTO() {
-        return CruiseDTO.builder()
-                .id(1L)
-                .number_of_register_people(3)
-                .ship(new Ship(1, "Ship1", 12,
-                        List.of(new Staff(1, "First Name", "Surname")),
-                        List.of(new City(1, "City", "Country")), 200))
-                .duration(3)
-                .startDate(Date.valueOf("2022-4-20"))
-                .price(3123.0)
                 .build();
     }
 
@@ -197,24 +195,5 @@ class GeneralServiceImplTest {
                 .route(getTestRouteList())
                 .staff(getTestStaffList())
                 .build();
-    }
-
-    @Test
-    void signIn() throws DbException, ServiceException {
-        User user = getTestUser();
-        when(userDao.getByEmail("test@gmail.com", "test")).thenReturn(Optional.of(user));
-        assertEquals(getTestUserDTO(), generalService.signIn("test@gmail.com", "test"));
-    }
-
-    @Test
-    void register() throws DbException {
-        User user = new User();
-        user.setLogin("test@gmail.com");
-        user.setPassword("test");
-        user.setFirstName("First Name");
-        user.setSurname("Surname");
-        doNothing().when(userDao).add(isA(User.class));
-        when(userDao.getById(1L)).thenReturn(Optional.of(user));
-        assertDoesNotThrow(() -> generalService.register(user.getLogin(), user.getPassword(), user.getFirstName(), user.getSurname()));
     }
 }
