@@ -1,6 +1,7 @@
 package dao.impl;
 
 import connection.DataSource;
+import dao.CityDao;
 import dao.ShipDao;
 import dao.constants.*;
 
@@ -25,11 +26,33 @@ public class MySqlShipDAO implements ShipDao {
             int index = 0;
             preparedStatement.setString(++index, ship.getName());
             preparedStatement.setInt(++index, ship.getCapacity());
+            preparedStatement.setInt(++index, ship.getNumberOfPorts());
             preparedStatement.execute();
         }catch (SQLException e){
             throw new DbException("Cannot add Ship", e);
         }
     }
+
+    @Override
+    public void addRoute(long shipId, List<City> route) throws DbException {
+        try(Connection connection = DataSource.getConnection()) {
+            for (City city : route) {
+                CityDao cityDao = new MySqlCityDAO();
+                if(cityDao.getById(city.getId()).isEmpty()){
+                    cityDao.add(city);
+                }
+                PreparedStatement preparedStatement = connection.prepareStatement(ShipMysqlQuery.ADD_ROUTE);
+                int index = 0;
+                preparedStatement.setLong(++index, shipId);
+                preparedStatement.setLong(++index, city.getId());
+                preparedStatement.execute();
+            }
+        }catch (SQLException e){
+            throw new DbException("Cannot add Route to the ship", e);
+        }
+    }
+
+
 
     @Override
     public Optional<Ship> getById(long id) throws DbException {
@@ -98,6 +121,7 @@ public class MySqlShipDAO implements ShipDao {
             preparedStatement.setString(++index, ship.getName());
             preparedStatement.setInt(++index, ship.getCapacity());
             preparedStatement.setInt(++index, ship.getNumberOfPorts());
+            preparedStatement.setLong(++index, ship.getId());
             preparedStatement.execute();
         }catch (SQLException e){
             throw new DbException("Cannot update Ship", e);

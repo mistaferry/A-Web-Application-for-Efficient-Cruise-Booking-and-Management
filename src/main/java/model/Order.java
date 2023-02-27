@@ -5,8 +5,8 @@ import lombok.Data;
 
 import java.sql.Date;
 
-@Builder
 @Data
+@Builder
 public class Order{
     private static final long serialVersionUID = 1L;
     Cruise cruise;

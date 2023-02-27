@@ -7,7 +7,7 @@ public final class CityMysqlQuery {
 
     public static final String GET_ALL = "SELECT * FROM city";
 
-    public static final String UPDATE = "UPDATE city WHERE id=?";
+    public static final String UPDATE = "UPDATE city SET name=?, country=? WHERE id=?";
 
     public static final String DELETE = "DELETE city WHERE id=?";
 

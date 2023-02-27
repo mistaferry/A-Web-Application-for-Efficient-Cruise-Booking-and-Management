@@ -12,4 +12,7 @@ public class ShipMysqlQuery {
     public static final String DELETE = "DELETE ship WHERE id=?";
 
     public static final String GET_CAPACITY_BY_SHIP_ID = "SELECT capacity FROM ship WHERE id=?";
+
+    public static final String ADD_ROUTE = "INSERT INTO ship_has_cities (ship_id, city_id) VALUES (?, ?)";
+
 }

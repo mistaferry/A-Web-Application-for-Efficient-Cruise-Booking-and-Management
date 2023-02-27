@@ -38,9 +38,9 @@ public class MySqlCityDAO implements CityDao {
             PreparedStatement preparedStatement = connection.prepareStatement(CityMysqlQuery.GET_BY_ID);
             int index = 0;
             preparedStatement.setLong(++index, id);
-            city = new City();
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                while (resultSet.next()) {
+                if (resultSet.next()) {
+                    city = new City();
                     city.setId(id);
                     city.setName(resultSet.getString("name"));
                     city.setCountry(resultSet.getString("country"));
@@ -49,7 +49,7 @@ public class MySqlCityDAO implements CityDao {
         }catch (SQLException e){
             throw new DbException("Cannot get City by Id", e);
         }
-        return Optional.of(city);
+        return Optional.ofNullable(city);
     }
 
     @Override
@@ -60,11 +60,12 @@ public class MySqlCityDAO implements CityDao {
             cityList = new ArrayList<>();
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
-                    City city = getCityFromDB(resultSet);
+                    City city = new City();
+                    city.setId(resultSet.getLong("id"));
+                    city.setName(resultSet.getString("name"));
+                    city.setCountry(resultSet.getString("country"));
                     cityList.add(city);
                 }
-            } catch (DbException e) {
-                throw new DbException("", e);
             }
         }catch (SQLException e){
             throw new DbException("Cannot get All Cities", e);
@@ -89,6 +90,7 @@ public class MySqlCityDAO implements CityDao {
             int index = 0;
             preparedStatement.setString(++index, city.getName());
             preparedStatement.setString(++index, city.getCountry());
+            preparedStatement.setLong(++index, city.getId());
             preparedStatement.execute();
         }catch (SQLException e){
             throw new DbException("Cannot update City", e);
