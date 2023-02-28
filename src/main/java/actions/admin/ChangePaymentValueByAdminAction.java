@@ -28,10 +28,6 @@ public class ChangePaymentValueByAdminAction implements Action {
         Date date = Date.valueOf((request.getParameter("date")));
         String path = null;
 
-//        System.out.println("user_id - " + userId);
-//        System.out.println("cruise_id - " + cruiseId);
-//        System.out.println("date - " + date);
-        //нові дані, введені
         generalService.updateOrderPaymentStatus(userId, cruiseId, date);
         path = "controller?action=admin-get-user-cruises&user="+userId+"&cruisePerPage=7&page=0";
         return path;
