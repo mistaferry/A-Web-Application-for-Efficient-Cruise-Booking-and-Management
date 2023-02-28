@@ -6,10 +6,7 @@ import exceptions.DbException;
 import model.City;
 import model.Ship;
 import model.Staff;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,11 +20,9 @@ import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.doNothing;
 
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class ShipDaoTest {
 
     @Test
-    @Order(1)
     void add() throws SQLException {
         ShipDao shipDao = new MySqlShipDAO();
         HikariDataSource dataSource = mock(HikariDataSource.class);
@@ -37,7 +32,24 @@ public class ShipDaoTest {
     }
 
     @Test
-    @Order(2)
+    void addRouteToShip() throws SQLException {
+        HikariDataSource dataSource = mock(HikariDataSource.class);
+        ShipDao shipDao = new MySqlShipDAO();
+        try(PreparedStatement pst = createPreparedStatement(dataSource)) {
+            assertDoesNotThrow(() -> shipDao.addRoute(getTestShip().getId(), getTestRoute()));
+        }
+    }
+
+    @Test
+    void addStaffToShip() throws SQLException {
+        HikariDataSource dataSource = mock(HikariDataSource.class);
+        ShipDao shipDao = new MySqlShipDAO();
+        try(PreparedStatement pst = createPreparedStatement(dataSource)) {
+            assertDoesNotThrow(() -> shipDao.addStaff(getTestShip().getId(), getTestStaff()));
+        }
+    }
+
+    @Test
     void update() throws SQLException {
         ShipDao shipDao = new MySqlShipDAO();
         HikariDataSource dataSource = mock(HikariDataSource.class);
@@ -48,7 +60,6 @@ public class ShipDaoTest {
     }
 
     @Test
-    @Order(3)
     void checkThereAreSomeShips() throws SQLException, DbException {
         HikariDataSource dataSource = mock(HikariDataSource.class);
         ShipDao shipDao = new MySqlShipDAO();
@@ -61,14 +72,6 @@ public class ShipDaoTest {
         }
     }
 
-    @Test
-    void addRouteToShip() throws SQLException {
-        HikariDataSource dataSource = mock(HikariDataSource.class);
-        ShipDao shipDao = new MySqlShipDAO();
-        try(PreparedStatement pst = createPreparedStatement(dataSource)) {
-            assertDoesNotThrow(() -> shipDao.addRoute(getTestShip().getId(), getTestRoute()));
-        }
-    }
 
     private PreparedStatement createPreparedStatement(HikariDataSource dataSource) throws SQLException {
         Connection connection = mock(Connection.class);
@@ -91,7 +94,7 @@ public class ShipDaoTest {
 
     }
 
-    private Ship getTestShip() {
+    public static Ship getTestShip() {
         return Ship.builder()
                 .id(1L)
                 .capacity(100)
@@ -113,7 +116,7 @@ public class ShipDaoTest {
         return cities;
     }
 
-    private List<Staff> getTestStaff() {
+    public static List<Staff> getTestStaff() {
         List<Staff> staff = new ArrayList<>();
         Staff staff1 = new Staff(1, "Name1", "Surname1");
         Staff staff2 = new Staff(2, "Name2", "Surname2");

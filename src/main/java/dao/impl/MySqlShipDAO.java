@@ -3,6 +3,7 @@ package dao.impl;
 import connection.DataSource;
 import dao.CityDao;
 import dao.ShipDao;
+import dao.StaffDao;
 import dao.constants.*;
 
 import exceptions.DbException;
@@ -52,7 +53,24 @@ public class MySqlShipDAO implements ShipDao {
         }
     }
 
-
+    @Override
+    public void addStaff(long shipId, List<Staff> staff) throws DbException {
+        try(Connection connection = DataSource.getConnection()) {
+            for (Staff person : staff) {
+                StaffDao staffDao = new MySqlStaffDAO();
+                if(staffDao.getById(person.getId()).isEmpty()){
+                    staffDao.add(person);
+                }
+                PreparedStatement preparedStatement = connection.prepareStatement(ShipMysqlQuery.ADD_STAFF);
+                int index = 0;
+                preparedStatement.setLong(++index, person.getId());
+                preparedStatement.setLong(++index, shipId);
+                preparedStatement.execute();
+            }
+        }catch (SQLException e){
+            throw new DbException("Cannot add Staff to the ship", e);
+        }
+    }
 
     @Override
     public Optional<Ship> getById(long id) throws DbException {

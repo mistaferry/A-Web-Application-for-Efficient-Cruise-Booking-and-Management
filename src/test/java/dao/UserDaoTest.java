@@ -17,11 +17,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.*;
 
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class UserDaoTest {
-
     @Test
-    @Order(1)
     void add() throws SQLException{
         UserDao userDao = new MySqlUserDAO();
         HikariDataSource dataSource = mock(HikariDataSource.class);
@@ -31,7 +28,6 @@ class UserDaoTest {
     }
 
     @Test
-    @Order(2)
     void update() throws SQLException {
         UserDao userDao = new MySqlUserDAO();
         HikariDataSource dataSource = mock(HikariDataSource.class);
@@ -42,7 +38,6 @@ class UserDaoTest {
     }
 
     @Test
-    @Order(3)
     void checkThereAreSomeUsers() throws SQLException, DbException {
         HikariDataSource dataSource = mock(HikariDataSource.class);
         UserDao userDao = new MySqlUserDAO();
@@ -56,7 +51,6 @@ class UserDaoTest {
     }
 
     @Test
-    @Order(4)
     void getById() throws SQLException, DbException {
         UserDao userDao = new MySqlUserDAO();
         HikariDataSource dataSource = mock(HikariDataSource.class);
@@ -64,14 +58,13 @@ class UserDaoTest {
             ResultSet rs = mock(ResultSet.class);
             when(pst.executeQuery()).thenReturn(rs);
             setResultSetValues(rs);
-            User user = userDao.getById(9L).orElse(null);
+            User user = userDao.getById(1L).orElse(null);
             assertNotNull(rs);
             assertEquals(getTestUser(), user);
         }
     }
 
     @Test
-    @Order(5)
     void getByEmail() throws SQLException, DbException {
         UserDao userDao = new MySqlUserDAO();
         HikariDataSource dataSource = mock(HikariDataSource.class);
@@ -131,7 +124,7 @@ class UserDaoTest {
 
     public User getTestUser() {
         return User.builder()
-                .id(9L)
+                .id(1L)
                 .login("newuser@gmail.com")
                 .password("newUser")
                 .firstName("UserName")

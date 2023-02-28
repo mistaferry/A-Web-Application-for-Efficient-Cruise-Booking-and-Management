@@ -15,4 +15,5 @@ public class ShipMysqlQuery {
 
     public static final String ADD_ROUTE = "INSERT INTO ship_has_cities (ship_id, city_id) VALUES (?, ?)";
 
+    public static final String ADD_STAFF = "INSERT INTO ship_has_staff (staff_id, ship_id) VALUES (?, ?)";
 }

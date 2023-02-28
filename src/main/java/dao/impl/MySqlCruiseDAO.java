@@ -75,12 +75,11 @@ public class MySqlCruiseDAO implements CruiseDao {
 
     @Override
     public Optional<Cruise> getByDate(Date date) throws DbException {
-        Cruise cruise;
+        Cruise cruise = null;
         try(Connection connection = DataSource.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(CruiseMysqlQuery.GET_BY_DATE);
             int index = 0;
             preparedStatement.setDate(++index, date);
-            cruise = new Cruise();
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     cruise = setCruiseValues(resultSet);
@@ -89,7 +88,7 @@ public class MySqlCruiseDAO implements CruiseDao {
         }catch (SQLException e){
             throw new DbException("Cannot get Cruise by Date", e);
         }
-        return Optional.of(cruise);
+        return Optional.ofNullable(cruise);
     }
 
     @Override
@@ -129,7 +128,12 @@ public class MySqlCruiseDAO implements CruiseDao {
         try(Connection connection = DataSource.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(CruiseMysqlQuery.ADD_CRUISE);
             int index = 0;
-            setValuesToStatement(cruise, preparedStatement, index);
+            preparedStatement.setLong(++index, cruise.getId());
+            preparedStatement.setLong(++index, cruise.getShip().getId());
+            preparedStatement.setInt(++index, cruise.getDuration());
+            preparedStatement.setDouble(++index, cruise.getPrice());
+            preparedStatement.setDate(++index, Date.valueOf(cruise.getStartDate().toLocalDate()));
+            preparedStatement.setInt(++index, cruise.getNumber_of_register_people());
             preparedStatement.execute();
         }catch (SQLException e){
             throw new DbException("Cannot add Cruise", e);
@@ -212,7 +216,12 @@ public class MySqlCruiseDAO implements CruiseDao {
         try(Connection connection = DataSource.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(CruiseMysqlQuery.UPDATE);
             int index = 0;
-            setValuesToStatement(cruise, preparedStatement, index);
+            preparedStatement.setLong(++index, cruise.getId());
+            preparedStatement.setLong(++index, cruise.getShip().getId());
+            preparedStatement.setInt(++index, cruise.getDuration());
+            preparedStatement.setDouble(++index, cruise.getPrice());
+            preparedStatement.setDate(++index, Date.valueOf(cruise.getStartDate().toLocalDate()));
+            preparedStatement.setInt(++index, cruise.getNumber_of_register_people());
             preparedStatement.execute();
         }catch (SQLException e){
             throw new DbException("Cannot update Cruise", e);

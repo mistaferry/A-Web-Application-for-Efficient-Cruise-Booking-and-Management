@@ -25,7 +25,7 @@ public class ViewAllUsersAction implements Action {
 
     @Override
     public String execute(HttpServletRequest request) throws ServiceException {
-        HttpSession session = request.getSession();
+//        HttpSession session = ;
         int pageNum = Integer.parseInt(request.getParameter("page"));
         int cruisePerPage = Integer.parseInt(request.getParameter("userPerPage"));
 //        System.out.println(request.getQueryString());
@@ -35,7 +35,7 @@ public class ViewAllUsersAction implements Action {
         pageAmount = generalService.getUserAmount();
         pageAmount /= cruisePerPage;
         request.setAttribute("pageAmount", pageAmount);
-        session.setAttribute("allUsers", userDTOList);
+        request.getSession().setAttribute("allUsers", userDTOList);
         path = "/mainAdminPage.jsp";
         return path;
     }

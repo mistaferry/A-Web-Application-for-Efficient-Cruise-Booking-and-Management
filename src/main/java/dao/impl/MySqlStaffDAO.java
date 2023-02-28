@@ -33,14 +33,14 @@ public class MySqlStaffDAO implements StaffDao {
 
     @Override
     public Optional<Staff> getById(long id) throws DbException {
-        Staff staff;
+        Staff staff = null;
         try(Connection connection = DataSource.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(StaffMysqlQuery.GET_BY_ID);
             int index = 0;
             preparedStatement.setLong(++index, id);
-            staff = new Staff();
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                while (resultSet.next()) {
+                if (resultSet.next()) {
+                    staff = new Staff();
                     staff.setId(id);
                     staff.setFirstName(resultSet.getString("first_name"));
                     staff.setSurname(resultSet.getString("surname"));
@@ -49,7 +49,7 @@ public class MySqlStaffDAO implements StaffDao {
         }catch (SQLException e){
             throw new DbException("Cannot get Staff by id", e);
         }
-        return Optional.of(staff);
+        return Optional.ofNullable(staff);
     }
 
     @Override
