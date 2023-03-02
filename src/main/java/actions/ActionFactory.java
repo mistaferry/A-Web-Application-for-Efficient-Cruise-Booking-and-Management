@@ -12,21 +12,26 @@ public final class ActionFactory {
     private static final Map<String, Action> ACTION_MAP = new HashMap<>();
 
     static {
-        ACTION_MAP.put("sign-in", new SignInAction());
-        ACTION_MAP.put("register", new RegisterAction());
-        ACTION_MAP.put("edit-user-profile", new EditUserProfileAction());
-        ACTION_MAP.put("change-password", new ChangePasswordAction());
+        //admin
+        ACTION_MAP.put("admin-get-user-cruises", new AdminGetUserCruisesAction());
+        ACTION_MAP.put("change-payment-value", new ChangePaymentValueByAdminAction());
+        ACTION_MAP.put("change-user-values-by-admin", new ChangeUserValuesByAdminAction());
+        ACTION_MAP.put("get-user-info", new GetUserInfoAction());
+        ACTION_MAP.put("view-all-users", new ViewAllUsersAction());
+        ACTION_MAP.put("admin-view-all-cruises", new ViewCruises());
+        ACTION_MAP.put("view-existing-data", new ViewExistingDataAction());
+
+        //customer
         ACTION_MAP.put("create-order", new CreateOrderAction());
         ACTION_MAP.put("view-user-cruises", new ViewUserCruisesAction());
         ACTION_MAP.put("view-cruises", new ViewCruiseCatalogAction());
-        ACTION_MAP.put("view-all-users", new ViewAllUsersAction());
-        ACTION_MAP.put("get-user-info", new GetUserInfoAction());
-        ACTION_MAP.put("admin-get-user-cruises", new AdminGetUserCruisesAction());
-        ACTION_MAP.put("change-user-values-by-admin", new ChangeUserValuesByAdminAction());
-        ACTION_MAP.put("change-payment-value", new ChangePaymentValueByAdminAction());
-        ACTION_MAP.put("admin-view-all-cruises", new ViewCruises());
-//        ACTION_MAP.put("add-new-cruise", new AddCruiseAction());
-        ACTION_MAP.put("view-existing-data", new ViewExistingDataAction());
+        ACTION_MAP.put("edit-user-profile", new EditUserProfileAction());
+
+        //general (common)
+        ACTION_MAP.put("sign-in", new SignInAction());
+        ACTION_MAP.put("register", new RegisterAction());
+        ACTION_MAP.put("change-password", new ChangePasswordAction());
+
     }
 
     private ActionFactory(){ }

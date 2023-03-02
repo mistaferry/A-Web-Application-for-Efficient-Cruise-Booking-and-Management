@@ -21,7 +21,7 @@
 
 <%@ include file="parts/userMenuChoose.jspf" %>
 
-<%@ include file="/parts/newCustomerCruises.jsp" %>
+<%@ include file="/parts/сustomerCruises.jspf" %>
 
 <%@ include file="/parts/footer.jspf" %>
 
