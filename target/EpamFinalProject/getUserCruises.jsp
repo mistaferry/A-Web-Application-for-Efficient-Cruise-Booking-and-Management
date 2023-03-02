@@ -51,67 +51,67 @@
     </c:when>
     <c:otherwise>
         <section class="table">
-            <form action="controller" method="get">
-                <input type="hidden" name="action" value="change-payment-value">
-                <div>
-                    <table>
-                        <thead>
+            <div>
+                <table>
+                    <thead>
+                    <tr>
+                        <td>cruise id</td>
+                        <td>Ship Name</td>
+                        <td>Start</td>
+                        <td>Duration</td>
+                        <td>Price</td>
+                        <td>Booking date</td>
+                        <td>Status</td>
+                        <td class="no-style"></td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach var="order" items="${requestScope.userCruises}">
                         <tr>
-                            <td>cruise id</td>
-                            <td>Ship Name</td>
-                            <td>Start</td>
-                            <td>Duration</td>
-                            <td>Price</td>
-                            <td>Booking date</td>
-                            <td>Status</td>
-                            <td class="no-style"></td>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <c:forEach var="order" items="${requestScope.userCruises}">
-                            <tr>
-                                <td>
-                                    <input type="hidden" name="order_cruise_id" value="${order.cruise.id}">
-                                    ${order.cruise.id}
-                                </td>
-                                <td>
-                                        ${order.cruise.ship.name}
-                                </td>
-                                <td>
-                                        ${order.cruise.startDate.toLocalDate().dayOfMonth} ${order.cruise.startDate.toLocalDate().month} ${order.cruise.startDate.toLocalDate().year}
-                                </td>
-                                <td>
-                                        ${order.cruise.duration} days
-                                </td>
-                                <td>
-                                        ${order.cruise.price} UAH
-                                </td>
-                                <td>
-                                        ${order.dateOfRegistration.toLocalDate().dayOfMonth} ${order.dateOfRegistration.toLocalDate().month} ${order.dateOfRegistration.toLocalDate().year}
-                                </td>
-                                <c:choose>
-                                    <c:when test="${order.paid}">
-                                        <td style="background: lightgreen">
-                                            Paid
-                                        </td>
-                                    </c:when>
-                                    <c:when test="${!order.paid}">
-                                        <td style="background: lightcoral">
-                                            Unpaid
-                                        </td>
-                                    </c:when>
-                                </c:choose>
-                                <td class="max-width">
-<%--                                    <input type="hidden" value="${order.cruise.id}" name="order_cruise_id">--%>
+                            <td>
+                                <input type="hidden" name="order_cruise_id" value="${order.cruise.id}">
+                                ${order.cruise.id}
+                            </td>
+                            <td>
+                                    ${order.cruise.ship.name}
+                            </td>
+                            <td>
+                                    ${order.cruise.startDate.toLocalDate().dayOfMonth} ${order.cruise.startDate.toLocalDate().month} ${order.cruise.startDate.toLocalDate().year}
+                            </td>
+                            <td>
+                                    ${order.cruise.duration} days
+                            </td>
+                            <td>
+                                    ${order.cruise.price} UAH
+                            </td>
+                            <td>
+                                    ${order.dateOfRegistration.toLocalDate().dayOfMonth} ${order.dateOfRegistration.toLocalDate().month} ${order.dateOfRegistration.toLocalDate().year}
+                            </td>
+                            <c:choose>
+                                <c:when test="${order.paid}">
+                                    <td style="background: lightgreen">
+                                        Paid
+                                    </td>
+                                </c:when>
+                                <c:when test="${!order.paid}">
+                                    <td style="background: lightcoral">
+                                        Unpaid
+                                    </td>
+                                </c:when>
+                            </c:choose>
+                            <td class="max-width">
+                                <form action="controller" method="get">
+                                    <input type="hidden" name="action" value="change-payment-value">
+                                    <input type="hidden" value="${order.cruise.id}" name="order_cruise_id">
                                     <input type="hidden" value="${order.dateOfRegistration}" name="date">
                                     <input class="button-order max-width white" type="submit" value="Change payment status"/>
-                                </td>
-                            </tr>
-                        </c:forEach>
-                        </tbody>
-                    </table>
-                </div>
-            </form>
+                                </form>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+            </div>
         </section>
 
         <nav class="page-nav">

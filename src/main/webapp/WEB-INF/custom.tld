@@ -1,0 +1,37 @@
+<taglib>
+    <tlib-version>2.0</tlib-version>
+    <jsp-version>2.0</jsp-version>
+    <short-name>custom</short-name>
+    <description>
+        Tag for showing details about customer orders.
+    </description>
+    <tag>
+        <name>ordetail</name>
+        <tag-class>tag.OrderDetails</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <name>orders</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.ArrayList</type>
+        </attribute>
+        <attribute>
+            <name>shipName</name>
+        </attribute>
+        <attribute>
+            <name>orderStart</name>
+        </attribute>
+        <attribute>
+            <name>duration</name>
+        </attribute>
+        <attribute>
+            <name>price</name>
+        </attribute>
+        <attribute>
+            <name>bookingDate</name>
+        </attribute>
+        <attribute>
+            <name>paymentStatus</name>
+        </attribute>
+    </tag>
+</taglib>

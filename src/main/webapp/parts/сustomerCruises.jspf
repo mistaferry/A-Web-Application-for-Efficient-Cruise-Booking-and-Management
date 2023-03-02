@@ -1,0 +1,104 @@
+<%@ page pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="or" uri="/WEB-INF/custom.tld" %>
+
+
+<form method="get" action="controller">
+    <input type="hidden" name="action" value="view-user-cruises">
+    <div>
+        <label>
+            <select name="page" style="display: none">
+                <option value="0" selected></option>
+            </select>
+        </label>
+        <label>
+            <select name="cruisePerPage" style="display: none">
+                <option value="7" selected></option>
+            </select>
+        </label>
+    </div>
+</form>
+
+<section class="table">
+    <div>
+        <h2>My cruises</h2><br>
+    </div>
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <td>Ship Name</td>
+                <td>Start</td>
+                <td>Duration</td>
+                <td>Price</td>
+                <td>Booking date</td>
+                <td>Status</td>
+            </tr>
+            </thead>
+            <tbody>
+            <or:ordetail orders="${sessionScope.myCruises}">
+                <tr>
+                    <td>
+                        <c:out value="${shipName }"/>
+                    </td>
+                    <td>
+                        <c:out value="${orderStart.toLocalDate().dayOfMonth }"/>
+                        <c:out value="${orderStart.toLocalDate().month }"/>
+                        <c:out value="${orderStart.toLocalDate().year }"/>
+                    </td>
+                    <td>
+                        <c:out value="${duration }"/>
+                    </td>
+                    <td>
+                        <c:out value="${price }"/>
+                    </td>
+                    <td>
+                        <c:out value="${bookingDate.toLocalDate().dayOfMonth }"/>
+                        <c:out value="${bookingDate.toLocalDate().month }"/>
+                        <c:out value="${bookingDate.toLocalDate().year }"/>
+                    </td>
+                    <c:choose>
+                        <c:when test="${paymentStatus }">
+                            <td style="background: lightgreen">
+                                Paid
+                            </td>
+                        </c:when>
+                        <c:when test="${!paymentStatus }">
+                            <td style="background: lightcoral">
+                                Unpaid
+                            </td>
+                        </c:when>
+                    </c:choose>
+                </tr>
+            </or:ordetail>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<nav class="page-nav">
+    <ul class="pagination">
+        <c:if test="${param.page != 0}">
+            <li><a class="page-link"
+                   href="controller?action=view-user-cruises&page=${param.page-1}&cruisePerPage=${param.cruisePerPage}"
+                   tabindex="-1">Previous</a></li>
+        </c:if>
+        <c:forEach var="num" begin="0" end="${requestScope.pageAmount}">
+            <li class="page-item ${param.page == num ? "active" : ""}">
+                <a class="page-link"
+                   href="controller?action=view-user-cruises&page=${num}&cruisePerPage=${param.cruisePerPage}">
+                        ${num+1}
+                </a>
+            </li>
+        </c:forEach>
+
+        <c:if test="${param.page lt requestScope.pageAmount}">
+            <li>
+                <a class="page-link"
+                   href="controller?action=view-user-cruises&page=${param.page+1}&cruisePerPage=${param.cruisePerPage}">
+                    Next
+                </a>
+            </li>
+        </c:if>
+    </ul>
+</nav>

@@ -50,7 +50,6 @@
                 <td>Start</td>
                 <td>Duration</td>
                 <td>Price</td>
-                <td>Staff</td>
             </tr>
             </thead>
             <tbody>
@@ -70,11 +69,6 @@
                     </td>
                     <td>
                             ${cruise.price} UAH
-                    </td>
-                    <td>
-                        <c:forEach var="staff" items="${cruise.ship.staff}">
-                            ${staff.id} - ${staff.firstName} ${staff.surname}<br>
-                        </c:forEach>
                     </td>
                 </tr>
             </c:forEach>
