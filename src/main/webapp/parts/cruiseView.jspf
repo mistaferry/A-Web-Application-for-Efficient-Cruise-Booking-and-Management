@@ -64,7 +64,7 @@
                     </p>
                 </div>
                 <div class="price">
-                    <fmt:message key="label.price"/> ${cruise.price}
+                    <fmt:message key="label.price"/> ${cruise.price} <fmt:message key="label.uah"/>
                 </div>
             </div>
             <div>

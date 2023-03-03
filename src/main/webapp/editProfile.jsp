@@ -34,15 +34,15 @@
                    value="${sessionScope.prevUser.surname eq null ? sessionScope.user.surname : sessionScope.prevUser.surname}"/>
             <c:set var="userLogin"
                    value="${sessionScope.prevUser.login eq null ? sessionScope.user.login : sessionScope.prevUser.login}"/>
-            <h4><fmt:message key="person.name"/></h4>
+            <h4><fmt:message key="label.person.name"/></h4>
             <label>
                 <input type="text" name="firstName" value="${userName}"/>
             </label>
-            <h4><fmt:message key="person.surname"/></h4>
+            <h4><fmt:message key="label.person.surname"/></h4>
             <label>
                 <input type="text" name="surname" value="${userSurname}"/>
             </label>
-            <h4><fmt:message key="person.login"/></h4>
+            <h4><fmt:message key="label.person.login"/></h4>
             <label>
                 <input type="text" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}" name="login"
                        value="${userLogin}"/>

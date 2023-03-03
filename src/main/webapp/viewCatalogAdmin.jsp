@@ -45,11 +45,11 @@
         <table>
             <thead>
             <tr>
-                <td>Id</td>
-                <td>Ship Name</td>
-                <td>Start</td>
-                <td>Duration</td>
-                <td>Price</td>
+                <td><fmt:message key="label.id"/></td>
+                <td><fmt:message key="label.ship.name"/></td>
+                <td><fmt:message key="label.startDay"/></td>
+                <td><fmt:message key="label.duration"/></td>
+                <td><fmt:message key="label.price"/></td>
             </tr>
             </thead>
             <tbody>
@@ -65,10 +65,10 @@
                             ${cruise.startDate.toLocalDate().dayOfMonth} ${cruise.startDate.toLocalDate().month} ${cruise.startDate.toLocalDate().year}
                     </td>
                     <td>
-                            ${cruise.duration} days
+                            ${cruise.duration} <fmt:message key="label.days"/>
                     </td>
                     <td>
-                            ${cruise.price} UAH
+                            ${cruise.price} <fmt:message key="label.uah"/>
                     </td>
                 </tr>
             </c:forEach>

@@ -30,7 +30,7 @@
         <br>
         <div class="login-option">
             <p><fmt:message key="no.account"/> <a href="register.jsp"><fmt:message key="register.here"/></a></p>
-            <a href="changePassword.jsp" class="login-option"><fmt:message key="forgot.password"/></a>
+<%--            <a href="changePassword.jsp" class="login-option"><fmt:message key="forgot.password"/></a>--%>
         </div>
         <br><br><br>
     </form>

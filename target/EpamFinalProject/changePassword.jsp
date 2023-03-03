@@ -27,7 +27,7 @@
             <h1><fmt:message key="change.password"/></h1>
         </div>
         <div>
-            <h4><fmt:message key="person.login"/></h4>
+            <h4><fmt:message key="label.person.login"/></h4>
             <label>
                 <input type="text" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}" name="login"/>
             </label>
@@ -50,9 +50,6 @@
         </div>
         <br>
         <button id="form-button" type="submit"><fmt:message key="button.save.changes"/></button>
-<%--        <div class="login-option">--%>
-<%--            <a href="index.jsp" class="login-option">I remember my password</a>--%>
-<%--        </div>--%>
     </div>
 </form>
 

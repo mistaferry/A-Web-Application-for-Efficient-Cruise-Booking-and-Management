@@ -21,12 +21,12 @@
         <table>
             <thead>
             <tr>
-                <td>Id</td>
-                <td><fmt:message key="person.login"/></td>
-                <td><fmt:message key="person.name"/></td>
-                <td><fmt:message key="person.surname"/></td>
-                <td><fmt:message key="person.role"/></td>
-                <td><fmt:message key="person.is.blocked"/></td>
+                <td><fmt:message key="label.id"/></td>
+                <td><fmt:message key="label.person.login"/></td>
+                <td><fmt:message key="label.person.name"/></td>
+                <td><fmt:message key="label.person.surname"/></td>
+                <td><fmt:message key="label.person.role"/></td>
+                <td><fmt:message key="label.person.is.blocked"/></td>
                 <td class="no-style"></td>
                 <td class="no-style"></td>
             </tr>
@@ -49,24 +49,24 @@
                     <c:choose>
                         <c:when test="${user.roleId == 1}">
                             <td>
-                                CUSTOMER
+                                <fmt:message key="label.role.customer"/>
                             </td>
                         </c:when>
                         <c:when test="${user.roleId == 2}">
                             <td>
-                                ADMIN
+                                <fmt:message key="label.role.admin"/>
                             </td>
                         </c:when>
                     </c:choose>
                     <c:choose>
                         <c:when test="${!user.blocked}">
                             <td style="background: lightgreen">
-                                Unblocked
+                                <fmt:message key="label.account.unblocked"/>
                             </td>
                         </c:when>
                         <c:when test="${user.blocked}">
                             <td style="background: lightcoral">
-                                Blocked
+                                <fmt:message key="label.account.blocked"/>
                             </td>
                         </c:when>
                     </c:choose>

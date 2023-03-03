@@ -55,13 +55,13 @@
                 <table>
                     <thead>
                     <tr>
-                        <td>cruise id</td>
-                        <td>Ship Name</td>
-                        <td>Start</td>
-                        <td>Duration</td>
-                        <td>Price</td>
-                        <td>Booking date</td>
-                        <td>Status</td>
+                        <td><fmt:message key="label.id"/></td>
+                        <td><fmt:message key="label.ship.name"/></td>
+                        <td><fmt:message key="label.startDay"/></td>
+                        <td><fmt:message key="label.duration"/></td>
+                        <td><fmt:message key="label.price"/></td>
+                        <td><fmt:message key="label.booking.date"/></td>
+                        <td><fmt:message key="label.payment.status"/></td>
                         <td class="no-style"></td>
                     </tr>
                     </thead>
@@ -79,10 +79,10 @@
                                     ${order.cruise.startDate.toLocalDate().dayOfMonth} ${order.cruise.startDate.toLocalDate().month} ${order.cruise.startDate.toLocalDate().year}
                             </td>
                             <td>
-                                    ${order.cruise.duration} days
+                                    ${order.cruise.duration} <fmt:message key="label.days"/>
                             </td>
                             <td>
-                                    ${order.cruise.price} UAH
+                                    ${order.cruise.price} <fmt:message key="label.uah"/>
                             </td>
                             <td>
                                     ${order.dateOfRegistration.toLocalDate().dayOfMonth} ${order.dateOfRegistration.toLocalDate().month} ${order.dateOfRegistration.toLocalDate().year}
@@ -90,12 +90,12 @@
                             <c:choose>
                                 <c:when test="${order.paid}">
                                     <td style="background: lightgreen">
-                                        Paid
+                                        <fmt:message key="label.status.paid"/>
                                     </td>
                                 </c:when>
                                 <c:when test="${!order.paid}">
                                     <td style="background: lightcoral">
-                                        Unpaid
+                                        <fmt:message key="label.status.unpaid"/>
                                     </td>
                                 </c:when>
                             </c:choose>
@@ -119,7 +119,7 @@
                 <c:if test="${param.page != 0}">
                     <li><a class="page-link"
                            href="controller?action=view-user-cruises&page=${param.page-1}&cruisePerPage=${param.cruisePerPage}"
-                           tabindex="-1">Previous</a></li>
+                           tabindex="-1"><fmt:message key="pagination.previous"/></a></li>
                 </c:if>
                 <c:forEach var="num" begin="0" end="${requestScope.pageAmount}">
                     <li class="page-item ${param.page == num ? "active" : ""}">
@@ -134,7 +134,7 @@
                     <li>
                         <a class="page-link"
                            href="controller?action=view-user-cruises&page=${param.page+1}&cruisePerPage=${param.cruisePerPage}">
-                            Next
+                            <fmt:message key="pagination.next"/>
                         </a>
                     </li>
                 </c:if>

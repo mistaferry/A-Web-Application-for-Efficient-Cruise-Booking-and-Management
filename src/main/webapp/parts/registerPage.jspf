@@ -20,12 +20,12 @@
                    required minlength="2" maxlength="10"><br><br>
         </div>
         <div>
-            <label for="firstName"><fmt:message key="person.name"/></label><br>
+            <label for="firstName"><fmt:message key="label.person.name"/></label><br>
             <input type="text" id="firstName" name="firstName"
                    required minlength="2" maxlength="15"><br><br>
         </div>
         <div>
-            <label for="surname"><fmt:message key="person.surname"/></label><br>
+            <label for="surname"><fmt:message key="label.person.surname"/></label><br>
             <input type="text" id="surname" name="surname"
                    required minlength="2" maxlength="15"><br>
         </div>
@@ -39,7 +39,7 @@
         </div>
         <br>
         <div class="login-option">
-            <p>I already have an <a href="index.jsp"> account</a></p>
+            <p><fmt:message key="register.have"/> <a href="index.jsp"><fmt:message key="register.have.account"/></a></p>
         </div>
     </form>
 </div>

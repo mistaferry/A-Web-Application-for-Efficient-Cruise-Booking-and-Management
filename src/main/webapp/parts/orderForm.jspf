@@ -8,10 +8,10 @@
     <div class="flex">
         <input type="hidden" name="action" value="create-order">
         <div class="form-left-right">
-            <label><fmt:message key="person.name"/><br>
+            <label><fmt:message key="label.person.name"/><br>
                 <input class="input1" type="text" value="${sessionScope.user.firstName}" readonly/>
             </label><br><br>
-            <label><fmt:message key="person.surname"/><br>
+            <label><fmt:message key="label.person.surname"/><br>
                 <input class="input1" type="text" value="${sessionScope.user.surname}" readonly/>
             </label><br><br>
             <div>
