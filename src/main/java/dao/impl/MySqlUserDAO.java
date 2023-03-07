@@ -6,6 +6,8 @@ import dao.constants.*;
 import exceptions.DbException;
 import model.Role;
 import model.User;
+
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -224,7 +226,15 @@ public class MySqlUserDAO implements UserDao {
     }
 
     @Override
-    public void updateUserValuesByAdmin(User chosenUser, boolean accountStatus, int role) throws DbException {
-          
+    public void addDocumentsToUser(long userId, InputStream inputStream) throws DbException {
+        try(Connection connection = DataSource.getConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(UserMysqlQuery.ADD_DOCUMENTS);
+            int index = 0;
+            preparedStatement.setLong(++index, userId);
+            preparedStatement.setBlob(++index, inputStream);
+            preparedStatement.execute();
+        }catch (SQLException e) {
+            throw new DbException("Cannot add Document to User", e);
+        }
     }
 }

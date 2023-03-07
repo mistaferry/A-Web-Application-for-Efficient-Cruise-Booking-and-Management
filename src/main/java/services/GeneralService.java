@@ -5,6 +5,8 @@ import dto.CruiseDTO;
 import dto.OrderDTO;
 import dto.ShipDTO;
 import dto.UserDTO;
+
+import java.io.InputStream;
 import java.sql.Date;
 import java.util.List;
 
@@ -49,4 +51,6 @@ public interface GeneralService {
     void updateUser(UserDTO user) throws ServiceException;
 
     void changePassword(String login, String oldPassword, String newPassword, String confirmPassword) throws ServiceException;
+
+    void addDocumentsToUser(long userId, InputStream inputStream) throws ServiceException;
 }

@@ -30,4 +30,6 @@ public class UserMysqlQuery {
     public static final String IS_REGISTERED = "DELETE user WHERE id=?";
 
     public static final String GET_COUNT = "SELECT COUNT(*) FROM user";
+
+    public static final String ADD_DOCUMENTS = "INSERT INTO user_has_document (user_id, document) VALUES (?, ?)";
 }

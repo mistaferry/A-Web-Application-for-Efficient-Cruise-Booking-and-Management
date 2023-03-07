@@ -95,6 +95,15 @@ CREATE TABLE ship_has_cities
         on delete cascade
 );
 
+CREATE TABLE user_has_document
+(
+    user_id INT,
+    document MEDIUMBLOB,
+    FOREIGN KEY (user_id) REFERENCES user (id)
+        on update cascade
+        on delete cascade
+);
+
 INSERT INTO city(name, country)
 VALUES ('Kiel', 'Germany'),
        ('Mons', 'Belgium'),

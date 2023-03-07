@@ -71,7 +71,7 @@
                 <c:choose>
                     <c:when test="${cruise.number_of_register_people lt cruise.ship.capacity}">
                         <form action="controller" method="get">
-                            <input type="hidden" name="action" value="create-order">
+                            <input type="hidden" name="action" value="get-order-form">
                             <input type="hidden" name="cruise_id" value="${cruise.id}">
                             <input class="button-order" type="submit" value="Order now"/>
                         </form>

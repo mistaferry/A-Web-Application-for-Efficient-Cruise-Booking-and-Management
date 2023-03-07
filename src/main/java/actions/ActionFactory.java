@@ -22,7 +22,8 @@ public final class ActionFactory {
         ACTION_MAP.put("view-existing-data", new ViewExistingDataAction());
 
         //customer
-        ACTION_MAP.put("create-order", new CreateOrderAction());
+        ACTION_MAP.put("get-order-form", new GetOrderForm());
+        ACTION_MAP.put("place-order", new PlaceOrder());
         ACTION_MAP.put("view-user-cruises", new ViewUserCruisesAction());
         ACTION_MAP.put("view-cruises", new ViewCruiseCatalogAction());
         ACTION_MAP.put("edit-user-profile", new EditUserProfileAction());

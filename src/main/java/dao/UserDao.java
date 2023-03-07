@@ -4,6 +4,7 @@ import exceptions.DbException;
 import model.Role;
 import model.User;
 
+import java.io.InputStream;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,5 +29,5 @@ public interface UserDao extends EntityDao<User>{
 
     int getAmount() throws DbException;
 
-    void updateUserValuesByAdmin(User chosenUser, boolean accountStatus, int role) throws DbException;
+    void addDocumentsToUser(long userId, InputStream inputStream) throws DbException;
 }

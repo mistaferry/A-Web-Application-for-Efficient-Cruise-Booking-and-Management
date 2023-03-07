@@ -16,6 +16,8 @@ import model.Ship;
 import model.User;
 import services.GeneralService;
 import utils.Convertor;
+
+import java.io.InputStream;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -255,6 +257,15 @@ public class GeneralServiceImpl implements GeneralService {
                 throw new ServiceException("Passwords aren't equal");
             }
             userDao.changePassword(user.getId(), newPassword);
+        }  catch (DbException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public void addDocumentsToUser(long userId, InputStream inputStream) throws ServiceException {
+        try {
+            userDao.addDocumentsToUser(userId, inputStream);
         }  catch (DbException e) {
             throw new ServiceException(e);
         }

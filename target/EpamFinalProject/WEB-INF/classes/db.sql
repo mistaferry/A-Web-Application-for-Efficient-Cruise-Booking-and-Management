@@ -56,8 +56,6 @@ CREATE TABLE city
     country VARCHAR(50)  NOT NULL
 );
 
-drop table users_has_cruises;
-drop  table cruise;
 CREATE TABLE cruise
 (
     id              INT PRIMARY KEY AUTO_INCREMENT,

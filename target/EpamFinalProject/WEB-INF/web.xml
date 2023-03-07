@@ -47,7 +47,7 @@
         </init-param>
         <init-param>
             <param-name>customer</param-name>
-            <param-value>create-order view-user-cruises view-cruises edit-user-profile</param-value>
+            <param-value>get-order-form view-user-cruises view-cruises edit-user-profile</param-value>
         </init-param>
         <init-param>
             <param-name>out-of-control</param-name>
