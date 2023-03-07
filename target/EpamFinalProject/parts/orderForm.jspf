@@ -8,29 +8,12 @@
     <div class="flex">
         <input type="hidden" name="action" value="create-order">
         <div class="form-left-right">
-            <label><fmt:message key="person.name"/><br>
+            <label><fmt:message key="label.person.name"/><br>
                 <input class="input1" type="text" value="${sessionScope.user.firstName}" readonly/>
             </label><br><br>
-            <label><fmt:message key="person.surname"/><br>
+            <label><fmt:message key="label.person.surname"/><br>
                 <input class="input1" type="text" value="${sessionScope.user.surname}" readonly/>
             </label><br><br>
-            <div>
-                <div class="gender-chose">
-                    <label><fmt:message key="label.adult"/>
-                        <input type="number" size="2" name="num" min="1" max="10" value="1" required>
-                    </label>
-                </div>
-                <div class="gender-chose">
-                    <label><fmt:message key="label.children"/>
-                        <input type="number" size="2" name="num" min="0" max="10" value="0" required>
-                    </label>
-                </div>
-            </div>
-            <br>
-            <label><fmt:message key="label.phone.number"/><br>
-                <input class="input1" type="tel" name="telNo" pattern="\+380\-[0-9]{3}\-[0-9]{3}\-[0-9]{3}">
-            </label>
-            <br><br>
             <label><fmt:message key="login.label.username"/><br>
                 <input class="input1" type="email" value="${sessionScope.user.login}" readonly>
             </label>

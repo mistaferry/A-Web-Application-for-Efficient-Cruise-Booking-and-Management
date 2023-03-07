@@ -28,20 +28,20 @@
             <h1><fmt:message key="user.profile"/></h1>
         </div>
         <div>
-            <h4><fmt:message key="person.name"/></h4>
+            <h4><fmt:message key="label.person.name"/></h4>
             <p>${sessionScope.chosenUser.firstName}</p>
-            <h4><fmt:message key="person.surname"/></h4>
+            <h4><fmt:message key="label.person.surname"/></h4>
             <p>${sessionScope.chosenUser.surname}</p>
-            <h4><fmt:message key="person.login"/></h4>
+            <h4><fmt:message key="label.person.login"/></h4>
             <p>${sessionScope.chosenUser.login}</p>
-            <h4><fmt:message key="person.role"/></h4>
+            <h4><fmt:message key="label.person.role"/></h4>
             <label>
                 <select name="role" class="select">
                     <option value="2" ${sessionScope.chosenUser.roleId == "2" ? "selected" : ""}>ADMIN</option>
                     <option value="1" ${sessionScope.chosenUser.roleId == "1" ? "selected" : ""}>CUSTOMER</option>
                 </select>
             </label>
-            <h4><fmt:message key="person.is.blocked"/></h4>
+            <h4><fmt:message key="label.person.is.blocked"/></h4>
             <label>
                 <select name="account_status" class="select">
                     <option value="true" ${sessionScope.chosenUser.blocked eq true ? "selected" : ""}>BLOCKED</option>

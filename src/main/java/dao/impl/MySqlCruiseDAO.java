@@ -6,6 +6,8 @@ import exceptions.DbException;
 import model.Cruise;
 import model.Ship;
 import dao.constants.*;
+
+import java.awt.geom.QuadCurve2D;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -250,6 +252,8 @@ public class MySqlCruiseDAO implements CruiseDao {
                     && !filters.get(1).equals("0")){
                 query += "WHERE ";
                 query += CruiseMysqlQuery.GET_BY_DURATION_FILTER;
+                query += " AND ";
+                query += CruiseMysqlQuery.CRUISE_IS_ENDED;
                 query += CruiseMysqlQuery.GET_PAGINATION;
                 preparedStatement = connection.prepareStatement(query);
                 int durationStart = 1;
@@ -262,6 +266,8 @@ public class MySqlCruiseDAO implements CruiseDao {
                 if(!filters.get(0).equals("0") && !filters.get(0).isEmpty()) {
                     if (filters.get(1).equals("0")) {
                         query += CruiseMysqlQuery.GET_BY_START_DAY_FILTER;
+                        query += " AND ";
+                        query += CruiseMysqlQuery.CRUISE_IS_ENDED;
                         query += CruiseMysqlQuery.GET_PAGINATION;
                         preparedStatement = connection.prepareStatement(query);
                         String startDay = filters.get(0);
@@ -271,6 +277,7 @@ public class MySqlCruiseDAO implements CruiseDao {
                     } else {
                         query += CruiseMysqlQuery.GET_BY_START_DAY_FILTER +
                                 " AND (" + CruiseMysqlQuery.GET_BY_DURATION_FILTER + ") ";
+                        query += " AND " + CruiseMysqlQuery.CRUISE_IS_ENDED + " ";
                         query += CruiseMysqlQuery.GET_PAGINATION;
                         preparedStatement = connection.prepareStatement(query);
                         String startDay = filters.get(0);
@@ -283,6 +290,8 @@ public class MySqlCruiseDAO implements CruiseDao {
                         setPaginationValues(preparedStatement, cruisePerPage, index, pageNum * cruisePerPage);
                     }
                 }else{
+                    query += " WHERE ";
+                    query += CruiseMysqlQuery.CRUISE_IS_ENDED;
                     query += CruiseMysqlQuery.GET_PAGINATION;
                     int index = 0;
                     preparedStatement = connection.prepareStatement(query);

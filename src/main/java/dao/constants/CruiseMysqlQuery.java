@@ -47,4 +47,6 @@ public class CruiseMysqlQuery {
     public static final String GET_NUMBER_OF_REGISTERED_PEOPLE = "SELECT number_of_register_people FROM cruise WHERE id=?";
 
     public static final String CHANGE_REGISTER_PEOPLE_AMOUNT = "UPDATE cruise SET number_of_register_people=number_of_register_people+1 WHERE id=?";
+
+    public static final String CRUISE_IS_ENDED = " start_day > DATE_ADD(current_date, INTERVAL duration DAY) ";
 }

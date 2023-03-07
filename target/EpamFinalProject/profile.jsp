@@ -25,11 +25,11 @@
         <h1><fmt:message key="user.profile"/></h1>
     </div>
     <div>
-        <h4><fmt:message key="person.name"/></h4>
+        <h4><fmt:message key="label.person.name"/></h4>
         <p>${sessionScope.user.firstName}</p>
-        <h4><fmt:message key="person.surname"/></h4>
+        <h4><fmt:message key="label.person.surname"/></h4>
         <p>${sessionScope.user.surname}</p>
-        <h4><fmt:message key="person.login"/></h4>
+        <h4><fmt:message key="label.person.login"/></h4>
         <p>${sessionScope.user.login}</p>
     </div>
     <div class="action-button">

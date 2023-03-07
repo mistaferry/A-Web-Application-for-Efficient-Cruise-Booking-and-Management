@@ -33,6 +33,8 @@ public class ViewCruiseCatalogAction implements Action {
         return "/catalog.jsp";
     }
 
+
+
     private void getFiltersFromPage(HttpServletRequest request, List<String> filters) {
         String date = request.getParameter("startDay");
         filters.add(date);
