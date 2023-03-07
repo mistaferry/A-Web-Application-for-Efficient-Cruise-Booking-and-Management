@@ -122,6 +122,11 @@
             <artifactId>tomcat-embed-core</artifactId>
             <version>9.0.34</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-jsp-api</artifactId>
+            <version>8.5.4</version>
+        </dependency>
     </dependencies>
 
 

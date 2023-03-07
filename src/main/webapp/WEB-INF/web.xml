@@ -61,5 +61,9 @@
         <servlet-name>Controller</servlet-name>
     </filter-mapping>
 
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.jpg</url-pattern>
+    </servlet-mapping>
 </web-app>
 

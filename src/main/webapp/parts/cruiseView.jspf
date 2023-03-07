@@ -46,7 +46,8 @@
 <section class="flex-container">
     <c:forEach var="cruise" items="${sessionScope.allCruises}">
         <div class="item">
-            <img src="/parts/images/cruise${cruise.id}.jpg" alt="1">
+
+            <img src="parts/images/cruise${cruise.id}.jpg" alt="cruise ${cruise.id}">
             <div class="text">
                 <div class="name">
                     <p>Cruise by "${cruise.ship.name}"

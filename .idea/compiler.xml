@@ -7,8 +7,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="web" />
+        <module name="EpamFinalProject" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="web" target="14" />
+    </bytecodeTargetLevel>
   </component>
 </project>
