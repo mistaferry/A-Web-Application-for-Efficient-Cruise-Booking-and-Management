@@ -7,9 +7,7 @@ import dto.UserDTO;
 import services.GeneralService;
 import services.ServiceFactory;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintWriter;
+import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Connection;
@@ -29,16 +27,19 @@ public class PlaceOrder implements Action {
         this.generalService = ServiceFactory.getInstance().getGeneralService();
     }
 
+
     @Override
     public String execute(HttpServletRequest request) throws ServiceException {
         InputStream inputStream = null;
         Part filePart = null;
         try {
-            filePart = request.getPart("photo");
+            filePart = request.getPart("copyDocument");
+            System.out.println("sdc");
             if (filePart != null) {
+                System.out.println(filePart.getInputStream());
                 inputStream = filePart.getInputStream();
             }else{
-                return "error.jsp";
+                return "errorPage.jsp";
             }
             long cruiseId = Long.parseLong(request.getParameter("cruise_id"));
             UserDTO user = (UserDTO) request.getSession().getAttribute("user");

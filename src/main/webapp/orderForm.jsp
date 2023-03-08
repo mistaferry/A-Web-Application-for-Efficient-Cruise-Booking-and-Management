@@ -20,7 +20,7 @@
 
 <%@ include file="parts/userMenuChoose.jspf" %>
 
-<form class="form-reg" action="controller">
+<form class="form-reg" action="controller" enctype="multipart/form-data" method="post">
     <div>
         <h1>Placing an order</h1>
     </div>
