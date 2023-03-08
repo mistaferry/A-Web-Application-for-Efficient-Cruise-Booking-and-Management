@@ -5,11 +5,25 @@
 <fmt:setLocale value="${language}"/>
 <fmt:setBundle basename="resources"/>
 
-<html>
+<!DOCTYPE html>
+<html lang="${language}">
 <head>
-    <title><fmt:message key="company.name"/></title>
+    <title>
+        <fmt:message key="company.name"/>
+    </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        <%@ include file="parts/css/newStylr.css"%>
+    </style>
 </head>
-<body>
-<h1>ERROR!!!!!!!!</h1>
-</body>
+<%@ include file="parts/userMenuChoose.jspf" %>
+<div class="flex">
+    <div>
+        <h1 class="text-jumbo text-ginormous hide-sm">Ой!</h1>
+        <h2>Схоже, сталася якась помилка.</h2>
+        <h4>Поверніться на <a href="profile.jsp">Головну</a></h4>
+    </div>
+</div>
+<%@ include file="/parts/footer.jspf" %>
 </html>
